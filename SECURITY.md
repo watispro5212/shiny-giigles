@@ -14,7 +14,7 @@ Only the latest major version is supported with security updates. Please update 
 If you discover a security vulnerability, we ask you to help keep the community safe by following these steps:
 
 1. **Do not** open public GitHub issues for security matters. 
-2. Report vulnerabilities directly by emailing **watispro1@gmail.com** with:
+2. Report vulnerabilities directly by emailing **williamdelilah3@gmail.com, altericjohnson2@gmail.com** with:
    - A clear description of the vulnerability
    - Steps to reproduce (if possible)
    - Relevant files, versions, or logs
