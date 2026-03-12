@@ -1,75 +1,66 @@
-const fs = require('fs');
-const path = require('path');
-
-const DATA_DIR = path.join(__dirname, '..', '..', 'data');
-const ECONOMY_FILE = path.join(DATA_DIR, 'economy.json');
-
-// ensure data directory and file exist
-if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-if (!fs.existsSync(ECONOMY_FILE)) {
-    fs.writeFileSync(ECONOMY_FILE, JSON.stringify({}));
-}
+const User = require('../models/User');
 
 class EconomyManager {
-    constructor() {
-        this.cache = this._loadData();
-    }
-
-    _loadData() {
+    /**
+     * Get a user from the database or create a new one if they don't exist.
+     * @param {string} userId 
+     * @param {string} guildId 
+     */
+    async getUser(userId, guildId) {
         try {
-            const raw = fs.readFileSync(ECONOMY_FILE, 'utf-8');
-            return JSON.parse(raw);
-        } catch (err) {
-            console.error('[EconomyManager] Error loading data:', err);
-            return {};
+            let user = await User.findOne({ userId, guildId });
+            
+            if (!user) {
+                user = await User.create({
+                    userId,
+                    guildId,
+                    wallet: 0,
+                    bank: 0,
+                    bankCapacity: 5000,
+                    xp: 0,
+                    level: 1,
+                    inventory: []
+                });
+            }
+
+            return user;
+        } catch (error) {
+            console.error('[EconomyManager] Error in getUser:', error);
+            return null;
         }
     }
 
-    _saveData() {
+    /**
+     * Save user data to the database.
+     * Note: Since User is a Mongoose document, you can also call user.save() directly.
+     * This method is kept for compatibility with existing command structure.
+     */
+    async saveUser(user) {
         try {
-            fs.writeFileSync(ECONOMY_FILE, JSON.stringify(this.cache, null, 4));
-        } catch (err) {
-            console.error('[EconomyManager] Error saving data:', err);
+            await user.save();
+        } catch (error) {
+            console.error('[EconomyManager] Error in saveUser:', error);
         }
     }
 
-    getUser(userId) {
-        if (!this.cache[userId]) {
-            this.cache[userId] = {
-                wallet: 0,
-                bank: 0,
-                bankCapacity: 5000,
-                lastDaily: null,
-                lastWork: null,
-                dailyStreak: 0,
-                xp: 0,
-                level: 1,
-                inventory: []
-            };
-            this._saveData();
-        } else {
-            // hot-patch existing users with new phase 5 fields
-            let needsSave = false;
-            if (this.cache[userId].xp === undefined) { this.cache[userId].xp = 0; needsSave = true; }
-            if (this.cache[userId].level === undefined) { this.cache[userId].level = 1; needsSave = true; }
-            if (!this.cache[userId].inventory) { this.cache[userId].inventory = []; needsSave = true; }
-            if (needsSave) this._saveData();
+    /**
+     * Get the top 10 users by net worth in a specific guild.
+     * @param {string} guildId 
+     */
+    async getLeaderboard(guildId) {
+        try {
+            const users = await User.find({ guildId })
+                .sort({ wallet: -1, bank: -1 })
+                .limit(10);
+
+            return users.map(user => ({
+                id: user.userId,
+                net: user.wallet + user.bank
+            }));
+        } catch (error) {
+            console.error('[EconomyManager] Error in getLeaderboard:', error);
+            return [];
         }
-        return this.cache[userId];
-    }
-
-    saveUser(userId, data) {
-        this.cache[userId] = data;
-        this._saveData();
-    }
-
-    getLeaderboard() {
-        return Object.entries(this.cache)
-            .map(([id, data]) => ({ id, net: (data.wallet || 0) + (data.bank || 0) }))
-            .sort((a, b) => b.net - a.net)
-            .slice(0, 10);
     }
 }
 

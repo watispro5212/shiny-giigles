@@ -9,8 +9,10 @@
     "dev": "nodemon src/index.js"
   },
   "dependencies": {
-    "discord.js": "^14.11.0",
-    "dotenv": "^16.3.1"
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.3.1",
+    "mongodb": "^7.1.0",
+    "mongoose": "^9.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

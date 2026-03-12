@@ -1,7 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const mongoose = require('mongoose');
 require('dotenv').config();
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('[DATABASE] Connected to MongoDB.'))
+    .catch(err => console.error('[DATABASE] Connection error:', err));
 
 const client = new Client({
     intents: [
@@ -12,7 +18,7 @@ const client = new Client({
 
 client.commands = new Collection();
 
-// Load Commands dynamically
+// load commands dynamically
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
@@ -26,7 +32,7 @@ for (const file of commandFiles) {
     }
 }
 
-// Load Events dynamically
+// load events dynamically
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -40,7 +46,7 @@ for (const file of eventFiles) {
     }
 }
 
-// Global Error Handlers
+// global error handlers
 process.on('unhandledRejection', (error) => {
     console.error('[Unhandled Rejection]', error);
 });

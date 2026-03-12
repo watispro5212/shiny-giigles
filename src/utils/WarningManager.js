@@ -1,65 +1,53 @@
-const fs = require('fs');
-const path = require('path');
-
-const DATA_DIR = path.join(__dirname, '..', '..', 'data');
-const WARNS_FILE = path.join(DATA_DIR, 'warnings.json');
-
-if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-if (!fs.existsSync(WARNS_FILE)) {
-    fs.writeFileSync(WARNS_FILE, JSON.stringify({}));
-}
+const Warning = require('../models/Warning');
 
 class WarningManager {
-    constructor() {
-        this.cache = this._loadData();
-    }
-
-    _loadData() {
+    /**
+     * Get all warnings for a user in a specific guild.
+     * @param {string} guildId 
+     * @param {string} userId 
+     */
+    async getWarnings(guildId, userId) {
         try {
-            return JSON.parse(fs.readFileSync(WARNS_FILE, 'utf-8'));
-        } catch (err) {
-            console.error('[WarningManager] Error loading data:', err);
-            return {};
+            return await Warning.find({ guildId, userId }).sort({ timestamp: -1 });
+        } catch (error) {
+            console.error('[WarningManager] Error in getWarnings:', error);
+            return [];
         }
     }
 
-    _saveData() {
+    /**
+     * Add a warning for a user.
+     * @param {string} guildId 
+     * @param {string} userId 
+     * @param {string} moderatorId 
+     * @param {string} reason 
+     */
+    async addWarning(guildId, userId, moderatorId, reason) {
         try {
-            fs.writeFileSync(WARNS_FILE, JSON.stringify(this.cache, null, 4));
-        } catch (err) {
-            console.error('[WarningManager] Error saving data:', err);
+            await Warning.create({
+                guildId,
+                userId,
+                moderatorId,
+                reason: reason || 'No reason provided'
+            });
+        } catch (error) {
+            console.error('[WarningManager] Error in addWarning:', error);
         }
     }
 
-    getWarnings(guildId, userId) {
-        if (!this.cache[guildId]) this.cache[guildId] = {};
-        if (!this.cache[guildId][userId]) this.cache[guildId][userId] = [];
-        return this.cache[guildId][userId];
-    }
-
-    addWarning(guildId, userId, moderatorId, reason) {
-        if (!this.cache[guildId]) this.cache[guildId] = {};
-        if (!this.cache[guildId][userId]) this.cache[guildId][userId] = [];
-        
-        const timestamp = Date.now();
-        this.cache[guildId][userId].push({
-            reason: reason,
-            moderator: moderatorId,
-            timestamp: timestamp
-        });
-        
-        this._saveData();
-    }
-
-    clearWarnings(guildId, userId) {
-        if (this.cache[guildId] && this.cache[guildId][userId]) {
-            this.cache[guildId][userId] = [];
-            this._saveData();
-            return true;
+    /**
+     * Clear all warnings for a user in a specific guild.
+     * @param {string} guildId 
+     * @param {string} userId 
+     */
+    async clearWarnings(guildId, userId) {
+        try {
+            const result = await Warning.deleteMany({ guildId, userId });
+            return result.deletedCount > 0;
+        } catch (error) {
+            console.error('[WarningManager] Error in clearWarnings:', error);
+            return false;
         }
-        return false;
     }
 }
 
