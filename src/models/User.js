@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    userId: { type: String, required: true, unique: true },
+    userId: { type: String, required: true },
     guildId: { type: String, required: true },
     wallet: { type: Number, default: 0 },
     bank: { type: Number, default: 0 },
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     inventory: { type: Array, default: [] }
 }, { timestamps: true });
 
-// Compound index for faster lookups across multiple guilds (if needed later)
-userSchema.index({ userId: 1, guildId: 1 });
+// Compound index for keeping track of users per guild
+userSchema.index({ userId: 1, guildId: 1 }, { unique: true });
 
 module.exports = mongoose.model('User', userSchema);
