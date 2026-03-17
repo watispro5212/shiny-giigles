@@ -90,6 +90,23 @@ const CATEGORIES = {
             { name: 'dog', desc: 'Retrieve a random canine biometric asset.' },
             { name: 'meme', desc: 'Fetch a top-rated cultural data packet (Meme).' }
         ]
+    },
+    glossary: {
+        label: 'Nexus Terminology',
+        description: 'Glossary for technical system classifications.',
+        emoji: '🧠',
+        commands: [
+            { name: 'Shard', desc: 'An isolated bot process instance for network scaling.' },
+            { name: 'Latency', desc: 'The temporal delay in data transmission pulses (Ping).' },
+            { name: 'Node', desc: 'A specific processing unit or server within the Nexus.' },
+            { name: 'Protocol', desc: 'A standardized set of rules for neural data exchange.' },
+            { name: 'Uplink', desc: 'A communication bridge to higher-level API systems.' },
+            { name: 'Neural Level', desc: 'A measure of an Operative\'s clearance and activity.' },
+            { name: 'Firewall', desc: 'A defensive barrier monitoring incoming data vectors.' },
+            { name: 'Breach', desc: 'An unauthorized security bypass or system intrusion.' },
+            { name: 'Cyber-Heist', desc: 'A high-stakes operation to siphon restricted credits.' },
+            { name: 'Biometric', desc: 'Unique biological signatures used for entity scans.' }
+        ]
     }
 };
 

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Status | Nexus Infrastructure</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nexus-bg">
+        <div class="grid-overlay"></div>
+        <div class="scanline"></div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <span>NEXUS</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="commands.html">Commands</a>
+                <a href="wiki.html">Wiki</a>
+                <a href="status.html" class="active">Network</a>
+                <a href="https://discord.com/api/oauth2/authorize?client_id=1480725340753101031&permissions=8&scope=bot%20applications.commands" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.8rem;">Initialize</a>
+            </div>
+        </div>
+    </nav>
+
+    <main style="padding-top: 100px;">
+        <section class="section">
+            <div class="section-header reveal">
+                <span class="section-label">Diagnostics</span>
+                <h2 class="section-title">System Uplink</h2>
+                <p class="hero-desc">Real-time telemetry from the Nexus global distribution network.</p>
+            </div>
+
+            <div class="grid-container reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="terminal-container" style="border-color: var(--primary-glow);">
+                    <div class="terminal-header" style="background: rgba(0, 255, 204, 0.05);">
+                        <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">SHARD_HEALTH_MATRIX</div>
+                    </div>
+                    <div class="terminal-body" style="padding: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>Active Shards</span>
+                            <span style="color: var(--primary);">001 / 001</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>Global Latency</span>
+                            <span style="color: var(--primary);">24ms</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>Uptime</span>
+                            <span style="color: var(--primary);">99.98%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Status</span>
+                            <span style="color: #00FF88;">NOMINAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terminal-container" style="border-color: var(--secondary-glow);">
+                    <div class="terminal-header" style="background: rgba(188, 19, 254, 0.05);">
+                        <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--secondary);">RESOURCE_DISTRIBUTION</div>
+                    </div>
+                    <div class="terminal-body" style="padding: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>CPU Index</span>
+                            <span style="color: var(--secondary);">12.4%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>RAM Load</span>
+                            <span style="color: var(--secondary);">412MB / 2048MB</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>Thread Count</span>
+                            <span style="color: var(--secondary);">4 Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Data Sector</span>
+                            <span style="color: var(--secondary);">SEC_ALPHA_01</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header reveal">
+                <span class="section-label">Live Feed</span>
+                <h2 class="section-title">Global Pulse</h2>
+            </div>
+            <div class="terminal-container reveal">
+                <div class="terminal-header">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">COMMAND_LOG_STREAM // REAL_TIME</div>
+                </div>
+                <div class="terminal-body" style="height: 300px; overflow-y: hidden; font-family: 'JetBrains Mono'; font-size: 0.8rem; padding: 1.5rem; color: var(--text-dim);">
+                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[20:44:01]</span> <span style="color: var(--primary);">SHARD_0</span>: Incoming command payload from GUILD_8829...</div>
+                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[20:44:03]</span> <span style="color: var(--primary);">SHARD_0</span>: Executing protocol /HELP... Success.</div>
+                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[20:44:12]</span> <span style="color: var(--primary);">SHARD_0</span>: Neural levels calibrated for user 0092...</div>
+                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[20:44:15]</span> <span style="color: var(--primary);">SHARD_0</span>: Mass data purge initiated by ADMIN_USER...</div>
+                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[20:44:20]</span> <span style="color: var(--primary);">CORE</span>: Heartbeat pulse detected. All sectors stable.</div>
+                    <div style="margin-top: 1rem; color: var(--primary); animation: blink 1s infinite;">_ LOADING_ADDITIONAL_PACKETS...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="margin-top: 100px;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <span>NEXUS</span>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-dim); font-size: 0.9rem;">The elite protocol for digital communities. Secure. Scalable. Next-Gen.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 style="color: white; margin-bottom: 1rem;">Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="commands.html">Commands</a>
+                    <a href="wiki.html">Wiki</a>
+                    <a href="status.html">Network</a>
+                </div>
+                <div class="footer-links">
+                    <h4 style="color: white; margin-bottom: 1rem;">Legal</h4>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="privacy.html">Privacy Protocol</a>
+                </div>
+            </div>
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-dim); font-size: 0.8rem;">
+                &copy; 2026 NEXUS_PROTOCOL. ALL_RIGHTS_RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
