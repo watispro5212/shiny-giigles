@@ -5,7 +5,7 @@ const packageJson = require('../../package.json');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('info')
-        .setDescription('Displays information about the bot and the current server.'),
+        .setDescription('Initiates a high-fidelity core specification scan of the Nexus and the current sector.'),
     async execute(interaction) {
         const { client, guild } = interaction;
         
@@ -20,19 +20,19 @@ module.exports = {
         uptimeString += `${uptimeMinutes}m`;
 
         const embed = createEmbed({
-            title: '🤖 Bot & Server Information',
-            description: packageJson.description,
+            title: '🤖 Nexus Core Specification Scan',
+            description: `\`[SCANNING NEURAL NETWORK...SUCCESS]\` \n${packageJson.description}`,
             thumbnail: client.user.displayAvatarURL(),
             fields: [
-                { name: 'Bot Name', value: `\`${client.user.username}\``, inline: true },
-                { name: 'Bot Version', value: `\`v${packageJson.version}\``, inline: true },
-                { name: 'Bot Uptime', value: `\`${uptimeString}\``, inline: true },
+                { name: '🤖 System Identity', value: `\`${client.user.username}\``, inline: true },
+                { name: '📦 Build Version', value: `\`v${packageJson.version}\``, inline: true },
+                { name: '⚡ Uptime Pulse', value: `\`${uptimeString}\``, inline: true },
                 
-                { name: 'Server Name', value: `\`${guild.name}\``, inline: true },
-                { name: 'Member Count', value: `\`${guild.memberCount}\``, inline: true },
-                { name: 'Created At', value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:R>`, inline: true }
+                { name: '📡 Current Sector', value: `\`${guild.name}\``, inline: true },
+                { name: '👥 Entity Count', value: `\`${guild.memberCount}\``, inline: true },
+                { name: '📅 Creation Hash', value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:R>`, inline: true }
             ],
-            footer: `Requested by ${interaction.user.tag}`
+            footer: `Analysis requested by ${interaction.user.tag} | Nexus Core 2.0`
         });
 
         await interaction.reply({ embeds: [embed] });

@@ -1,17 +1,17 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 const { createEmbed } = require('../utils/embed');
 const logger = require('../utils/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('slowmode')
-        .setDescription('Sets the slowmode delay for the current channel.')
+        .setDescription('Adjusts the transmission throttling delay for the current sector.')
         .addIntegerOption(option => 
             option.setName('seconds')
-                .setDescription('The slowmode duration in seconds (0 to disable).')
+                .setDescription('The throttle duration in seconds (0 to disable).')
                 .setRequired(true)
                 .setMinValue(0)
-                .setMaxValue(21600)) // Discord max is 6 hours
+                .setMaxValue(21600))
         ,
     async execute(interaction) {
         const seconds = interaction.options.getInteger('seconds');
@@ -23,13 +23,14 @@ module.exports = {
             logger.info(`${interaction.user.tag} set slowmode in #${channel.name} to ${seconds}s`);
 
             const desc = seconds === 0 
-                ? '🐇 Slowmode has been disabled.' 
-                : `🐢 Slowmode is now active. Members must wait **${seconds} seconds** between messages.`;
+                ? '\`[STATUS]\` Sector transmission throttling has been **DISABLED**.' 
+                : `\`[STATUS]\` Sector transmission throttling active. \nEntities must wait **${seconds} seconds** between data bursts.`;
 
             const embed = createEmbed({
-                title: '⏱️ Slowmode Updated',
+                title: '⏱️ Transmission Throttle Updated',
                 description: desc,
-                color: '#00FFCC'
+                color: '#00FFCC',
+                footer: 'Nexus Security | SEC-THROTTLE-SET'
             });
 
             await interaction.reply({ embeds: [embed] });
@@ -37,8 +38,8 @@ module.exports = {
             logger.error(`Failed to set slowmode in #${channel.name}: ${error}`);
             await interaction.reply({
                 embeds: [createEmbed({
-                    title: '❌ Error',
-                    description: 'Could not set slowmode. Check my channel permissions.',
+                    title: '❌ Override Failed',
+                    description: '\`[FATAL]\` Could not adjust sector throttle. Check uplink permissions.',
                     color: 0xED4245
                 })],
                 flags: 64
