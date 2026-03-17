@@ -1,4 +1,5 @@
 const { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+// Stabilization patch applied
 const { createEmbed } = require('../utils/embed');
 const logger = require('../utils/logger');
 
@@ -179,10 +180,15 @@ module.exports = {
                 timestamp: false
             });
 
-            if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ embeds: [errorEmbed], flags: 64 });
-            } else {
-                await interaction.reply({ embeds: [errorEmbed], flags: 64 });
+            // Second try-catch to prevent crashing if the interaction is dead/invalid
+            try {
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ embeds: [errorEmbed], flags: 64 });
+                } else {
+                    await interaction.reply({ embeds: [errorEmbed], flags: 64 });
+                }
+            } catch (replyError) {
+                logger.error(`Failed to send error message for /${interaction.commandName}: ${replyError}`);
             }
         }
     },

@@ -85,23 +85,28 @@ module.exports = {
         // Fetch user data
         const data = await economy.getUser(userId, guildId);
 
-        // Grant 15 to 25 XP
-        const xpGained = Math.floor(Math.random() * 11) + 15;
+        // Grant 20 to 35 XP (Boosted)
+        const xpGained = Math.floor(Math.random() * 16) + 20;
         data.xp += xpGained;
 
-        const requiredXp = getXpRequirement(data.level);
-
-        // Level Up Logic
-        if (data.xp >= requiredXp) {
-            data.xp -= requiredXp; // carry over remainder
+        // Level Up Logic (While loop to handle potential multi-level jumps)
+        let leveledUp = false;
+        let totalReward = 0;
+        
+        while (data.xp >= getXpRequirement(data.level)) {
+            data.xp -= getXpRequirement(data.level);
             data.level += 1;
-
+            leveledUp = true;
+            
             const reward = data.level * 500; // E.g., level 5 = 2500 credits
             data.wallet += reward;
+            totalReward += reward;
+        }
 
+        if (leveledUp) {
             const embed = createEmbed({
                 title: '🎉 Level Up!',
-                description: `Congratulations <@${userId}>, you leveled up to **Level ${data.level}**!\n\nYou earned **${reward.toLocaleString()} Credits** as a reward!`,
+                description: `Congratulations <@${userId}>, you reached **Level ${data.level}**!\n\nYou earned **${totalReward.toLocaleString()} Credits** and ascended in the Nexus!`,
                 color: '#FEE75C'
             });
 
