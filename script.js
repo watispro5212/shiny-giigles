@@ -128,9 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial render
-    if (commandList) renderCommands();
-
     // Tabs
     if (tabContainer) {
         tabContainer.addEventListener('click', (e) => {
@@ -166,6 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', reveal);
     reveal(); // init
 
-    // Initial Commands
-    renderCommands();
+    // Initial render call with safety check
+    if (commandList) {
+        renderCommands();
+    }
 });
