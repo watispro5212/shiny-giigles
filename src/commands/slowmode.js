@@ -11,7 +11,8 @@ module.exports = {
                 .setDescription('The slowmode duration in seconds (0 to disable).')
                 .setRequired(true)
                 .setMinValue(0)
-                .setMaxValue(21600)) // Discord max is 6 hours,
+                .setMaxValue(21600)) // Discord max is 6 hours
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
     async execute(interaction) {
         const seconds = interaction.options.getInteger('seconds');
         const channel = interaction.channel;
@@ -40,7 +41,7 @@ module.exports = {
                     description: 'Could not set slowmode. Check my channel permissions.',
                     color: 0xED4245
                 })],
-                flags: 64
+                ephemeral: true
             });
         }
     },

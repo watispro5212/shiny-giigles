@@ -74,7 +74,7 @@ module.exports = {
                                  ` Credits**.`,
                     color: 0xED4245
                 })],
-                flags: 64
+                ephemeral: true
             });
         }
 
@@ -127,14 +127,17 @@ module.exports = {
             });
         }
 
-        await interaction.reply(});
-		const  = await interaction.fetchReply();
+        const reply = await interaction.reply({ 
+            embeds: [buildEmbed('Game in progress. Your turn.', '#00FFCC')], 
+            components: [buttons], 
+            fetchReply: true 
+        });
 
         const collector = reply.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
 
         collector.on('collect', async i => {
             if (i.user.id !== userId) {
-                return i.reply({ content: 'Play your own game by typing `/blackjack`!', flags: 64 });
+                return i.reply({ content: 'Play your own game by typing `/blackjack`!', ephemeral: true });
             }
 
             if (i.customId === 'bj_hit') {
@@ -181,7 +184,7 @@ module.exports = {
 
             if (winnings > 0) {
                 data.wallet += winnings;
-                await data.save();
+                economy.saveUser(userId, data);
             }
 
             const finalEmbed = buildEmbed(resultMsg, color);

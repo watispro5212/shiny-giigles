@@ -16,7 +16,7 @@ module.exports = {
         const target = interaction.options.getUser('target') || interaction.user;
         
         if (target.bot) {
-            return interaction.reply({ content: 'Bots do not have inventories!', flags: 64 });
+            return interaction.reply({ content: 'Bots do not have inventories!', ephemeral: true });
         }
 
         const data = await economy.getUser(target.id, interaction.guild.id);

@@ -10,10 +10,11 @@ const { createEmbed } = require('../utils/embed');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('verify-setup')
-        .setDescription('Drops an interactive panel into this channel that users can click to get verified.'),
+        .setDescription('Drops an interactive panel into this channel that users can click to get verified.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
         
-        await interaction.deferReply({ flags: 64 });
+        await interaction.deferReply({ ephemeral: true });
 
         const row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()

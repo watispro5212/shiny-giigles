@@ -30,8 +30,11 @@ module.exports = {
             color: '#00FFCC'
         });
 
-        await interaction.reply(});
-		const  = await interaction.fetchReply();
+        const reply = await interaction.reply({ 
+            embeds: [embed], 
+            components: [row],
+            fetchReply: true 
+        });
 
         const collector = reply.createMessageComponentCollector({ 
             componentType: ComponentType.Button, 
@@ -40,7 +43,7 @@ module.exports = {
 
         collector.on('collect', async i => {
             if (i.user.id !== interaction.user.id) {
-                return i.reply({ content: 'Start your own game with `/rps`!', flags: 64 });
+                return i.reply({ content: 'Start your own game with `/rps`!', ephemeral: true });
             }
 
             const userChoiceId = i.customId.split('_')[1]; // rock, paper, or scissors

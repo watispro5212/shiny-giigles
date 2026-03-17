@@ -19,7 +19,7 @@ module.exports = {
         if (!item) {
             return interaction.reply({ 
                 content: `Could not find an item with the ID \`${itemId}\`. Please check \`/shop\`.`, 
-                flags: 64 
+                ephemeral: true 
             });
         }
 
@@ -33,7 +33,7 @@ module.exports = {
                     description: `You need **${item.price.toLocaleString()} Credits** to buy **${item.name}**, but you only have **${data.wallet.toLocaleString()} Credits** in your wallet.`,
                     color: 0xED4245
                 })],
-                flags: 64
+                ephemeral: true
             });
         }
 
@@ -54,14 +54,14 @@ module.exports = {
             if ((item.type === 'passive' || item.type === 'flex') && ownedAmount >= 1) {
                 // Refund
                 data.wallet += item.price;
-                return interaction.reply({ content: `You already own **${item.name}** and cannot buy duplicates.`, flags: 64 });
+                return interaction.reply({ content: `You already own **${item.name}** and cannot buy duplicates.`, ephemeral: true });
             }
 
             // Consumables can be stacked
             data.inventory.push(item.id);
         }
 
-        await data.save();
+        economy.saveUser(userId, data);
 
         const embed = createEmbed({
             title: '🛍️ Purchase Successful!',

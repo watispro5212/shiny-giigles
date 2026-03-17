@@ -28,7 +28,7 @@ module.exports = {
                     description: `You are trying to bet **${bet.toLocaleString()} Credits**, but your wallet only has **${data.wallet.toLocaleString()} Credits**.`,
                     color: 0xED4245
                 })],
-                flags: 64
+                ephemeral: true
             });
         }
 
@@ -39,7 +39,7 @@ module.exports = {
 
         // Deduct bet and save to prevent backing out
         data.wallet -= bet;
-        await data.save();
+        economy.saveUser(userId, data);
 
         // Define slot icons and weights
         const icons = ['🍒', '🍋', '🍉', '🍇', '🔔', '💎', '🎰'];
@@ -84,7 +84,7 @@ module.exports = {
         // Payout
         if (winnings > 0) {
             data.wallet += winnings;
-            await data.save();
+            economy.saveUser(userId, data);
         }
 
         const slotMachineStr = `[ ${results.join(' | ')} ]`;

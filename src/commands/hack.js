@@ -17,15 +17,14 @@ module.exports = {
         const target = interaction.options.getUser('target');
 
         if (target.id === interaction.user.id) {
-            return interaction.reply({ content: 'Are you trying to penetrate your own firewall? That\'s sad.', flags: 64 });
+            return interaction.reply({ content: 'Are you trying to penetrate your own firewall? That\'s sad.', ephemeral: true });
         }
         
         if (target.id === interaction.client.user.id) {
-            return interaction.reply({ content: 'Access Denied. My firewall is impenetrable.', flags: 64 });
+            return interaction.reply({ content: 'Access Denied. My firewall is impenetrable.', ephemeral: true });
         }
 
-        await interaction.reply(});
-		const  = await interaction.fetchReply();
+        const msg = await interaction.reply({ content: `[SYSTEM] Initiating penetration protocol on ${target.username}...`, fetchReply: true });
 
         const steps = [
             `[SYSTEM] Bypassing mainframe security protocols...`,

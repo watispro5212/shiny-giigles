@@ -24,14 +24,14 @@ module.exports = {
         if (targetUser.bot) {
             return interaction.reply({ 
                 content: 'You cannot send credits to a bot!', 
-                flags: 64 
+                ephemeral: true 
             });
         }
         
         if (targetId === senderId) {
             return interaction.reply({ 
                 content: 'You cannot send credits to yourself!', 
-                flags: 64 
+                ephemeral: true 
             });
         }
 
@@ -44,7 +44,7 @@ module.exports = {
                     description: `You only have **${senderData.wallet.toLocaleString()} Credits** in your wallet.`,
                     color: 0xED4245
                 })],
-                flags: 64
+                ephemeral: true
             });
         }
 
@@ -54,8 +54,8 @@ module.exports = {
         senderData.wallet -= amount;
         targetData.wallet += amount;
 
-        await senderData.save();
-        await targetData.save();
+        economy.saveUser(senderId, senderData);
+        economy.saveUser(targetId, targetData);
 
         const embed = createEmbed({
             title: '💸 Transfer Successful',

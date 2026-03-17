@@ -5,7 +5,8 @@ const logger = require('../utils/logger');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('unlock')
-        .setDescription('Unlocks the current channel by restoring SendMessages for @everyone'),
+        .setDescription('Unlocks the current channel by restoring SendMessages for @everyone')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
     async execute(interaction) {
         const channel = interaction.channel;
 
@@ -31,7 +32,7 @@ module.exports = {
                     description: 'Could not unlock the channel. Check my permissions (Manage Roles/Channels).',
                     color: 0xED4245
                 })],
-                flags: 64
+                ephemeral: true
             });
         }
     },

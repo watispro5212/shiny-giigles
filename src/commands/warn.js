@@ -14,16 +14,17 @@ module.exports = {
         .addStringOption(opt => 
             opt.setName('reason')
                 .setDescription('Reason for the warning')
-                .setRequired(true)),
+                .setRequired(true))
+        .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
     async execute(interaction) {
         const target = interaction.options.getUser('target');
         const reason = interaction.options.getString('reason');
 
         if (target.bot) {
-            return interaction.reply({ content: 'You cannot warn bots!', flags: 64 });
+            return interaction.reply({ content: 'You cannot warn bots!', ephemeral: true });
         }
         if (target.id === interaction.user.id) {
-            return interaction.reply({ content: 'You cannot warn yourself!', flags: 64 });
+            return interaction.reply({ content: 'You cannot warn yourself!', ephemeral: true });
         }
 
         warns.addWarning(interaction.guild.id, target.id, interaction.user.id, reason);

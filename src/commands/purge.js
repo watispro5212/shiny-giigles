@@ -11,12 +11,13 @@ module.exports = {
                 .setDescription('Number of messages to delete (1-100)')
                 .setRequired(true)
                 .setMinValue(1)
-                .setMaxValue(100)),
+                .setMaxValue(100))
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
     
     async execute(interaction) {
         const amount = interaction.options.getInteger('amount');
         
-        await interaction.deferReply({ flags: 64 });
+        await interaction.deferReply({ ephemeral: true });
 
         try {
             // Fetch messages to delete

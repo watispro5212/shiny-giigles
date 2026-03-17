@@ -15,7 +15,7 @@ module.exports = {
         const target = interaction.options.getUser('target') || interaction.user;
         
         if (target.bot) {
-            return interaction.reply({ content: 'Scanning failed. Artificial constructs do not possess currency.', flags: 64 });
+            return interaction.reply({ content: 'Scanning failed. Artificial constructs do not possess currency.', ephemeral: true });
         }
 
         const data = await economy.getUser(target.id, interaction.guild.id);

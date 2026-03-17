@@ -18,7 +18,8 @@ module.exports = {
                 .setDescription('Number of recipients (default 1).')
                 .setMinValue(1)
                 .setMaxValue(10)
-                .setRequired(false)),
+                .setRequired(false))
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageEvents),
     async execute(interaction) {
         const prize = interaction.options.getString('prize');
         const durationStr = interaction.options.getString('duration');
@@ -26,7 +27,7 @@ module.exports = {
 
         const timeMatch = durationStr.match(/^(\d+)([smhd])$/);
         if (!timeMatch) {
-            return interaction.reply({ content: 'Invalid time format. Try something like `10s`, `5m`, `1h`, `1d`.', flags: 64 });
+            return interaction.reply({ content: 'Invalid time format. Try something like `10s`, `5m`, `1h`, `1d`.', ephemeral: true });
         }
 
         const value = parseInt(timeMatch[1]);
@@ -39,7 +40,7 @@ module.exports = {
         else if (unit === 'd') ms = value * 24 * 60 * 60 * 1000;
 
         if (ms > 7 * 24 * 60 * 60 * 1000) {
-            return interaction.reply({ content: 'Maximum drop duration is 7 days.', flags: 64 });
+            return interaction.reply({ content: 'Maximum drop duration is 7 days.', ephemeral: true });
         }
 
         const endsAt = Math.floor((Date.now() + ms) / 1000);
@@ -51,8 +52,7 @@ module.exports = {
             footer: 'Nexus Rewards System'
         });
 
-        await interaction.reply(});
-		const  = await interaction.fetchReply();
+        const message = await interaction.reply({ embeds: [embed], fetchReply: true });
         await message.react('🎉');
 
         setTimeout(async () => {

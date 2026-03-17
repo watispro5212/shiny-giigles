@@ -11,7 +11,7 @@ module.exports = {
         if (!guild.iconURL()) {
             return interaction.reply({ 
                 content: 'This node does not have a custom icon set.', 
-                flags: 64 
+                ephemeral: true 
             });
         }
 
