@@ -55,12 +55,4 @@ process.on('uncaughtException', (error) => {
     console.error('[Uncaught Exception]', error);
 });
 
-// Initialize Web Dashboard
-const { initWebServer } = require('./web/server');
-
-client.login(process.env.TOKEN).then(() => {
-    // Only run web server on the first shard to avoid port conflicts
-    if (client.shard.ids.includes(0)) {
-        initWebServer(client);
-    }
-});
+client.login(process.env.TOKEN);
