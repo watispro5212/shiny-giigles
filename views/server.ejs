@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= guild.name %> | Settings</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-canvas"></div>
+    
+    <%- include('partials/header') %>
+
+    <div class="container" style="padding-top: 120px; min-height: 80vh;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <% if (guild.icon) { %>
+                <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="Icon" style="width: 80px; height: 80px; border-radius: 12px; border: 2px solid var(--primary);">
+            <% } %>
+            <div>
+                <a href="/dashboard" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">← Back to Hub</a>
+                <h1 class="hero-title" style="font-size: 2.5rem; text-align: left; margin: 0;"><%= guild.name %> Configuration</h1>
+            </div>
+        </div>
+
+        <form action="/api/settings/<%= guild.id %>" method="POST" class="settings-form feature-card" style="max-width: 800px; display: flex; flex-direction: column; gap: 1.5rem;">
+            <div class="form-group" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label for="welcomeChannelId" style="font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--primary);">Welcome Channel ID</label>
+                <input type="text" id="welcomeChannelId" name="welcomeChannelId" placeholder="e.g. 1320058519642177668" value="<%= config.welcomeChannelId || '' %>" style="background: var(--bg-hover); border: 1px solid var(--border); color: #fff; padding: 0.8rem; border-radius: 8px; font-family: inherit;">
+                <small style="color: var(--text-muted);">The ID of the channel where welcome messages are sent. Leave blank to disable.</small>
+            </div>
+
+            <div class="form-group" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label for="logChannelId" style="font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--primary);">Audit Log Channel ID</label>
+                <input type="text" id="logChannelId" name="logChannelId" placeholder="e.g. 1320058519642177668" value="<%= config.logChannelId || '' %>" style="background: var(--bg-hover); border: 1px solid var(--border); color: #fff; padding: 0.8rem; border-radius: 8px; font-family: inherit;">
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem;">
+                <input type="checkbox" id="economyEnabled" name="economyEnabled" <%= config.economyEnabled ? 'checked' : '' %> style="width: 20px; height: 20px; accent-color: var(--primary);">
+                <label for="economyEnabled" style="font-weight: 600;">Enable Local Economy Systems</label>
+            </div>
+            
+            <div class="form-group" style="display: flex; align-items: center; gap: 1rem;">
+                <input type="checkbox" id="strictMode" name="strictMode" <%= config.strictMode ? 'checked' : '' %> style="width: 20px; height: 20px; accent-color: var(--primary);">
+                <label for="strictMode" style="font-weight: 600;">Enable Strict Administrative Override</label>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+                <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer;">Save Protocol Specifications</button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Check URL for success
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('success')) {
+            alert('Settings successfully synced with Nexus Core.'); // Simple alert for now, can be styled later
+            // Remove the success query param so it doesn't alert on reload
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+</body>
+</html>

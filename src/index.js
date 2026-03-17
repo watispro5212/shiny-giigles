@@ -55,4 +55,9 @@ process.on('uncaughtException', (error) => {
     console.error('[Uncaught Exception]', error);
 });
 
-client.login(process.env.TOKEN);
+// Initialize Web Dashboard
+const { initWebServer } = require('./web/server');
+
+client.login(process.env.TOKEN).then(() => {
+    initWebServer(client);
+});

@@ -234,6 +234,29 @@ header {
     animation: pulse 1.5s infinite;
 }
 
+/* Dashboard Specific Styles */
+.guilds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.guild-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.1);
+}
+
+.settings-form input[type="text"] {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.settings-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.2);
+}
+
 /* Sections */
 .section {
     padding: 8rem 0;

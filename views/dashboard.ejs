@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Nexus Protocol</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-canvas"></div>
+    
+    <%- include('partials/header') %>
+
+    <div class="container" style="padding-top: 120px; min-height: 80vh;">
+        <h1 class="hero-title" style="font-size: 2.5rem; text-align: left;">Welcome, <%= user.username %></h1>
+        <p class="hero-subtitle" style="text-align: left; margin-bottom: 2rem;">Select a node to configure its protocol parameters.</p>
+
+        <div class="guilds-grid">
+            <% if (guilds.length === 0) { %>
+                <div class="feature-card" style="grid-column: 1 / -1; text-align: center;">
+                    <h3>No Managed Nodes</h3>
+                    <p>It seems you do not have administrative privileges in any Discord servers.</p>
+                </div>
+            <% } else { %>
+                <% guilds.forEach(guild => { %>
+                    <% const isBotInGuild = botClient.guilds.cache.has(guild.id); %>
+                    
+                    <div class="feature-card guild-card" style="display: flex; align-items: center; gap: 1rem; cursor: pointer; transition: all 0.3s ease;" onclick="window.location.href='<%= isBotInGuild ? `/dashboard/${guild.id}` : `https://discord.com/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&permissions=8&scope=bot%20applications.commands&guild_id=${guild.id}` %>'">
+                        <% if (guild.icon) { %>
+                            <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="<%= guild.name %>" class="guild-icon" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border);">
+                        <% } else { %>
+                            <div class="guild-icon-placeholder" style="width: 64px; height: 64px; border-radius: 50%; background: var(--bg-hover); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">
+                                <%= guild.name.charAt(0) %>
+                            </div>
+                        <% } %>
+                        
+                        <div style="flex-grow: 1;">
+                            <h3 style="margin-bottom: 0.2rem;"><%= guild.name %></h3>
+                            <% if (isBotInGuild) { %>
+                                <span style="font-size: 0.8rem; color: var(--primary); font-family: 'JetBrains Mono', monospace;">● CONNECTED</span>
+                            <% } else { %>
+                                <span style="font-size: 0.8rem; color: var(--danger, #FF4B2B); font-family: 'JetBrains Mono', monospace;">○ DISCONNECTED - CLICK TO INVITE</span>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

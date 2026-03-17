@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus Protocol | Elite Community Tools</title>
     <meta name="description" content="NexusBot is a premium Discord bot providing advanced network economy, high-stakes modules, and elite moderation capabilities.">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
@@ -13,28 +13,19 @@
 <body>
     <div class="bg-canvas"></div>
     
-    <nav>
-        <div class="container nav-content">
-            <a href="index.html" class="logo">
-                <span>NexusBot</span>
-                <svg class="verified-badge" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-            </a>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#commands">Commands</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="terms.html">Terms</a>
-            </div>
-        </div>
-    </nav>
+    <%- include('partials/header', { isHome: true }) %>
 
     <div class="container">
         <header class="reveal">
             <h1 class="hero-title hero-glow">Initialize Nexus Protocol.</h1>
             <p class="hero-subtitle">NexusBot provides authorized access to professional network economy, high-stakes interfaces, and elite node moderation tools.</p>
             <div class="hero-btns">
-                <a href="#" class="btn btn-primary" id="invite-btn">Authorize Bot</a>
-                <button class="btn btn-glass btn-pulse" id="surprise-btn">🎲 System Override</button>
+                <% if (user) { %>
+                    <a href="/dashboard" class="btn btn-primary">Access Dashboard</a>
+                <% } else { %>
+                    <a href="/api/auth/login" class="btn btn-primary">Initialize Access</a>
+                <% } %>
+                <a href="https://discord.com/oauth2/authorize?client_id=1320058519642177668&permissions=8&scope=bot%20applications.commands" class="btn btn-glass btn-pulse" target="_blank">Invite Bot</a>
             </div>
         </header>
 
