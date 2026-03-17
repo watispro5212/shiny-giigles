@@ -8,12 +8,12 @@ module.exports = {
             option.setName('message')
                 .setDescription('The message to transmit.')
                 .setRequired(true))
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+        ,
     async execute(interaction) {
         const message = interaction.options.getString('message');
         
         // Acknowledge the interaction so Discord doesn't timeout
-        await interaction.reply({ content: 'Transmission sent.', ephemeral: true });
+        await interaction.reply({ content: 'Transmission sent.', flags: 64 });
         
         // Send the actual message
         await interaction.channel.send(message);

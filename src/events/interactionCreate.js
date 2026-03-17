@@ -9,7 +9,7 @@ module.exports = {
         // --- BUTTON HANDLING ---
         if (interaction.isButton()) {
             if (interaction.customId === 'verify_role_button') {
-                await interaction.deferReply({ ephemeral: true });
+                await interaction.deferReply({ flags: 64 });
                 
                 let verifiedRole = interaction.guild.roles.cache.find(r => r.name === 'Verified');
                 
@@ -47,7 +47,7 @@ module.exports = {
 
             // --- TICKET CREATION ---
             if (interaction.customId === 'create_ticket_btn') {
-                await interaction.deferReply({ ephemeral: true });
+                await interaction.deferReply({ flags: 64 });
                 
                 try {
                     // Check if they already have one open
@@ -140,28 +140,28 @@ module.exports = {
             if (!config.economyEnabled && economyCmds.includes(interaction.commandName)) {
                 return interaction.reply({ 
                     embeds: [createEmbed({ title: '❌ Module Disabled', description: 'The **Economy** module is disabled on this server.', color: '#ED4245' })],
-                    ephemeral: true 
+                    flags: 64 
                 });
             }
 
             if (!config.casinoEnabled && casinoCmds.includes(interaction.commandName)) {
                 return interaction.reply({ 
                     embeds: [createEmbed({ title: '❌ Module Disabled', description: 'The **Casino** module is disabled on this server.', color: '#ED4245' })],
-                    ephemeral: true 
+                    flags: 64 
                 });
             }
 
             if (!config.funEnabled && funCmds.includes(interaction.commandName)) {
                 return interaction.reply({ 
                     embeds: [createEmbed({ title: '❌ Module Disabled', description: 'The **Fun** module is disabled on this server.', color: '#ED4245' })],
-                    ephemeral: true 
+                    flags: 64 
                 });
             }
 
             if (!config.levelingEnabled && levelingCmds.includes(interaction.commandName)) {
                 return interaction.reply({ 
                     embeds: [createEmbed({ title: '❌ Module Disabled', description: 'The **Leveling** module is disabled on this server.', color: '#ED4245' })],
-                    ephemeral: true 
+                    flags: 64 
                 });
             }
         }
@@ -180,9 +180,9 @@ module.exports = {
             });
 
             if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
+                await interaction.followUp({ embeds: [errorEmbed], flags: 64 });
             } else {
-                await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+                await interaction.reply({ embeds: [errorEmbed], flags: 64 });
             }
         }
     },

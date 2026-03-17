@@ -14,7 +14,7 @@ module.exports = {
             option.setName('reason')
                 .setDescription('Reason for the ban')
                 .setRequired(false))
-        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+        ,
     
     async execute(interaction) {
         const targetUser = interaction.options.getUser('target');
@@ -27,7 +27,7 @@ module.exports = {
                     description: 'You cannot ban yourself!',
                     color: 0xED4245
                 })],
-                ephemeral: true
+                flags: 64
             });
         }
 
@@ -40,7 +40,7 @@ module.exports = {
                     description: 'That user is not in this server.',
                     color: 0xED4245
                 })],
-                ephemeral: true
+                flags: 64
             });
         }
 
@@ -51,7 +51,7 @@ module.exports = {
                     description: 'I do not have permission to ban this user. They may have a higher role than me.',
                     color: 0xED4245
                 })],
-                ephemeral: true
+                flags: 64
             });
         }
 
@@ -92,7 +92,7 @@ module.exports = {
                     description: 'An error occurred while trying to ban the user.',
                     color: 0xED4245
                 })],
-                ephemeral: true
+                flags: 64
             });
         }
     },

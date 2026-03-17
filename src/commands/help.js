@@ -126,8 +126,8 @@ module.exports = {
         const response = await interaction.reply({ 
             embeds: [initialEmbed], 
             components: [row],
-            fetchReply: true 
-        });
+            withResponse: true 
+        }).then(i => i.resource ? i.resource.message : i.fetchReply());
 
         // Setup component collector for the dropdown
         const collector = response.createMessageComponentCollector({ 
@@ -138,7 +138,7 @@ module.exports = {
         collector.on('collect', async i => {
             // Only allow the original unvoker to use the dropdown
             if (i.user.id !== interaction.user.id) {
-                return i.reply({ content: 'Unauthorized access. This interface is locked to the original user.', ephemeral: true });
+                return i.reply({ content: 'Unauthorized access. This interface is locked to the original user.', flags: 64 });
             }
 
             const categoryId = i.values[0];

@@ -12,12 +12,12 @@ module.exports = {
                 .setRequired(true)
                 .setMinValue(1)
                 .setMaxValue(100))
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+        ,
     
     async execute(interaction) {
         const amount = interaction.options.getInteger('amount');
         
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: 64 });
 
         try {
             // Fetch messages to delete

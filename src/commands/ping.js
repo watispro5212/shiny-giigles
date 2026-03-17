@@ -14,8 +14,8 @@ module.exports = {
                     color: '#00FFCC'
                 })
             ], 
-            fetchReply: true 
-        });
+            withResponse: true 
+        }).then(i => i.resource ? i.resource.message : i.fetchReply());
 
         const roundtripLatency = sent.createdTimestamp - interaction.createdTimestamp;
         const wsLatency = Math.round(interaction.client.ws.ping);
