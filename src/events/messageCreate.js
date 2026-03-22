@@ -12,6 +12,19 @@ const spamTracker = new Map();
 const SPAM_LIMIT = 5;
 const SPAM_TIME = 5000; 
 
+// Auto-prune spam tracker every 60 seconds to prevent memory leaks
+setInterval(() => {
+    const now = Date.now();
+    for (const [userId, timestamps] of spamTracker.entries()) {
+        const recent = timestamps.filter(t => now - t < SPAM_TIME);
+        if (recent.length === 0) {
+            spamTracker.delete(userId);
+        } else {
+            spamTracker.set(userId, recent);
+        }
+    }
+}, 60000);
+
 // XP required = 100 * (level ^ 1.5)
 function getXpRequirement(level) {
     return Math.floor(100 * Math.pow(level, 1.5));

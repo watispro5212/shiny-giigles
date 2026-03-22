@@ -1,7 +1,36 @@
 const { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-// Stabilization patch applied
 const { createEmbed } = require('../utils/embed');
 const logger = require('../utils/logger');
+const cooldownManager = require('../utils/cooldownManager');
+const { isOwner } = require('../utils/ownerGate');
+
+// Default cooldown durations (ms) per category
+const COOLDOWN_DURATIONS = {
+    economy: 5000,
+    casino: 8000,
+    moderation: 3000,
+    fun: 3000,
+    utility: 2000,
+    default: 3000
+};
+
+// Categorize commands for cooldown purposes
+const COMMAND_CATEGORIES = {
+    economy: ['balance', 'daily', 'work', 'rob', 'transfer', 'leaderboard', 'shop', 'buy', 'inventory'],
+    casino: ['blackjack', 'slots', 'coinflip'],
+    moderation: ['ban', 'kick', 'warn', 'purge', 'lock', 'unlock', 'slowmode', 'say', 'verify-setup', 'ticket-setup'],
+    fun: ['8ball', 'roll', 'rps', 'trivia', 'hack', 'emojify', 'joke', 'fact', 'quote'],
+    media: ['cat', 'dog', 'meme', 'urban'],
+};
+
+function getCooldownDuration(commandName) {
+    for (const [category, commands] of Object.entries(COMMAND_CATEGORIES)) {
+        if (commands.includes(commandName)) {
+            return COOLDOWN_DURATIONS[category] || COOLDOWN_DURATIONS.default;
+        }
+    }
+    return COOLDOWN_DURATIONS.default;
+}
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -16,7 +45,6 @@ module.exports = {
                 
                 try {
                     if (!verifiedRole) {
-                        // Create it if it doesn't exist
                         verifiedRole = await interaction.guild.roles.create({
                             name: 'Verified',
                             color: '#2ecc71',
@@ -51,7 +79,6 @@ module.exports = {
                 await interaction.deferReply({ flags: 64 });
                 
                 try {
-                    // Check if they already have one open
                     const existingChannel = interaction.guild.channels.cache.find(c => c.name === `ticket-${interaction.user.username.toLowerCase()}`);
                     if (existingChannel) {
                         return interaction.editReply({ 
@@ -61,18 +88,17 @@ module.exports = {
 
                     const ticketChannel = await interaction.guild.channels.create({
                         name: `ticket-${interaction.user.username}`,
-                        type: 0, // GuildText
+                        type: 0,
                         permissionOverwrites: [
                             {
-                                id: interaction.guild.id, // @everyone
+                                id: interaction.guild.id,
                                 deny: ['ViewChannel'],
                             },
                             {
-                                id: interaction.user.id, // The user
+                                id: interaction.user.id,
                                 allow: ['ViewChannel', 'SendMessages', 'ReadMessageHistory'],
                             },
                             {
-                                // Give the bot itself permissions explicitly
                                 id: client.user.id,
                                 allow: ['ViewChannel', 'SendMessages', 'ReadMessageHistory', 'ManageChannels'],
                             }
@@ -128,6 +154,68 @@ module.exports = {
             return;
         }
 
+        // ==============================
+        // SECURITY LAYER 1: BLACKLIST CHECK
+        // ==============================
+        if (client.blacklist && client.blacklist.has(interaction.user.id)) {
+            return interaction.reply({
+                embeds: [createEmbed({
+                    title: '🚫 ACCESS REVOKED',
+                    description: 'Your access to the Nexus Protocol has been permanently severed.\nContact the system administrator if you believe this is an error.',
+                    color: '#FF0000'
+                })],
+                flags: 64
+            });
+        }
+
+        // ==============================
+        // SECURITY LAYER 2: GUILD-ONLY CHECK
+        // ==============================
+        if (!interaction.guild) {
+            return interaction.reply({
+                content: '`[ERROR]` Nexus commands can only be executed within a server sector.',
+                flags: 64
+            });
+        }
+
+        // ==============================
+        // SECURITY LAYER 3: OWNER COMMAND GATE
+        // ==============================
+        if (command.ownerOnly && !isOwner(interaction.user.id)) {
+            return interaction.reply({
+                embeds: [createEmbed({
+                    title: '🔒 ACCESS DENIED',
+                    description: 'This protocol requires **Root Clearance**.\nYou do not have the required authorization level.',
+                    color: '#FF0000'
+                })],
+                flags: 64
+            });
+        }
+
+        // ==============================
+        // SECURITY LAYER 4: COOLDOWN ENFORCEMENT
+        // ==============================
+        // Owner bypasses cooldowns
+        if (!isOwner(interaction.user.id)) {
+            const cooldownMs = getCooldownDuration(interaction.commandName);
+            const { onCooldown, remaining } = cooldownManager.check(
+                interaction.commandName,
+                interaction.user.id,
+                cooldownMs
+            );
+
+            if (onCooldown) {
+                return interaction.reply({
+                    embeds: [createEmbed({
+                        title: '⏳ Cooldown Active',
+                        description: `Protocol \`/${interaction.commandName}\` is on cooldown.\nPlease wait **${remaining}s** before re-executing.`,
+                        color: '#E67E22'
+                    })],
+                    flags: 64
+                });
+            }
+        }
+
         // --- DASHBOARD MODULE TOGGLES ---
         const GuildConfig = require('../models/GuildConfig');
         const config = await GuildConfig.findOne({ guildId: interaction.guild.id });
@@ -136,7 +224,7 @@ module.exports = {
             const economyCmds = ['balance', 'daily', 'work', 'buy', 'inventory', 'shop', 'transfer'];
             const casinoCmds = ['blackjack', 'slots', 'coinflip', 'rob'];
             const funCmds = ['8ball', 'cat', 'dog', 'emojify', 'fact', 'hack', 'joke', 'meme', 'quote', 'roll', 'rps', 'say', 'trivia', 'urban'];
-            const levelingCmds = ['rank', 'leaderboard']; // Leaderboard also used for economy, but strictly leveling mostly
+            const levelingCmds = ['rank', 'leaderboard'];
 
             if (!config.economyEnabled && economyCmds.includes(interaction.commandName)) {
                 return interaction.reply({ 
@@ -167,20 +255,22 @@ module.exports = {
             }
         }
 
+        // ==============================
+        // EXECUTE COMMAND
+        // ==============================
         try {
-            await command.execute(interaction);
-            logger.info(`${interaction.user.tag} executed /${interaction.commandName} in #${interaction.channel?.name || 'DM'}`);
+            await command.execute(interaction, client);
+            logger.info(`[CMD] ${interaction.user.tag} → /${interaction.commandName} in ${interaction.guild.name}/#${interaction.channel?.name || 'unknown'}`);
         } catch (error) {
             logger.error(`Error executing /${interaction.commandName}: ${error}`);
             
             const errorEmbed = createEmbed({
-                title: '❌ Error',
-                description: 'There was an error while executing this command!',
+                title: '❌ Execution Error',
+                description: 'A critical error occurred while processing this protocol.\nThe incident has been logged for analysis.',
                 color: 0xED4245,
                 timestamp: false
             });
 
-            // Second try-catch to prevent crashing if the interaction is dead/invalid
             try {
                 if (interaction.replied || interaction.deferred) {
                     await interaction.followUp({ embeds: [errorEmbed], flags: 64 });

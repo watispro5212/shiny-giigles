@@ -1,10 +1,47 @@
-# Custom License
+# Nexus Protocol License (BSL-Attribution)
 
-This software is licensed under the following terms:
+Copyright (c) 2026 watispro5212, watispro1. All rights reserved.
 
-- You are free to use, modify, and distribute this software.
-- Attribution must be given to the original authors watispro5212, and watispro1 in any distributed copies or substantial portions of the software.
+## Terms
 
-### Disclaimer
+### 1. Grant of License
+Permission is hereby granted, free of charge, to any person or organization
+obtaining a copy of this software and associated documentation files (the
+"Software"), to use, copy, modify, and distribute the Software, subject to
+the following conditions:
 
-This software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
+### 2. Attribution Requirement
+All copies, substantial portions, or derivative works of the Software must
+include prominent attribution to the original authors:
+
+    Nexus Protocol — Created by watispro5212 and watispro1
+
+This attribution must appear in:
+- The README or equivalent documentation of any distributed copy
+- The "About" or "Credits" section of any public-facing interface
+- Source code headers of substantially modified files
+
+### 3. Non-Commercial Hosting
+You may host the Software for personal or community (non-commercial) use
+without restriction. Commercial hosting (selling access, requiring payment
+for features provided by this Software) requires written permission from
+the copyright holders.
+
+### 4. No Impersonation
+You may not present the Software or any derivative work as being officially
+affiliated with, endorsed by, or created by the Nexus Protocol team unless
+you have explicit written consent.
+
+### 5. Security Vulnerability Disclosure
+If you discover a security vulnerability in the Software, you must report it
+responsibly as described in SECURITY.md before any public disclosure.
+
+## Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
