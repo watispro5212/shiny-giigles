@@ -18,8 +18,14 @@ const CATEGORIES = {
             { name: 'serverinfo', desc: 'Displays detailed encryption and sector data.' },
             { name: 'userinfo', desc: 'Initiates a biometric scan on a specified entity.' },
             { name: 'avatar', desc: 'Retrieves high-fidelity visual iconography.' },
+            { name: 'servericon', desc: 'Extracts the high-resolution icon of the current node.' },
             { name: 'math', desc: 'Executes complex neural computations.' },
-            { name: 'timer', desc: 'Sets a temporal countdown anchor.' }
+            { name: 'timer', desc: 'Sets a temporal countdown anchor.' },
+            { name: 'remind', desc: 'Have the system keep tabs on something for you.' },
+            { name: 'poll', desc: 'Fire up a quick community consensus vote.' },
+            { name: 'translate', desc: 'Translate text across language protocols.' },
+            { name: 'weather', desc: 'Pull atmospheric data for a location.' },
+            { name: 'profile', desc: 'View a comprehensive operative dossier.' }
         ]
     },
     economy: {
@@ -28,8 +34,8 @@ const CATEGORIES = {
         emoji: '💰',
         commands: [
             { name: 'balance', desc: 'Check current credit reserves and net worth.' },
-            { name: 'daily', desc: 'Claim your 24-hour credit allocation.' },
-            { name: 'work', desc: 'Submit a labor packet to earn credits.' },
+            { name: 'daily', desc: 'Claim your 24-hour credit allocation (streak bonus!).' },
+            { name: 'work', desc: 'Submit a labor packet to earn credits (scales with level).' },
             { name: 'rob', desc: 'Risk a breach to siphon credits from others.' },
             { name: 'transfer', desc: 'Execute a secure credit transaction.' },
             { name: 'leaderboard', desc: 'Displays the top 10 richest entities.' },
@@ -44,7 +50,8 @@ const CATEGORIES = {
         emoji: '🎰',
         commands: [
             { name: 'blackjack', desc: 'Challenge the dealer in a risk-reward matrix.' },
-            { name: 'slots', desc: 'Test your luck against the RNG modules.' }
+            { name: 'slots', desc: 'Test your luck against the RNG modules.' },
+            { name: 'coinflip', desc: 'Execute a boolean 50/50 algorithm.' }
         ]
     },
     leveling: {
@@ -52,7 +59,8 @@ const CATEGORIES = {
         description: 'Track XP and rank metrics.',
         emoji: '📈',
         commands: [
-            { name: 'rank', desc: 'Displays your current neural level and XP pulse.' }
+            { name: 'rank', desc: 'Displays your current neural level and XP pulse.' },
+            { name: 'leaderboard', desc: 'View the top operatives by level and XP.' }
         ]
     },
     moderation: {
@@ -62,11 +70,14 @@ const CATEGORIES = {
         commands: [
             { name: 'ban', desc: 'Terminate an entity\'s access permanently.' },
             { name: 'kick', desc: 'Expel an entity from the sector.' },
+            { name: 'warn', desc: 'Issue a formal protocol strike to an entity.' },
             { name: 'purge', desc: 'Wipe multiple transmission logs.' },
             { name: 'lock', desc: 'Execute a sector-wide transmission lock.' },
             { name: 'unlock', desc: 'Restore standard transmission protocols.' },
             { name: 'slowmode', desc: 'Adjust transmission throttling delays.' },
-            { name: 'verify-setup', desc: 'Deploy a biometric verification node.' }
+            { name: 'say', desc: 'Transmit a cleartext message through the Nexus.' },
+            { name: 'verify-setup', desc: 'Deploy a biometric verification node.' },
+            { name: 'ticket-setup', desc: 'Deploy a support ticket interface.' }
         ]
     },
     fun: {
@@ -75,10 +86,25 @@ const CATEGORIES = {
         emoji: '🎲',
         commands: [
             { name: '8ball', desc: 'Consult the Nexus Oracle for predictions.' },
-            { name: 'coinflip', desc: 'Execute a binary probability sequence.' },
             { name: 'roll', desc: 'Roll a multi-sided randomization module.' },
             { name: 'rps', desc: 'Initiate a conflict resolution sequence.' },
-            { name: 'trivia', desc: 'Initiate a neural data retrieval game.' }
+            { name: 'trivia', desc: 'Initiate a neural data retrieval game.' },
+            { name: 'hack', desc: 'Initiate a harmless penetration test on a target.' },
+            { name: 'emojify', desc: 'Convert text data into an encrypted emoji string.' },
+            { name: 'joke', desc: 'Process a humorous data packet.' },
+            { name: 'fact', desc: 'Extract an interesting file from the database.' },
+            { name: 'quote', desc: 'Extract an inspirational transmission.' }
+        ]
+    },
+    advanced: {
+        label: 'Advanced Operations',
+        description: 'Elite-tier protocols and system intel.',
+        emoji: '⚡',
+        commands: [
+            { name: 'cyber-heist', desc: 'Execute a high-stakes multi-phase heist operation.' },
+            { name: 'giveaway', desc: 'Airdrop credits or resources to the community.' },
+            { name: 'network-stats', desc: 'Display real-time shard and gateway diagnostics.' },
+            { name: 'shards', desc: 'View active shard processes and their health.' }
         ]
     },
     media: {
@@ -88,7 +114,8 @@ const CATEGORIES = {
         commands: [
             { name: 'cat', desc: 'Retrieve a random feline biometric asset.' },
             { name: 'dog', desc: 'Retrieve a random canine biometric asset.' },
-            { name: 'meme', desc: 'Fetch a top-rated cultural data packet (Meme).' }
+            { name: 'meme', desc: 'Fetch a top-rated cultural data packet (Meme).' },
+            { name: 'urban', desc: 'Query the Urban data archives for slang definitions.' }
         ]
     },
     glossary: {
@@ -106,18 +133,18 @@ const CATEGORIES = {
             { name: 'Breach', desc: 'An unauthorized security bypass or system intrusion.' },
             { name: 'Cyber-Heist', desc: 'A high-stakes operation to siphon restricted credits.' },
             { name: 'Biometric', desc: 'Unique biological signatures used for entity scans.' },
-            { name: 'Sync', desc: 'The process of aligning local state with the global Nexus database.' },
+            { name: 'Sync', desc: 'Aligning local state with the global Nexus database.' },
             { name: 'Callback', desc: 'A functional trigger returned after a process completes.' },
             { name: 'Gateway', desc: 'The entry point for all neural transmissions to Discord.' },
             { name: 'Websocket', desc: 'A persistent, bidirectional data stream protocol.' },
             { name: 'Shard ID', desc: 'The unique identifier for a specific bot instance.' },
-            { name: 'Cluster', desc: 'A collection of shards operating on the same hardware node.' },
+            { name: 'Cluster', desc: 'A collection of shards operating on the same hardware.' },
             { name: 'Env', desc: 'System variables defining the operative environment config.' },
-            { name: 'API Key', desc: 'A cryptographic token used for unauthorized-free access.' },
+            { name: 'API Key', desc: 'A cryptographic token used for authorized access.' },
             { name: 'Webhook', desc: 'An automated data push to a specific sector endpoint.' },
             { name: 'Packet', desc: 'A discrete unit of data transmitted over the network.' },
             { name: 'Handshake', desc: 'The initial cryptographic greeting between two nodes.' },
-            { name: 'SSL', desc: 'Secure Sockets Layer - encryption for protocol safety.' }
+            { name: 'SSL', desc: 'Secure Sockets Layer — encryption for protocol safety.' }
         ]
     }
 };
@@ -144,7 +171,7 @@ module.exports = {
 
         const initialEmbed = createEmbed({
             title: '💿 Nexus Directory Matrix',
-            description: `\`[SYSTEM READY]\` \nSelect a command module from the dropdown below to view available functions.`,
+            description: `\`[SYSTEM READY]\` \nSelect a command module from the dropdown below to view available functions.\n\n**${Object.values(CATEGORIES).reduce((sum, cat) => sum + cat.commands.length, 0)}** total protocols across **${Object.keys(CATEGORIES).length}** modules.`,
             color: '#00FFCC',
             footer: 'Directory interface active for 3 minutes.'
         });
@@ -169,7 +196,7 @@ module.exports = {
             const categoryData = CATEGORIES[categoryId];
 
             const fields = categoryData.commands.map(cmd => ({
-                name: `/${cmd.name}`,
+                name: categoryId === 'glossary' ? `📖 ${cmd.name}` : `/${cmd.name}`,
                 value: `↳ ${cmd.desc}`,
                 inline: false
             }));

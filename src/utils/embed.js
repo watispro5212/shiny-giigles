@@ -50,11 +50,8 @@ function createEmbed(options = {}) {
     if (options.fields) embed.addFields(options.fields);
     
     // Standardized Premium Footer
-    const footerText = options.footer || 'Nexus Core System // Sector v2.0';
-    embed.setFooter({ 
-        text: footerText,
-        iconURL: 'https://cdn.discordapp.com/emojis/112233445566778899.png' // Placeholder for bot icon if available
-    });
+    const footerText = options.footer || 'Nexus Core v3.0 // Protocol Active';
+    embed.setFooter({ text: footerText });
     
     if (options.thumbnail) embed.setThumbnail(options.thumbnail);
     if (options.image) embed.setImage(options.image);

@@ -14,7 +14,11 @@ const JOBS = [
     'sold custom terminal scripts on the black market',
     'recalibrated high-density orbital sensors',
     'intercepted a rogue enemy transmission',
-    'debugged a planetary defense sub-grid'
+    'debugged a planetary defense sub-grid',
+    'reverse-engineered an adversary\'s firewall',
+    'smuggled classified blueprints across the dark web',
+    'repaired a damaged hyperlink relay tower',
+    'decoded an ancient protocol cipher'
 ];
 
 module.exports = {
@@ -49,7 +53,9 @@ module.exports = {
             })]
         });
 
-        const payout = Math.floor(Math.random() * (MAX_PAY - MIN_PAY + 1)) + MIN_PAY;
+        // Scale pay with level (higher level = better gigs)
+        const levelBonus = Math.floor((data.level || 1) * 25);
+        const payout = Math.floor(Math.random() * (MAX_PAY - MIN_PAY + 1)) + MIN_PAY + levelBonus;
         const jobDesc = JOBS[Math.floor(Math.random() * JOBS.length)];
 
         data.wallet += payout;
@@ -58,7 +64,7 @@ module.exports = {
 
         const embed = createEmbed({
             title: '💰 Gig Execution: SUCCESS',
-            description: `You **${jobDesc}** and were compensated \`${payout}\` **CR**.\nCurrent Liquid Balance: \`${data.wallet.toLocaleString()}\` **CR**.`,
+            description: `You **${jobDesc}** and were compensated \`${payout}\` **CR**.${levelBonus > 0 ? `\n📈 Level bonus: **+${levelBonus} CR**` : ''}\nCurrent Liquid Balance: \`${data.wallet.toLocaleString()}\` **CR**.`,
             color: '#00FFCC',
             footer: 'Nexus Freelance Bureau | Payment Processed'
         });

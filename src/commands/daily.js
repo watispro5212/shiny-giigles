@@ -37,16 +37,21 @@ module.exports = {
             })]
         });
 
-        data.wallet += DAILY_REWARD;
+        const streak = (diff > COOLDOWN_MS * 2) ? 1 : (data.dailyStreak || 0) + 1;
+        const streakBonus = Math.min(streak * 100, 2000);
+        const totalReward = DAILY_REWARD + streakBonus;
+
+        data.wallet += totalReward;
         data.lastDaily = now;
-        data.dailyStreak = (diff > COOLDOWN_MS * 2) ? 1 : (data.dailyStreak || 0) + 1;
+        data.dailyStreak = streak;
         await data.save();
 
         const embed = createEmbed({
             title: '✅ Allotment Successful',
-            description: `You have received **${DAILY_REWARD.toLocaleString()} Credits**.\nCurrent Liquid Balance: **${data.wallet.toLocaleString()} CR**.`,
+            description: `You have received **${totalReward.toLocaleString()} Credits**.${streakBonus > 0 ? `\n🔥 Streak bonus: **+${streakBonus.toLocaleString()} CR**` : ''}\nCurrent Liquid Balance: **${data.wallet.toLocaleString()} CR**.`,
             fields: [
-                { name: '🔥 Sync Streak', value: `\`${data.dailyStreak}\` consecutive cycles`, inline: true }
+                { name: '🔥 Sync Streak', value: `\`${streak}\` consecutive cycles`, inline: true },
+                { name: '💎 Next Bonus', value: streak < 20 ? `\`${Math.min((streak + 1) * 100, 2000)}\` CR` : '`MAX`', inline: true }
             ],
             color: '#00FFCC',
             footer: 'Nexus Treasury | Allocation Protocol: Secure'

@@ -32,6 +32,9 @@ module.exports = {
             });
         }
 
+        // Deduct bet upfront
+        data.wallet -= bet;
+
         await interaction.reply({
             embeds: [createEmbed({
                 title: '🎰 Spinning Reels...',
@@ -58,11 +61,15 @@ module.exports = {
             });
         }
 
+        // Check if user has Lucky Charm in inventory
+        const hasCharm = data.inventory && data.inventory.some(item => item === 'lucky_charm' || item.id === 'lucky_charm');
+
         const icons = ['🍒', '🍋', '🍉', '🍇', '🔔', '💎', '🎰'];
         const results = [];
         
         for (let i = 0; i < 3; i++) {
             let pick = Math.floor(Math.random() * icons.length);
+            // Lucky Charm gives a slight bias towards better icons
             if (hasCharm && Math.random() < 0.20 && pick > 0) pick -= 1;
             results.push(icons[pick]);
         }
@@ -95,10 +102,12 @@ module.exports = {
         }
 
         const winnings = Math.floor(bet * multiplier);
-        if (winnings > 0) {
-            data.wallet += winnings;
-            economy.saveUser(userId, data);
-        }
+        // Add winnings back (bet was already deducted)
+        data.wallet += winnings;
+        await data.save();
+
+        const netResult = winnings - bet;
+        const netDisplay = netResult >= 0 ? `+${netResult.toLocaleString()}` : `${netResult.toLocaleString()}`;
 
         const embed = createEmbed({
             title: '🎰 Nexus Slot Terminal',
@@ -106,10 +115,10 @@ module.exports = {
             fields: [
                 { name: '📥 Wager', value: `\`${bet.toLocaleString()}\` **CR**`, inline: true },
                 { name: '📤 Payout', value: `**${winnings.toLocaleString()}** **CR**`, inline: true },
-                { name: '💳 New Balance', value: `\`${data.wallet.toLocaleString()}\` **CR**`, inline: true }
+                { name: '💳 New Balance', value: `\`${data.wallet.toLocaleString()}\` **CR** (${netDisplay})`, inline: true }
             ],
             color: color,
-            footer: 'Nexus Casino v4.2 | Odds: Algorithmic'
+            footer: `Nexus Casino v4.2 | ${hasCharm ? '🍀 Lucky Charm Active' : 'Odds: Algorithmic'}`
         });
 
         await interaction.editReply({ embeds: [embed] });

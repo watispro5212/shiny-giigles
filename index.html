@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nexus Protocol — Elite Discord bot with advanced economy, moderation, leveling, and casino systems.">
     <title>Nexus Protocol | Elite Community Tools</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,6 +11,8 @@
     <div class="nexus-bg">
         <div class="grid-overlay"></div>
         <div class="scanline"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
     </div>
 
     <nav>
@@ -18,26 +21,49 @@
                 <svg class="logo-icon" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 <span>NEXUS</span>
             </a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <div class="nav-links">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="active">Home</a>
                 <a href="commands.html">Commands</a>
                 <a href="wiki.html">Wiki</a>
                 <a href="staff.html">Staff</a>
                 <a href="premium.html">Premium</a>
+                <a href="changelog.html">Changelog</a>
                 <a href="status.html">Network</a>
-                <a href="https://discord.com/api/oauth2/authorize?client_id=1480725340753101031&permissions=8&scope=bot%20applications.commands" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.8rem;">Initialize</a>
+                <a href="https://discord.com/api/oauth2/authorize?client_id=1480725340753101031&permissions=8&scope=bot%20applications.commands" class="btn btn-primary btn-sm">Initialize</a>
             </div>
         </div>
     </nav>
 
     <main>
         <section class="hero">
-            <div class="badge reveal">Protocol v2.1.0 Active</div>
+            <div class="badge reveal">Protocol v3.0 Active</div>
             <h1 class="hero-title reveal"><span class="text-gradient">Unleash the</span><br>Digital Nexus.</h1>
             <p class="hero-desc reveal">Experience the next generation of Discord integration. Advanced network economy, secure moderation nodes, and elite high-stakes interfaces.</p>
             <div class="btn-group reveal">
                 <a href="https://discord.com/api/oauth2/authorize?client_id=1480725340753101031&permissions=8&scope=bot%20applications.commands" class="btn btn-primary">Deploy Protocol</a>
                 <a href="#features" class="btn btn-outline">Explore Core</a>
+            </div>
+
+            <div class="stats-grid reveal">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="4" data-suffix="+">0</span>
+                    <span class="stat-label">Servers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="53" data-suffix="+">0</span>
+                    <span class="stat-label">Commands</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="99" data-suffix="%">0</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="9" data-suffix="">0</span>
+                    <span class="stat-label">Modules</span>
+                </div>
             </div>
         </section>
 
@@ -54,18 +80,28 @@
                 </div>
                 <div class="card reveal">
                     <div class="card-icon">⚡</div>
-                    <h3>High-Frequency Slots</h3>
-                    <p>Engage with low-latency casino modules designed for maximum engagement and ultra-smooth visual feedback.</p>
+                    <h3>High-Frequency Casino</h3>
+                    <p>Engage with low-latency casino modules: Slots, Blackjack, and Coinflip designed for maximum engagement.</p>
                 </div>
                 <div class="card reveal">
                     <div class="card-icon">🛡️</div>
                     <h3>Firewall Moderation</h3>
-                    <p>Enforce network rules with high-priority purge protocols, secure channel locking, and automated threat detection.</p>
+                    <p>Enforce network rules with purge protocols, channel locking, warn strikes, ticket systems, and automated threat detection.</p>
                 </div>
                 <div class="card reveal">
                     <div class="card-icon">🧬</div>
                     <h3>Neural Rank System</h3>
-                    <p>Track operative activity with custom security clearance levels, XP progression, and futuristic profile cards.</p>
+                    <p>Track operative activity with security clearance levels, XP progression, custom rank cards, and the /profile dossier.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🎒</div>
+                    <h3>Item Arsenal</h3>
+                    <p>8 unique items in the shop: XP Boosters, Shield Modules, Lucky Charms, Crate Keys, and more.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🎯</div>
+                    <h3>Advanced Operations</h3>
+                    <p>Execute multi-phase cyber-heists, manage giveaways, and monitor real-time shard diagnostics.</p>
                 </div>
             </div>
         </section>
@@ -77,26 +113,23 @@
                 <p class="hero-desc">Live stream of cross-sector system events and protocol executions.</p>
             </div>
             
-            <div class="terminal-container reveal" style="margin-top: 3rem;">
+            <div class="terminal-container reveal">
                 <div class="terminal-header">
-                    <div style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary);">NEXUS_EVENT_STREAM // MONITORING_ACTIVE</div>
+                    <div class="terminal-dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-label">NEXUS_EVENT_STREAM // MONITORING_ACTIVE</div>
                 </div>
-                <div class="terminal-body" style="height: 250px; overflow: hidden; font-family: 'JetBrains Mono'; font-size: 0.75rem; padding: 1.5rem; color: var(--text-dim); line-height: 1.6;">
-                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[21:52:10]</span> <span style="color: var(--primary);">SHARD_0</span>: Initializing neural level sync for guild_8829... <span style="color: #00FF88;">SUCCESS</span></div>
-                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[21:52:12]</span> <span style="color: var(--primary);">FIREWALL</span>: Unauthorized breach attempt detected in sector_G4. Blocking vector... <span style="color: #FF4B2B;">BLOCKED</span></div>
-                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[21:52:15]</span> <span style="color: var(--primary);">CORE</span>: Global heartbeat pulse emitted. Latency: 18ms.</div>
-                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[21:52:20]</span> <span style="color: var(--primary);">UPLINK</span>: Gateway handshake confirmed with Discord API nodes.</div>
-                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[21:52:25]</span> <span style="color: var(--primary);">ECONOMY</span>: Batching 4,821 credit transactions to global ledger...</div>
-                    <div style="margin-bottom: 0.5rem;"><span style="color: var(--secondary);">[21:52:28]</span> <span style="color: var(--primary);">SHARD_0</span>: Processing /HELP request from entity_0092...</div>
-                    <div style="margin-top: 1rem; color: var(--primary); animation: blink 1s infinite;">_ LISTENING_FOR_TRAFFIC...</div>
-                </div>
+                <div class="ops-feed" id="ops-feed"></div>
             </div>
         </section>
 
         <section class="section" id="network-status" style="padding-top: 0;">
-            <div class="terminal-container reveal" style="max-width: 600px; margin: 0 auto; border-color: var(--primary-glow);">
+            <div class="terminal-container reveal" style="max-width: 600px; margin: 0 auto; border-color: var(--glass-border);">
                 <div class="terminal-header" style="background: rgba(0, 255, 204, 0.05);">
-                    <div style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--primary);">SHARD_LIST // STATUS: NOMINAL</div>
+                    <div class="terminal-label">SHARD_LIST // STATUS: NOMINAL</div>
                 </div>
                 <div class="terminal-body" style="padding: 20px; display: flex; justify-content: space-between; align-items: center;">
                     <div class="shard-item">
@@ -115,12 +148,16 @@
         <div class="footer-content">
             <div class="footer-left">
                 <div class="logo">
-                     <svg class="logo-icon" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     <span>NEXUS</span>
                 </div>
                 <p class="footer-tagline">Elite Node Integration for Modern Communities.</p>
             </div>
             <div class="footer-links">
+                <a href="commands.html">Commands</a>
+                <a href="wiki.html">Wiki</a>
+                <a href="changelog.html">Changelog</a>
+                <a href="status.html">Network</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
                 <a href="https://discord.gg/VgPETfTun2" target="_blank" rel="noopener">Uplink Support</a>
