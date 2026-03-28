@@ -472,11 +472,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('mouseover', (e) => {
-        const el = e.target.closest?.('a, button:not(.tab-btn), .cmd-item, .card, .explore-card, .nav-item, .protocol-strip a, .scroll-to-top, .toggle-switch');
+        const el = e.target.closest?.('a, button:not(.tab-btn), .cmd-item, .card, .explore-card, .nav-item, .scroll-to-top, .toggle-switch');
         if (el) document.body.classList.add('clickable-hover');
     });
     document.addEventListener('mouseout', (e) => {
-        const el = e.target.closest?.('a, button:not(.tab-btn), .cmd-item, .card, .explore-card, .nav-item, .protocol-strip a, .scroll-to-top, .toggle-switch');
+        const el = e.target.closest?.('a, button:not(.tab-btn), .cmd-item, .card, .explore-card, .nav-item, .scroll-to-top, .toggle-switch');
         const rel = e.relatedTarget;
         if (el && (!rel || !el.contains(rel))) {
             document.body.classList.remove('clickable-hover');
