@@ -81,7 +81,7 @@ body:hover .cursor-dot, body:hover .cursor-trail {
     height: 100vh;
     z-index: -2;
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.58;
 }
 
 /* --- Premium Background --- */
@@ -93,7 +93,36 @@ body:hover .cursor-dot, body:hover .cursor-trail {
     height: 100%;
     z-index: -1;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, #050510 0%, #020205 100%);
+    background:
+        radial-gradient(ellipse 140% 90% at 50% -25%, rgba(0, 255, 234, 0.14) 0%, transparent 58%),
+        radial-gradient(ellipse 85% 70% at 105% 45%, rgba(157, 0, 255, 0.16) 0%, transparent 52%),
+        radial-gradient(ellipse 75% 55% at -8% 75%, rgba(255, 0, 85, 0.06) 0%, transparent 48%),
+        radial-gradient(ellipse 50% 40% at 80% 10%, rgba(0, 255, 234, 0.04) 0%, transparent 50%),
+        linear-gradient(168deg, #07071c 0%, #04040f 38%, #020208 72%, #06061a 100%);
+    box-shadow: inset 0 0 200px 80px rgba(0, 0, 0, 0.55);
+}
+
+.nexus-bg::before {
+    content: '';
+    position: absolute;
+    inset: -25%;
+    background:
+        radial-gradient(ellipse 55% 40% at 25% 25%, rgba(0, 255, 234, 0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 38% at 75% 70%, rgba(157, 0, 255, 0.1) 0%, transparent 50%);
+    animation: nexusAurora 24s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes nexusAurora {
+    0% {
+        transform: translate(-2%, -1%) scale(1);
+        opacity: 0.65;
+    }
+    100% {
+        transform: translate(3%, 2%) scale(1.06);
+        opacity: 1;
+    }
 }
 
 .grid-overlay {
@@ -102,12 +131,17 @@ body:hover .cursor-dot, body:hover .cursor-trail {
     height: 200%;
     top: -50%;
     left: -50%;
-    background-image: 
-        linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
-    background-size: 60px 60px;
+    z-index: 1;
+    background-image:
+        linear-gradient(rgba(0, 255, 204, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 204, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(157, 0, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 0, 255, 0.022) 1px, transparent 1px);
+    background-size: 60px 60px, 60px 60px, 180px 180px, 180px 180px;
     transform: perspective(1000px) rotateX(60deg);
     animation: gridMove 20s linear infinite;
+    mask-image: radial-gradient(ellipse 85% 70% at 50% 45%, black 15%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 45%, black 15%, transparent 75%);
 }
 
 @keyframes gridMove {
@@ -124,13 +158,19 @@ body:hover .cursor-dot, body:hover .cursor-trail {
     background: linear-gradient(
         to bottom,
         transparent 50%,
-        rgba(0, 255, 204, 0.02) 51%,
+        rgba(0, 255, 204, 0.025) 51%,
+        transparent 52%
+    ),
+    linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(157, 0, 255, 0.012) 51%,
         transparent 52%
     );
-    background-size: 100% 4px;
+    background-size: 100% 4px, 100% 7px;
     pointer-events: none;
     z-index: 100;
-    opacity: 0.3;
+    opacity: 0.35;
 }
 
 /* --- Floating Orbs --- */
@@ -1234,4 +1274,109 @@ footer {
 .faq-item.active .faq-answer-inner {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 1.5rem;
+}
+
+/* --- Cross-page quick navigation --- */
+.protocol-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 3rem;
+    max-width: 920px;
+    padding: 1.1rem 1.35rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    background: rgba(8, 8, 20, 0.55);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.protocol-strip a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 0.45rem 0.95rem;
+    border: 1px solid rgba(0, 255, 234, 0.22);
+    border-radius: 8px;
+    background: rgba(0, 255, 234, 0.04);
+    transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.protocol-strip a:hover {
+    color: var(--text);
+    border-color: var(--primary);
+    box-shadow: 0 0 18px rgba(0, 255, 234, 0.2);
+    transform: translateY(-1px);
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.explore-card {
+    display: block;
+    padding: 1.5rem 1.35rem;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(12, 12, 24, 0.5);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+}
+
+.explore-card:hover {
+    border-color: var(--glass-border);
+    box-shadow: 0 12px 36px rgba(157, 0, 255, 0.12), 0 0 24px rgba(0, 255, 234, 0.08);
+    transform: translateY(-3px);
+}
+
+.explore-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.explore-card p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+    margin: 0;
+}
+
+.page-callout {
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--secondary);
+    border-radius: 0 10px 10px 0;
+    background: rgba(157, 0, 255, 0.06);
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.page-callout a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.page-callout code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    color: var(--primary);
+    background: rgba(0, 255, 234, 0.08);
+    padding: 0.12em 0.35em;
+    border-radius: 4px;
 }

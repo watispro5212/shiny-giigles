@@ -394,6 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.radius = Math.random() * 1.5 + 0.5;
+                this.accent = Math.random() > 0.52 ? 'primary' : 'secondary';
             }
             update() {
                 this.x += this.vx;
@@ -404,7 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0, 255, 234, 0.5)';
+                ctx.fillStyle = this.accent === 'primary'
+                    ? 'rgba(0, 255, 234, 0.48)'
+                    : 'rgba(188, 130, 255, 0.42)';
                 ctx.fill();
             }
         }
@@ -425,10 +428,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     
                     if (dist < 120) {
+                        const alpha = Math.max(0, 0.2 - dist / 600);
+                        const useViolet = (i + j) % 3 === 0;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(0, 255, 234, ${0.2 - dist/600})`;
+                        ctx.strokeStyle = useViolet
+                            ? `rgba(157, 0, 255, ${alpha * 0.95})`
+                            : `rgba(0, 255, 234, ${alpha})`;
                         ctx.stroke();
                     }
                 }
@@ -458,6 +465,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <canvas id="network-canvas"></canvas>
             <div class="grid-overlay"></div>
             <div class="scanline"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
         `;
         document.body.prepend(bgContainer);
         // Reload location to trigger the canvas script initialized above (requires small refactor or just run it inline, easier to just reload if needed)
