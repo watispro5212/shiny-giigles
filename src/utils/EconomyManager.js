@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const logger = require('./logger');
+const CacheManager = require('./CacheManager');
 
 class EconomyManager {
     /**
@@ -8,6 +9,10 @@ class EconomyManager {
      * @param {string} guildId 
      */
     async getUser(userId, guildId) {
+        const cacheKey = `user:${guildId}:${userId}`;
+        const cached = CacheManager.get(cacheKey);
+        if (cached) return cached;
+
         try {
             let user = await User.findOne({ userId, guildId });
             
@@ -24,6 +29,7 @@ class EconomyManager {
                 });
             }
 
+            CacheManager.set(cacheKey, user, 60 * 1000 * 5); // 5 min cache
             return user;
         } catch (error) {
             logger.error(`[EconomyManager] getUser: ${error.message}`);
@@ -39,6 +45,8 @@ class EconomyManager {
     async saveUser(user) {
         try {
             await user.save();
+            const cacheKey = `user:${user.guildId}:${user.userId}`;
+            CacheManager.set(cacheKey, user, 60 * 1000 * 5);
         } catch (error) {
             logger.error(`[EconomyManager] saveUser: ${error.message}`);
         }
