@@ -223,11 +223,11 @@ Highly restricted.
 
 Thanks for stopping by! Please take a quick moment to orient yourself:
 
-**1.** 📜 Read our rules in <#CHANNEL_ID_HERE>. We strongly prohibit toxicity and sharing sensitive/secret tokens here.
-**2.** ✅ Verify your account by hitting the button below or interacting with the screening popup to gain full server access.
-**3.** 🤖 Looking to add NexusBot? Head straight over to <#CHANNEL_ID_HERE> to find the official invite link.
-**4.** 🆘 Need assistance? Use the community <#CHANNEL_ID_HERE> or open a private ticket over at <#CHANNEL_ID_HERE>.
-**5.** 🐛 Found a bug or glitch? Make a post in <#CHANNEL_ID_HERE> outlining exactly what happened.
+**1.** 📜 Read our rules in **#rules**. We strongly prohibit toxicity and sharing sensitive/secret tokens here.
+**2.** ✅ Verify your account by interacting with the screening popup to gain full server access.
+**3.** 🤖 Looking to add NexusBot? Head straight over to **#links** (or your bot invite channel) to find the official invite link.
+**4.** 🆘 Need assistance? Head over to **#open-a-ticket** to open a private ticket with our staff team.
+**5.** 🐛 Found a bug or glitch? Make a post in our **#bug-reports** tracking forum outlining exactly what happened.
 
 Have an amazing time here!
 — The Nexus Team
@@ -244,6 +244,48 @@ Have an amazing time here!
 4. **Use Appropriate Channels:** Keep spam command execution in the `🤖┃bot-commands` channel.
 5. **Follow Discord Guidelines:** See the official [Discord Guidelines](https://discord.com/guidelines).
 6. **Enforcement:** Moderators have the final say and may timeout, kick, or ban users who intentionally disrupt the server.
+```
+
+---
+
+## 7.5. 🗣️ Forum Channel Setup (Tags & First Posts)
+
+For your forum channels (`💡┃suggestions`, `🧰┃help`, `🐛┃bug-reports`), you should configure structured Tags and create a pinned "First Post" to guide users on how to use the channel properly.
+
+### 🐛┃bug-reports (Tags)
+Configure these inside the forum channel settings:
+- `🔴 Critical` (Red)
+- `🟠 High Priority` (Orange)
+- `🟡 Minor UI` (Yellow)
+- `🟢 Resolved` (Green)
+- `🔵 Needs Info` (Blue)
+
+### 🧰┃help (Tags)
+- `🔧 Self-Hosting`
+- `💻 Code Error`
+- `⚙️ Configuration`
+- `✅ Solved`
+
+### 📌 Pinned "First Post" Template (For Bug Reports/Help Forums)
+Create a new post in the forum, name it **"READ BEFORE POSTING: Formatting Guidelines"**, pin it, and lock it so no one else replies:
+
+```markdown
+**👋 Welcome to the Support/Bug Forum!**
+
+To help our staff assist you efficiently, please ensure your posts contain the following structure:
+
+**1. Title Your Post Accurately:** 
+Don't use titles like "Pls help me" or "Bot doesn't work". 
+Use specific titles like "Error when running /invite command" or "Missing permissions on starboard".
+
+**2. Always Include:**
+- What happened (the actual error vs. expected output).
+- Detailed steps on how to reproduce the issue.
+- The Node.js version and Discord.js version you are using.
+- Relevant screenshots of terminal errors or Discord UI bugs.
+
+**3. Remember:**
+Never upload full `.env` files or paste your raw bot tokens. Posts that leak tokens will be immediately deleted for your own safety!
 ```
 
 ---
