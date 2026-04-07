@@ -1,58 +1,67 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 
-/**
- * Node Severance Protocol (Ban)
- * Permanently severs an entity's connection to the current node.
- */
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ban')
-        .setDescription('Permanently sever a user from the node.')
+        .setDescription('Permanently ban a user from the server.')
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
-        .addUserOption(option => 
+        .addUserOption(option =>
             option.setName('target')
-                .setDescription('The entity to sever.')
+                .setDescription('The user to ban.')
                 .setRequired(true))
-        .addStringOption(option => 
+        .addStringOption(option =>
             option.setName('reason')
-                .setDescription('The reason for protocol execution.')
+                .setDescription('Reason for the ban.')
+                .setRequired(false))
+        .addIntegerOption(option =>
+            option.setName('delete_days')
+                .setDescription('Days of messages to delete (0-7).')
+                .setMinValue(0)
+                .setMaxValue(7)
                 .setRequired(false)),
-
+    cooldown: 5,
     async execute(interaction, client) {
         const target = interaction.options.getMember('target');
         const reason = interaction.options.getString('reason') || 'No reason provided.';
+        const deleteDays = interaction.options.getInteger('delete_days') || 0;
 
         if (!target) {
-            return interaction.reply({
-                content: 'The target entity is not reachable in this node.',
-                ephemeral: true
-            });
+            return interaction.reply({ content: '❌ That user is not in this server.', ephemeral: true });
         }
 
         if (!target.bannable) {
-            return interaction.reply({
-                content: 'System error: Target clearance level is superior to your own.',
-                ephemeral: true
-            });
+            return interaction.reply({ content: '❌ I cannot ban this user — their role is higher than mine.', ephemeral: true });
         }
 
+        if (target.id === interaction.user.id) {
+            return interaction.reply({ content: '❌ You cannot ban yourself.', ephemeral: true });
+        }
+
+        // DM the user before banning
         try {
-            await target.ban({ reason });
-
-            const banEmbed = embedBuilder({
-                title: 'Security Protocol // NODE_SEVERANCE',
-                description: `**Entity:** ${target.user.tag}\n**Reason:** ${reason}\n**Admin:** ${interaction.user.tag}`,
-                color: '#ED4245',
-                thumbnail: target.user.displayAvatarURL({ dynamic: true })
+            await target.send({
+                embeds: [embedBuilder({
+                    title: `🔨 Banned from ${interaction.guild.name}`,
+                    description: `**Reason:** ${reason}\n**Moderator:** ${interaction.user.tag}`,
+                    color: '#ED4245'
+                })]
             });
+        } catch (err) { /* DMs closed */ }
 
-            await interaction.reply({ embeds: [banEmbed] });
-        } catch (err) {
+        try {
+            await target.ban({ reason, deleteMessageSeconds: deleteDays * 86400 });
+
             await interaction.reply({
-                content: `Protocol failed. Error: \`${err.message}\``,
-                ephemeral: true
+                embeds: [embedBuilder({
+                    title: '🔨 User Banned',
+                    description: `**User:** ${target.user.tag} (\`${target.id}\`)\n**Reason:** ${reason}\n**Messages Deleted:** ${deleteDays} days\n**Moderator:** ${interaction.user.tag}`,
+                    color: '#ED4245',
+                    thumbnail: target.user.displayAvatarURL({ dynamic: true })
+                })]
             });
+        } catch (err) {
+            await interaction.reply({ content: `❌ Ban failed: \`${err.message}\``, ephemeral: true });
         }
     },
 };

@@ -1,43 +1,61 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 
-/**
- * Data Deletion Protocol (Purge)
- * Mass deletes messages in the current channel.
- */
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('purge')
-        .setDescription('Initiate a mass data deletion in the current channel.')
+        .setDescription('Mass delete messages in the current channel.')
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
-        .addIntegerOption(option => 
+        .addIntegerOption(option =>
             option.setName('amount')
-                .setDescription('The number of data packets (messages) to delete (1-100).')
+                .setDescription('Number of messages to delete (1-100).')
                 .setRequired(true)
                 .setMinValue(1)
-                .setMaxValue(100)),
-
+                .setMaxValue(100))
+        .addUserOption(option =>
+            option.setName('target')
+                .setDescription('Only delete messages from this user.')
+                .setRequired(false)),
+    cooldown: 10,
     async execute(interaction, client) {
         const amount = interaction.options.getInteger('amount');
+        const targetUser = interaction.options.getUser('target');
 
         try {
-            const deleted = await interaction.channel.bulkDelete(amount, true);
+            let deleted;
 
-            const successEmbed = embedBuilder({
-                title: 'Data Deletion // SUCCESS',
-                description: `Successfully purged \`${deleted.size}\` data packets from the local node.`,
-                color: '#2ECC71'
+            if (targetUser) {
+                // Fetch messages and filter by user
+                const messages = await interaction.channel.messages.fetch({ limit: 100 });
+                const userMessages = messages
+                    .filter(m => m.author.id === targetUser.id)
+                    .first(amount);
+                deleted = await interaction.channel.bulkDelete(userMessages, true);
+            } else {
+                deleted = await interaction.channel.bulkDelete(amount, true);
+            }
+
+            const description = targetUser
+                ? `Purged \`${deleted.size}\` messages from ${targetUser.tag}.`
+                : `Purged \`${deleted.size}\` messages.`;
+
+            await interaction.reply({
+                embeds: [embedBuilder({
+                    title: '🗑️ Purge Complete',
+                    description: `${description}\n**Requested:** \`${amount}\`\n**Moderator:** ${interaction.user.tag}`,
+                    color: '#2ECC71'
+                })],
+                ephemeral: true
             });
-
-            await interaction.reply({ embeds: [successEmbed], ephemeral: true });
         } catch (err) {
-            const errEmbed = embedBuilder({
-                title: 'Deletion Failure',
-                description: 'The system encountered an error while purging transmissions. Messages older than 14 days cannot be mass deleted.',
-                color: '#ED4245'
+            await interaction.reply({
+                embeds: [embedBuilder({
+                    title: '❌ Purge Failed',
+                    description: 'Messages older than 14 days cannot be bulk deleted.',
+                    color: '#ED4245'
+                })],
+                ephemeral: true
             });
-
-            await interaction.reply({ embeds: [errEmbed], ephemeral: true });
         }
     },
 };

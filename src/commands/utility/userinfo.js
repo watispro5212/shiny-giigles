@@ -1,30 +1,55 @@
 const { SlashCommandBuilder } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 
-/**
- * Entity Dossier & Profile Command
- * Pulls detailed system data on a target user or the command author.
- */
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('userinfo')
-        .setDescription('Pull system file and data on a specific user.')
-        .addUserOption(option => 
+        .setDescription('Full dossier on a user — account info, roles, and status.')
+        .addUserOption(option =>
             option.setName('target')
-                .setDescription('The user protocol to scan.')
+                .setDescription('The user to scan.')
                 .setRequired(false)),
-
+    cooldown: 5,
     async execute(interaction, client) {
         const target = interaction.options.getMember('target') || interaction.member;
         const user = target.user;
 
+        // Calculate account age
+        const accountAge = Math.floor((Date.now() - user.createdTimestamp) / 86400000);
+
+        // Get top role (highest non-@everyone)
+        const topRole = target.roles.highest.id !== interaction.guild.id
+            ? target.roles.highest
+            : null;
+
+        // Get all roles (excluding @everyone)
+        const roles = target.roles.cache
+            .filter(r => r.name !== '@everyone')
+            .sort((a, b) => b.position - a.position)
+            .map(r => r)
+            .slice(0, 15);
+
+        const statusMap = {
+            online: '🟢 Online',
+            idle: '🌙 Idle',
+            dnd: '🔴 Do Not Disturb',
+            offline: '⚫ Offline',
+        };
+
         const infoEmbed = embedBuilder({
-            title: `Entity Dossier // ${user.username}`,
-            description: `**ID:** \`${user.id}\`\n**Status:** \`${target.presence?.status ?? 'Offline'}\`\n**Identity:** \`${user.bot ? 'Artificial Intelligence (Bot)' : 'Biological Entity (Human)'}\``,
+            title: `👤 Entity Dossier // ${user.displayName}`,
+            description: [
+                `**ID:** \`${user.id}\``,
+                `**Tag:** \`${user.tag}\``,
+                `**Status:** ${statusMap[target.presence?.status] || '⚫ Offline'}`,
+                `**Type:** \`${user.bot ? 'Bot' : 'Human'}\``,
+                `**Account Age:** \`${accountAge} days\``,
+            ].join('\n'),
             fields: [
-                { name: 'Node Registration', value: `<t:${Math.floor(user.createdTimestamp / 1000)}:R>`, inline: true },
-                { name: 'Node Integration', value: `<t:${Math.floor(target.joinedTimestamp / 1000)}:R>`, inline: true },
-                { name: 'Security Clearances', value: target.roles.cache.size > 1 ? target.roles.cache.filter(r => r.name !== '@everyone').map(r => r).join(' ') : 'No special clearance detected.', inline: false }
+                { name: '📅 Account Created', value: `<t:${Math.floor(user.createdTimestamp / 1000)}:R>`, inline: true },
+                { name: '📥 Joined Server', value: `<t:${Math.floor(target.joinedTimestamp / 1000)}:R>`, inline: true },
+                { name: '👑 Top Role', value: topRole ? `${topRole}` : 'None', inline: true },
+                { name: `🏷️ Roles (${target.roles.cache.size - 1})`, value: roles.length > 0 ? roles.join(' ') : 'No roles.', inline: false },
             ],
             color: user.accentColor ?? '#BC82FF',
             thumbnail: user.displayAvatarURL({ dynamic: true, size: 512 })

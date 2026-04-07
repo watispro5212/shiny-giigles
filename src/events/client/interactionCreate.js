@@ -1,4 +1,4 @@
-const { Events, InteractionType } = require('discord.js');
+const { Events, Collection } = require('discord.js');
 const logger = require('../../utils/logger');
 const embedBuilder = require('../../utils/embedBuilder');
 const BlacklistEntry = require('../../models/BlacklistEntry');
@@ -11,39 +11,77 @@ module.exports = {
         const command = client.commands.get(interaction.commandName);
         if (!command) return;
 
-        // Blacklist Check
+        logger.command(interaction.commandName, interaction.user.tag);
+
+        // ── Blacklist Check ──
         try {
             const isBlacklisted = await BlacklistEntry.findOne({ targetId: interaction.user.id });
             if (isBlacklisted) {
                 return interaction.reply({
                     embeds: [embedBuilder({
-                        title: 'Access Denied',
-                        description: `You are blacklisted from using the Nexus Protocol.\n**Reason:** ${isBlacklisted.reason}`,
+                        title: '🚫 Access Denied',
+                        description: `You are blacklisted from the Nexus Protocol.\n**Reason:** ${isBlacklisted.reason}`,
                         color: '#ED4245'
                     })],
                     ephemeral: true
                 });
             }
         } catch (err) {
-            logger.error('Blacklist check failed:', err);
+            // If MongoDB is down, allow commands to continue
+            logger.error('Blacklist check failed (allowing command):', err);
         }
 
-        // Execute Command
+        // ── Cooldown System ──
+        if (!client.cooldowns) client.cooldowns = new Collection();
+
+        if (!client.cooldowns.has(command.data.name)) {
+            client.cooldowns.set(command.data.name, new Collection());
+        }
+
+        const now = Date.now();
+        const timestamps = client.cooldowns.get(command.data.name);
+        const cooldownAmount = (command.cooldown || 3) * 1000; // default 3s
+
+        if (timestamps.has(interaction.user.id)) {
+            const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
+
+            if (now < expirationTime) {
+                const timeLeft = ((expirationTime - now) / 1000).toFixed(1);
+                return interaction.reply({
+                    embeds: [embedBuilder({
+                        title: '⏳ Cooldown Active',
+                        description: `Please wait **${timeLeft}s** before using \`/${command.data.name}\` again.`,
+                        color: '#F1C40F'
+                    })],
+                    ephemeral: true
+                });
+            }
+        }
+
+        timestamps.set(interaction.user.id, now);
+        setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+
+        // ── Execute Command ──
         try {
             await command.execute(interaction, client);
         } catch (error) {
-            logger.error(`Error executing ${interaction.commandName}:`, error);
+            const errorId = Date.now().toString(36).toUpperCase();
+            logger.error(`[${errorId}] Error executing /${interaction.commandName}:`, error);
 
             const errEmbed = embedBuilder({
-                title: 'Execution Error',
-                description: 'There was an internal error while executing this command. The developers have been notified.',
+                title: '⚠️ Execution Error',
+                description: `An internal error occurred.\n**Error ID:** \`${errorId}\`\nThis has been logged for the developers.`,
                 color: '#ED4245'
             });
 
-            if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ embeds: [errEmbed], ephemeral: true });
-            } else {
-                await interaction.reply({ embeds: [errEmbed], ephemeral: true });
+            try {
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ embeds: [errEmbed], ephemeral: true });
+                } else {
+                    await interaction.reply({ embeds: [errEmbed], ephemeral: true });
+                }
+            } catch (replyErr) {
+                logger.error('Failed to send error response:', replyErr);
             }
         }
     },

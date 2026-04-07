@@ -2,28 +2,22 @@ const { SlashCommandBuilder } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 const User = require('../../models/User');
 
-/**
- * Daily Resource Allocation Command
- * Grants a set amount of credits once every 24 hours.
- */
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('daily')
-        .setDescription('Receive your daily Nexus Credit allocation.'),
-
+        .setDescription('Claim your daily credit allocation with streak bonuses.'),
+    cooldown: 5,
     async execute(interaction, client) {
         const userId = interaction.user.id;
         const guildId = interaction.guild.id;
 
-        // Find or create user
         let userData = await User.findOne({ userId, guildId });
         if (!userData) {
             userData = new User({ userId, guildId });
         }
 
         const now = new Date();
-        const baseAmount = 1000;
-        const cooldown = 24 * 60 * 60 * 1000; // 24 hours
+        const cooldown = 24 * 60 * 60 * 1000;
 
         if (userData.lastDaily && (now - userData.lastDaily < cooldown)) {
             const timeLeft = cooldown - (now - userData.lastDaily);
@@ -32,25 +26,43 @@ module.exports = {
 
             return interaction.reply({
                 embeds: [embedBuilder({
-                    title: 'Allocation Denied // COOLDOWN',
-                    description: `Your terminal is already fully charged.\n**Next Sync:** \`${hours}h ${minutes}m\``,
+                    title: '⏳ Already Claimed',
+                    description: `Your daily is on cooldown.\n**Next Claim:** \`${hours}h ${minutes}m\``,
                     color: '#ED4245'
                 })],
                 ephemeral: true
             });
         }
 
-        // Grant credits
-        userData.balance += baseAmount;
+        // Check streak (within 48h of last daily = streak continues)
+        const streakWindow = 48 * 60 * 60 * 1000;
+        if (userData.lastDaily && (now - userData.lastDaily < streakWindow)) {
+            userData.streak = (userData.streak || 0) + 1;
+        } else {
+            userData.streak = 1;
+        }
+
+        // Calculate amount with streak bonus (base 1000 + streak * 100, cap 5000)
+        const baseAmount = 1000;
+        const streakBonus = Math.min(userData.streak * 100, 4000);
+        const totalAmount = baseAmount + streakBonus;
+
+        userData.balance += totalAmount;
+        userData.totalEarned = (userData.totalEarned || 0) + totalAmount;
         userData.lastDaily = now;
         await userData.save();
 
-        const successEmbed = embedBuilder({
-            title: 'Protocol Executed // DAILY_SYNC',
-            description: `**Credits Transferred:** \`$${baseAmount}\`\n**Current Balance:** \`$${userData.balance}\``,
-            color: '#2ECC71'
+        await interaction.reply({
+            embeds: [embedBuilder({
+                title: '✅ Daily Claimed!',
+                description: [
+                    `**Base Reward:** \`$${baseAmount.toLocaleString()}\``,
+                    `**Streak Bonus:** \`+$${streakBonus.toLocaleString()}\` (${userData.streak} day streak 🔥)`,
+                    `**Total Received:** \`$${totalAmount.toLocaleString()}\``,
+                    `**Balance:** \`$${userData.balance.toLocaleString()}\``
+                ].join('\n'),
+                color: '#2ECC71'
+            })]
         });
-
-        await interaction.reply({ embeds: [successEmbed] });
     },
 };

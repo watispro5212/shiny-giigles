@@ -1,37 +1,40 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 
-/**
- * Firewall Disengagement Protocol (Unlock)
- * Restores SendMessages permissions for the @everyone role in the current node.
- */
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('unlock')
-        .setDescription('Disengage firewall on the current channel.')
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
-
+        .setDescription('Unlock a channel — restore public messaging.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+        .addStringOption(option =>
+            option.setName('reason')
+                .setDescription('Reason for unlocking the channel.')
+                .setRequired(false)),
+    cooldown: 5,
     async execute(interaction, client) {
+        const reason = interaction.options.getString('reason') || 'No reason provided.';
+
         try {
             await interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone, {
                 SendMessages: null
             });
 
-            const unlockEmbed = embedBuilder({
-                title: 'Security Protocol // FIREWALL_DISENGAGED',
-                description: 'Transmission parameters restored to default.',
-                color: '#2ECC71'
+            await interaction.reply({
+                embeds: [embedBuilder({
+                    title: '🔓 Channel Unlocked',
+                    description: `This channel has been unlocked.\n**Reason:** ${reason}\n**Moderator:** ${interaction.user.tag}`,
+                    color: '#2ECC71'
+                })]
             });
-
-            await interaction.reply({ embeds: [unlockEmbed] });
         } catch (err) {
-            const errEmbed = embedBuilder({
-                title: 'Restoration Failure',
-                description: 'Permission sync failed. Check system hierarchy.',
-                color: '#ED4245'
+            await interaction.reply({
+                embeds: [embedBuilder({
+                    title: '❌ Unlock Failed',
+                    description: 'Could not modify channel permissions. Check bot role hierarchy.',
+                    color: '#ED4245'
+                })],
+                ephemeral: true
             });
-
-            await interaction.reply({ embeds: [errEmbed], ephemeral: true });
         }
     },
 };

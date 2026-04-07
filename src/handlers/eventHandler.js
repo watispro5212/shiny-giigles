@@ -4,35 +4,43 @@ const logger = require('../utils/logger');
 
 module.exports = (client) => {
     const eventsPath = path.join(__dirname, '../events');
-    
-    // Create directory if it doesn't exist
+    let onceCount = 0;
+    let onCount = 0;
+
     if (!fs.existsSync(eventsPath)) fs.mkdirSync(eventsPath);
 
     const loadEvents = (dir) => {
-        const files = fs.readdirSync(path.join(eventsPath, dir));
-        
-        for (const file of files) {
-            const stat = fs.lstatSync(path.join(eventsPath, dir, file));
-            
+        const entries = fs.readdirSync(path.join(eventsPath, dir));
+
+        for (const entry of entries) {
+            const fullPath = path.join(eventsPath, dir, entry);
+            const stat = fs.lstatSync(fullPath);
+
             if (stat.isDirectory()) {
-                loadEvents(path.join(dir, file));
-            } else if (file.endsWith('.js')) {
-                const event = require(path.join(eventsPath, dir, file));
-                
-                if (event.once) {
-                    client.once(event.name, (...args) => event.execute(...args, client));
-                } else {
-                    client.on(event.name, (...args) => event.execute(...args, client));
+                loadEvents(path.join(dir, entry));
+            } else if (entry.endsWith('.js')) {
+                try {
+                    const event = require(fullPath);
+
+                    if (event.once) {
+                        client.once(event.name, (...args) => event.execute(...args, client));
+                        onceCount++;
+                    } else {
+                        client.on(event.name, (...args) => event.execute(...args, client));
+                        onCount++;
+                    }
+
+                    client.events.set(event.name, event);
+                } catch (err) {
+                    logger.error(`Failed to load event ${entry}:`, err);
                 }
-                
-                client.events.set(event.name, event);
             }
         }
     };
 
     try {
         loadEvents('');
-        logger.success(`Loaded ${client.events.size} events.`);
+        logger.success(`Loaded ${client.events.size} events (${onceCount} once, ${onCount} persistent).`);
     } catch (err) {
         logger.error('Error loading events:', err);
     }

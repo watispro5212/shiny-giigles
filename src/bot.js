@@ -11,25 +11,27 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildPresences
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildVoiceStates
     ]
 });
 
 client.commands = new Collection();
+client.cooldowns = new Collection();
 client.events = new Collection();
 
-// MongoDB Connection
+// MongoDB Connection — no deprecated options (Mongoose 8+/MongoDB Driver 6+ dropped them)
 if (process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+        serverSelectionTimeoutMS: 12000,
+        maxPoolSize: 10
     }).then(() => {
         logger.success('Connected to MongoDB.');
     }).catch(err => {
         logger.error('Failed to connect to MongoDB:', err);
     });
 } else {
-    logger.warn('MONGODB_URI not found. Persistence might not work.');
+    logger.warn('MONGODB_URI not found in .env — persistence features disabled.');
 }
 
 // Load Handlers
@@ -43,6 +45,19 @@ fs.readdirSync(handlersPath).forEach(file => {
 client.login(process.env.TOKEN).catch(err => {
     logger.error('Failed to login to Discord:', err);
 });
+
+// Graceful shutdown
+const shutdown = (signal) => {
+    logger.warn(`${signal} received — shutting down gracefully...`);
+    client.destroy();
+    mongoose.connection.close(false).then(() => {
+        logger.info('MongoDB connection closed.');
+        process.exit(0);
+    }).catch(() => process.exit(0));
+};
+
+process.on('SIGINT', () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));
 
 // Error handling
 process.on('unhandledRejection', error => {

@@ -1,37 +1,40 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 
-/**
- * Firewall Engagement Protocol (Lock)
- * Revokes SendMessages permissions for the @everyone role in the current node.
- */
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('lock')
-        .setDescription('Engage firewall on the current channel.')
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
-
+        .setDescription('Lock a channel — prevent public messages.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+        .addStringOption(option =>
+            option.setName('reason')
+                .setDescription('Reason for locking the channel.')
+                .setRequired(false)),
+    cooldown: 5,
     async execute(interaction, client) {
+        const reason = interaction.options.getString('reason') || 'No reason provided.';
+
         try {
             await interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone, {
                 SendMessages: false
             });
 
-            const lockEmbed = embedBuilder({
-                title: 'Security Protocol // FIREWALL_ENGAGED',
-                description: 'Bandwidth for public transmissions has been throttled to zero.',
-                color: '#ED4245'
+            await interaction.reply({
+                embeds: [embedBuilder({
+                    title: '🔒 Channel Locked',
+                    description: `This channel has been locked.\n**Reason:** ${reason}\n**Moderator:** ${interaction.user.tag}`,
+                    color: '#ED4245'
+                })]
             });
-
-            await interaction.reply({ embeds: [lockEmbed] });
         } catch (err) {
-            const errEmbed = embedBuilder({
-                title: 'Firewall Failure',
-                description: 'Permission sync failed. Check system hierarchy.',
-                color: '#ED4245'
+            await interaction.reply({
+                embeds: [embedBuilder({
+                    title: '❌ Lock Failed',
+                    description: 'Could not modify channel permissions. Check bot role hierarchy.',
+                    color: '#ED4245'
+                })],
+                ephemeral: true
             });
-
-            await interaction.reply({ embeds: [errEmbed], ephemeral: true });
         }
     },
 };

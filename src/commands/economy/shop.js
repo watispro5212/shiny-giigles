@@ -1,30 +1,38 @@
 const { SlashCommandBuilder } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 
-/**
- * Hardware Catalog & Shop Command
- * Displays available items for purchase within the Nexus node.
- */
+const shopItems = [
+    { id: 'cyberlink', name: '🔗 Cyber-Link', price: 5000, description: 'Basic neural interface module' },
+    { id: 'neuralshunt', name: '🧠 Neural-Shunt', price: 12000, description: 'Advanced thought accelerator' },
+    { id: 'datacore', name: '💎 Data-Core', price: 25000, description: 'Quantum data storage implant' },
+    { id: 'biohack', name: '🧬 Bio-Hack', price: 50000, description: 'Biological enhancement suite' },
+    { id: 'shardkey', name: '🔑 Shard-Key', price: 100000, description: 'Access key to restricted shards' },
+    { id: 'rootaccess', name: '👑 Root-Access', price: 500000, description: 'Ultimate system control module' },
+    { id: 'xpbooster', name: '⚡ XP Booster', price: 8000, description: '2x XP for 24 hours' },
+    { id: 'shield', name: '🛡️ Shield Module', price: 15000, description: 'Protection against /rob attempts' },
+];
+
+// Export for use in buy command
 module.exports = {
+    shopItems,
     data: new SlashCommandBuilder()
         .setName('shop')
-        .setDescription('Access the underground hardware catalog.'),
-
+        .setDescription('Browse the Nexus hardware catalog.'),
+    cooldown: 5,
     async execute(interaction, client) {
-        const shopEmbed = embedBuilder({
-            title: 'Nexus Node // HARDWARE_CATALOG',
-            description: 'Acquire high-end hardware to enhance your operative dossier. Use `/buy <item_id>` to purchase.',
-            fields: [
-                { name: '1. Cyber-Link', value: 'Price: `$5,000` | ID: `cyberlink`', inline: true },
-                { name: '2. Neural-Shunt', value: 'Price: `$12,000` | ID: `neuralshunt`', inline: true },
-                { name: '3. Data-Core', value: 'Price: `$25,000` | ID: `datacore`', inline: true },
-                { name: '4. Bio-Hack', value: 'Price: `$50,000` | ID: `biohack`', inline: true },
-                { name: '5. Shard-Key', value: 'Price: `$100,000` | ID: `shardkey`', inline: true },
-                { name: '6. Root-Access', value: 'Price: `$500,000` | ID: `rootaccess`', inline: true }
-            ],
-            color: '#F1C40F' // Gold
-        });
+        const fields = shopItems.map((item, i) => ({
+            name: `${i + 1}. ${item.name}`,
+            value: `Price: \`$${item.price.toLocaleString()}\`\n${item.description}\nID: \`${item.id}\``,
+            inline: true
+        }));
 
-        await interaction.reply({ embeds: [shopEmbed] });
+        await interaction.reply({
+            embeds: [embedBuilder({
+                title: '🏪 Nexus Hardware Catalog',
+                description: 'Acquire hardware to enhance your operative profile.\nUse `/buy <item_id>` to purchase.',
+                fields,
+                color: '#F1C40F'
+            })]
+        });
     },
 };
