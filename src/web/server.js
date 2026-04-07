@@ -85,7 +85,7 @@ module.exports = (manager) => {
     }));
 
     // Fallback for SPA-like behavior or clean URLs
-    app.get('*', (req, res, next) => {
+    app.get(/.*/, (req, res, next) => {
         if (!req.path.includes('.')) {
             const possibleFile = path.join(__dirname, '../../', `${req.path}.html`);
             return res.sendFile(possibleFile, err => {
