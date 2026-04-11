@@ -88,72 +88,88 @@
                 </div>
             </div>
 
-            <div class="cmd-grid">
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>SHARD</span></div>
-                    <p class="cmd-desc">An isolated bot process instance. Sharding allows the Nexus to scale across thousands of sectors without performance degradation.</p>
+            <div class="bento-grid reveal">
+                <!-- Group: Network Architecture -->
+                <div class="bento-item bento-big reveal">
+                    <div class="bento-inner">
+                        <div class="bento-tag">Cluster Alpha // Infrastructure</div>
+                        <h3>Network Architecture</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;">
+                            <div>
+                                <h4 style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">SHARDING</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Isolated bot process instances. Sharding allows the Nexus to scale across thousands of sectors without performance degradation.</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">LATENCY</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Temporal delay in data pulses. Measured in milliseconds, lower latency ensures faster neural response times.</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">GATEWAY</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Primary entry point for neural transmissions to the Discord API. Manages real-time event streams.</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">NODE</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Specific processing unit or server cluster within the infrastructure where commands are executed.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>LATENCY</span></div>
-                    <p class="cmd-desc">The temporal delay in data transmission pulses. Measured in milliseconds (ms), lower latency ensures faster neural response times.</p>
+
+                <!-- Group: Security Layers -->
+                <div class="bento-item bento-medium reveal">
+                    <div class="bento-inner">
+                        <div class="bento-tag">Cluster Beta // Security</div>
+                        <h3>Defensive Protocols</h3>
+                        <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+                            <div>
+                                <h4 style="color: var(--secondary); font-size: 0.9rem;">FIREWALL</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Active defensive barrier monitoring incoming vectors to protect from unauthorized intrusions.</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--secondary); font-size: 0.9rem;">BREACH</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Controlled security bypass initiated during high-stakes simulation exercises.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>NODE</span></div>
-                    <p class="cmd-desc">A specific processing unit or server cluster within the Nexus infrastructure where commands are executed.</p>
+
+                <!-- Group: Data Packets -->
+                <div class="bento-item bento-medium reveal">
+                    <div class="bento-inner">
+                        <div class="bento-tag">Cluster Gamma // Data</div>
+                        <h3>Neutral Mechanics</h3>
+                        <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+                            <div>
+                                <h4 style="color: #00FF88; font-size: 0.9rem;">PACKET</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Discrete unit of data transmitted over the network. Every event is wrapped inside a packet.</p>
+                            </div>
+                            <div>
+                                <h4 style="color: #00FF88; font-size: 0.9rem;">HANDSHAKE</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">Initial cryptographic greeting establishing a secure communication channel between nodes.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>PROTOCOL</span></div>
-                    <p class="cmd-desc">The fundamental set of cryptographic rules that define how data and commands are securely transmitted across the network.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>UPLINK</span></div>
-                    <p class="cmd-desc">A primary communication bridge between the Nexus core and external API systems (e.g., Discord Gateway).</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>FIREWALL</span></div>
-                    <p class="cmd-desc">An active defensive barrier that monitors incoming data vectors to protect sectors from unauthorized intrusions.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>NEURAL LEVEL</span></div>
-                    <p class="cmd-desc">A classification metric representing an operative's clearance level, earned through active contribution and data exchange.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>BREACH</span></div>
-                    <p class="cmd-desc">A controlled security bypass often initiated during high-stakes simulation exercises or cyber-heist operations.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>GATEWAY</span></div>
-                    <p class="cmd-desc">The primary entry point for all neural transmissions to the Discord API. The Gateway manages real-time event streams.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>WEBSOCKET</span></div>
-                    <p class="cmd-desc">A persistent, bidirectional data stream protocol used for real-time communication between the Nexus and Discord.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>PACKET</span></div>
-                    <p class="cmd-desc">A discrete unit of data transmitted over the network. Each command, event, and message is wrapped inside a packet.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>HANDSHAKE</span></div>
-                    <p class="cmd-desc">The initial cryptographic greeting between two nodes, establishing a secure communication channel.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>SSL / TLS</span></div>
-                    <p class="cmd-desc">Secure Sockets Layer — encryption protocol ensuring data safety during transit between the Nexus and external endpoints.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>CLUSTER</span></div>
-                    <p class="cmd-desc">A collection of shards operating on the same hardware node. Clusters enable distributed processing at scale.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>API KEY</span></div>
-                    <p class="cmd-desc">A cryptographic token used for authorized access to external services and the Nexus core itself.</p>
-                </div>
-                <div class="cmd-item reveal">
-                    <div class="cmd-name"><span>WEBHOOK</span></div>
-                    <p class="cmd-desc">An automated data push mechanism that forwards events to a specific endpoint/channel in real time.</p>
+
+                <!-- Group: Glossary Wide -->
+                <div class="bento-item bento-wide reveal">
+                    <div class="bento-inner" style="flex-direction: row; gap: 3rem;">
+                        <div style="flex: 1;">
+                            <h4 style="color: white; font-size: 1rem; margin-bottom: 0.5rem;">NEURAL LEVEL</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim);">Classification metric representing an operative's clearance, earned through active contribution.</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="color: white; font-size: 1rem; margin-bottom: 0.5rem;">SSL / TLS</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim);">Secure Sockets Layer — encryption protocol ensuring data safety during transit across endpoints.</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="color: white; font-size: 1rem; margin-bottom: 0.5rem;">WEBHOOK</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim);">Automated data push mechanism forwarding events to specific endpoints in real time.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </section>
 
         <section class="section">

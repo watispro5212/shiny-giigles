@@ -49,124 +49,79 @@
 
             <p class="page-callout reveal">Need deeper context? See the <a href="wiki.html">Nexus Wiki</a> for glossary terms, economy mechanics, and setup walkthroughs.</p>
 
-            <div class="faq-container reveal">
-                <!-- FAQ Item 1 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How do I start using the Nexus Protocol?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            Once you invite Nexus Bot to your server, you can begin by typing <code>/help</code> or <code>/profile</code>. To generate your first credits, run the <code>/daily</code> command. From there, you can explore the economy, casino, and moderation features.
+            <div class="bento-grid reveal" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                <!-- Category: Protocol Genesis -->
+                <div class="bento-item bento-big reveal">
+                    <div class="bento-inner">
+                        <div class="bento-tag">Sector 01 // Basics</div>
+                        <h3>Protocol Genesis</h3>
+                        <div class="faq-container" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="faq-item">
+                                <button class="faq-question">How do I start using the Nexus Protocol?<span class="faq-icon">▼</span></button>
+                                <div class="faq-answer"><div class="faq-answer-inner">Invite Nexus to your server and initialize with <code>/help</code>. Run <code>/daily</code> to synchronize your credit stream instantly.</div></div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question">Are credits global across all sectors?<span class="faq-icon">▼</span></button>
+                                <div class="faq-answer"><div class="faq-answer-inner">Yes. The Nexus Economy is a unified global network; credits persist across every server running the Protocol.</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- FAQ Item 2 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Are the credits global across all servers?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            Yes. The Nexus Economy is a strictly global network. The credits you earn through work, gambling, or daily rewards persist across every server that runs the Nexus Protocol.
+                <!-- Category: Neural Economy -->
+                <div class="bento-item bento-medium reveal">
+                    <div class="bento-inner">
+                        <div class="bento-tag">Sector 02 // Finance</div>
+                        <h3>Economy Nodes</h3>
+                        <div class="faq-container" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="faq-item">
+                                <button class="faq-question">Can I transfer credits?<span class="faq-icon">▼</span></button>
+                                <div class="faq-answer"><div class="faq-answer-inner">Utilize <code>/transfer</code> to beam credits to another user's wallet. Double-check recipient IDs before execution.</div></div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question">What is Level Scaling?<span class="faq-icon">▼</span></button>
+                                <div class="faq-answer"><div class="faq-answer-inner">Labor pay scales with your Neural Level. Higher levels earn increased credit yields per packet.</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- FAQ Item 3 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How do I configure the Auto-Moderation (Black-Ice)?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            Administrators can use the <code>/automod-setup</code> command to toggle spam protection, bad word filters, and set the strictness level of the system.
+                <!-- Category: Security & Black-Ice -->
+                <div class="bento-item bento-medium reveal">
+                    <div class="bento-inner">
+                        <div class="bento-tag">Sector 03 // Defense</div>
+                        <h3>Security Matrix</h3>
+                        <div class="faq-container" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="faq-item">
+                                <button class="faq-question">How do I setup Black-Ice?<span class="faq-icon">▼</span></button>
+                                <div class="faq-answer"><div class="faq-answer-inner">Administrators can use <code>/automod-setup</code> to toggle antispam, word filters, and strictness nodes.</div></div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question">Does Nexus log messages?<span class="faq-icon">▼</span></button>
+                                <div class="faq-answer"><div class="faq-answer-inner">No. Data is processed in volatile memory for live filtering and immediately purged. We keep no archives.</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- FAQ Item 4 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can I transfer credits to another Operative?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            Yes, utilize the <code>/transfer</code> command to securely beam credits from your bank to another user's wallet. Please double-check the recipient's operative ID before sending.
+                <!-- Category: Support & Premium -->
+                <div class="bento-item bento-wide reveal">
+                    <div class="bento-inner" style="flex-direction: row; gap: 2rem; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <div class="bento-tag">Sector 04 // Uplink</div>
+                            <h3>Support & Premium</h3>
+                            <p style="color: var(--text-dim); font-size: 0.9rem;">Nexus Premium grants 2x multipliers and priority command queuing. Report vulnerabilities via staff-apply.</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 5 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What happens if the protocol gets rate-limited?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            Our advanced ShardingManager architecture ensures that rate limits only affect localized clusters temporarily. The Network page tracks system health in real-time. Wait a few moments, and the connection will restore organically.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 6 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What are the benefits of Nexus Premium?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            Upgrading to Nexus Premium grants you early access to beta modules, a 2x multiplier on daily credit limits, priority API routing for faster command execution, and exclusive holographic profile badges within the economy system.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 7 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How can I report a bug or vulnerability?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            Open a support ticket on the official Nexus server (your staff can deploy <code>/ticket-setup</code> if it is not already available). For critical vulnerabilities, contact the Developer Core privately and do not disclose details in public channels.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 8 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Does Nexus log my server's message history?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            No. Message content is processed in memory for immediate evaluation (e.g., auto-mod filters) and then immediately discarded. We do not maintain historical message archives of your communications.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 9 -->
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can I export my server's configuration?
-                        <span class="faq-icon">▼</span>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">
-                            There is no single export file. Reapply settings on a new server using <code>/automod-setup</code>, <code>/log-setup</code>, <code>/verify-setup</code>, and related admin commands, or copy values from your existing server documentation.
+                        <div class="faq-container" style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="faq-item">
+                                <button class="faq-question">How to report critical bugs?<span class="faq-icon">▼</span></button>
+                                <div class="faq-answer"><div class="faq-answer-inner">Contact the Developer Core privately or open a high-priority ticket in the support sector.</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </section>
     </main>
 
