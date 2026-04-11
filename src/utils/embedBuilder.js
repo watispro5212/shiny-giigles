@@ -48,13 +48,11 @@ module.exports = (options) => {
     }
 
     
-    const versionTag = 'NEXUS PROTOCOL v8.5.0';
-    const sectorTag = options.sector || 'SECTOR_BRAVO';
-    const footerText = trim(options.footer || `${versionTag} 
+    const versionTag = 'Nexus v8.5';
+    const footerText = trim(options.footer || versionTag, 2048);
 
     embed.setFooter({
-        text: footerText,
-        iconURL: 'https://cdn.discordapp.com/emojis/1210452340753101031.png' // Placeholder for bot icon if desired
+        text: footerText
     });
 
     return embed;
