@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, ComponentType } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 const fs = require('fs');
 const path = require('path');
@@ -11,68 +11,95 @@ const categoryEmojis = {
     fun: '🎮',
 };
 
+const categoryDescriptions = {
+    utility: 'Essential system tools and information protocols.',
+    economy: 'Manage your credit reserves and participate in the global market.',
+    moderation: 'Enforce node security and manage community entities.',
+    advanced: 'High-level infrastructure and network diagnostic protocols.',
+    fun: 'Engage with random data packets and entertainment sub-routines.'
+};
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('help')
-        .setDescription('Display all available commands organized by category.')
-        .addStringOption(option =>
-            option.setName('category')
-                .setDescription('View a specific category.')
-                .setRequired(false)
-                .addChoices(
-                    { name: '🔧 Utility', value: 'utility' },
-                    { name: '💰 Economy', value: 'economy' },
-                    { name: '🛡️ Moderation', value: 'moderation' },
-                    { name: '⚡ Advanced', value: 'advanced' },
-                    { name: '🎮 Fun', value: 'fun' }
-                )),
+        .setDescription('Open the interactive Nexus Command Directory.'),
     cooldown: 5,
     async execute(interaction, client) {
-        const targetCategory = interaction.options.getString('category');
         const commandsDir = path.join(__dirname, '..');
-        const dirEntries = fs.readdirSync(commandsDir, { withFileTypes: true });
-        const categories = {};
+        const categories = fs.readdirSync(commandsDir, { withFileTypes: true })
+            .filter(dir => dir.isDirectory())
+            .map(dir => dir.name);
 
-        for (const entry of dirEntries) {
-            if (entry.isDirectory()) {
-                if (targetCategory && entry.name !== targetCategory) continue;
-
-                const categoryFiles = fs.readdirSync(path.join(commandsDir, entry.name))
-                    .filter(file => file.endsWith('.js'));
-
-                const categoryCommands = categoryFiles.map(file => {
-                    const cmd = require(path.join(commandsDir, entry.name, file));
-                    return `\`/${cmd.data.name}\``;
+        const buildHelpEmbed = (category = null) => {
+            if (!category) {
+                return embedBuilder({
+                    title: '📖 Nexus Protocol — Command Hub',
+                    description: 'Welcome to the central command directory. Use the interaction menu below to explore specific protocol categories.\n\n' +
+                                 '**Active Modules:** ' + categories.map(c => `\`${c.toUpperCase()}\``).join(', ') + '\n' +
+                                 '**Interface:** Slash Commands (/) Only',
+                    fields: [
+                        { name: '🌐 Integrated Dashboard', value: '[Access Web Portal](https://nexus-protocol.com)', inline: true },
+                        { name: '🛡️ Support Array', value: '[Join Support](https://discord.gg/nexus)', inline: true }
+                    ],
+                    color: '#5865F2',
+                    footer: `Nexus Protocol v7 • Select a category to begin`
                 });
-
-                if (categoryCommands.length > 0) {
-                    const emoji = categoryEmojis[entry.name] || '📁';
-                    categories[`${emoji} ${entry.name.charAt(0).toUpperCase() + entry.name.slice(1)}`] = {
-                        commands: categoryCommands.join(', '),
-                        count: categoryCommands.length
-                    };
-                }
             }
-        }
 
-        const fields = Object.entries(categories).map(([name, data]) => ({
-            name: `${name} (${data.count})`,
-            value: data.commands,
-            inline: false
-        }));
+            const emoji = categoryEmojis[category] || '📁';
+            const cmdFiles = fs.readdirSync(path.join(commandsDir, category)).filter(f => f.endsWith('.js'));
+            const commands = cmdFiles.map(file => {
+                const cmd = require(path.join(commandsDir, category, file));
+                return `**/${cmd.data.name}**\n*${cmd.data.description}*`;
+            }).join('\n\n');
 
-        const totalCount = Object.values(categories).reduce((acc, d) => acc + d.count, 0);
+            return embedBuilder({
+                title: `${emoji} ${category.toUpperCase()} Protocol Directory`,
+                description: `${categoryDescriptions[category] || 'List of commands for this module.'}\n\n${commands}`,
+                color: '#5865F2',
+                footer: `Nexus Protocol v7 • ${cmdFiles.length} Commands in ${category}`
+            });
+        };
 
-        const helpEmbed = embedBuilder({
-            title: '📖 Nexus Protocol — Command Hub',
-            description: targetCategory
-                ? `Showing commands in the **${targetCategory}** category.`
-                : `**${totalCount}** commands available across **${fields.length}** categories.\nUse \`/help category:<name>\` to filter by category.`,
-            fields: fields,
-            color: '#5865F2',
-            footer: `Nexus Protocol v7 • ${totalCount} Commands Loaded`
+        const selectMenu = new StringSelectMenuBuilder()
+            .setCustomId('help_category')
+            .setPlaceholder('Select a Command Category...')
+            .addOptions(
+                { label: 'Main Menu', description: 'Return to the command hub overview.', value: 'main', emoji: '🏠' },
+                ...categories.map(cat => ({
+                    label: cat.charAt(0).toUpperCase() + cat.slice(1),
+                    description: categoryDescriptions[cat] || `Commands for ${cat}`,
+                    value: cat,
+                    emoji: categoryEmojis[cat] || '📁'
+                }))
+            );
+
+        const row = new ActionRowBuilder().addComponents(selectMenu);
+
+        const response = await interaction.reply({
+            embeds: [buildHelpEmbed()],
+            components: [row],
+            ephemeral: true
         });
 
-        await interaction.reply({ embeds: [helpEmbed], ephemeral: true });
+        const collector = response.createMessageComponentCollector({
+            componentType: ComponentType.StringSelect,
+            time: 60000
+        });
+
+        collector.on('collect', async i => {
+            const selection = i.values[0];
+            const newEmbed = selection === 'main' ? buildHelpEmbed() : buildHelpEmbed(selection);
+            
+            await i.update({
+                embeds: [newEmbed],
+                components: [row]
+            });
+        });
+
+        collector.on('end', () => {
+            interaction.editReply({ components: [] }).catch(() => {});
+        });
     },
 };
+

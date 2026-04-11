@@ -19,6 +19,8 @@ const client = new Client({
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.events = new Collection();
+client.owners = process.env.OWNER_IDS ? process.env.OWNER_IDS.split(',').map(id => id.trim()) : [];
+
 
 // MongoDB Connection — no deprecated options (Mongoose 8+/MongoDB Driver 6+ dropped them)
 if (process.env.MONGODB_URI) {

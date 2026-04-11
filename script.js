@@ -1,79 +1,41 @@
 const CATEGORIES = {
     utility: [
-        { name: 'ping', desc: 'Checks the module connection and data latency' },
-        { name: 'invite', desc: 'Get a link to add Nexus to another server' },
-        { name: 'uptime', desc: 'Process uptime, client session, ping, and shard layout' },
-        { name: 'info', desc: 'Access global terminal and bot classification data' },
-        { name: 'serverinfo', desc: 'Scan parameters and data regarding the current node' },
-        { name: 'userinfo', desc: 'Pull system file and data on a specific user' },
-        { name: 'avatar', desc: 'Extract a high-resolution user image file' },
-        { name: 'servericon', desc: 'Extract the high-resolution icon of the current Nexus node' },
-        { name: 'math', desc: 'Process a central intelligence operation' },
-        { name: 'timer', desc: 'Initiate a synchronized countdown pulse' },
-        { name: 'poll', desc: 'Fire up a quick community consensus vote' },
-        { name: 'remind', desc: 'Have the system keep tabs on something for you' },
-        { name: 'translate', desc: 'Translate text across language protocols' },
-        { name: 'weather', desc: 'Pull atmospheric data for a location' },
-        { name: 'profile', desc: 'View a comprehensive operative dossier' },
-        { name: 'help', desc: 'Open the interactive command directory matrix' }
-    ],
-    economy: [
-        { name: 'balance', desc: 'Scan current credit reserves and net worth' },
-        { name: 'daily', desc: 'Receive your daily Nexus Credit allocation (streak bonus!)' },
-        { name: 'work', desc: 'Execute a gig to earn Nexus Credits (scales with level)' },
-        { name: 'rob', desc: 'Execute a cyber-heist on another user\'s local wallet' },
-        { name: 'transfer', desc: 'Initiate an encrypted credit transfer' },
-        { name: 'leaderboard', desc: 'Displays the top operatives by net worth' },
-        { name: 'shop', desc: 'Access the underground hardware catalog (8 items!)' },
-        { name: 'buy', desc: 'Acquire hardware from the shop' },
-        { name: 'inventory', desc: 'View your locally stored items' },
-        { name: 'quests', desc: 'Initialize your daily active sub-routines for credit bounties' }
-    ],
-    casino: [
-        { name: 'blackjack', desc: 'Engage in a high-stakes protocol against the dealer' },
-        { name: 'slots', desc: 'Wager credits on the random number generator' },
-        { name: 'coinflip', desc: 'Execute a boolean 50/50 algorithm' }
-    ],
-    leveling: [
-        { name: 'rank', desc: 'Analyze your current security clearance and XP progress' }
+        { name: 'help', desc: 'Interactive diagnostic protocol menu.' },
+        { name: 'ping', desc: 'Check connection latency to the Nexus core.' },
+        { name: 'serverinfo', desc: 'Comprehensive scan of current guild parameters.' },
+        { name: 'weather', desc: 'Query atmospheric mapping sensors.' },
+        { name: 'botinfo', desc: 'Technical specifications of the Nexus unit.' },
+        { name: 'invite', desc: 'Get an encrypted uplink to add Nexus to another node.' },
+        { name: 'uptime', desc: 'Process uptime and system heartbeat.' }
     ],
     moderation: [
-        { name: 'ban', desc: 'Permanently sever a user from the node' },
-        { name: 'kick', desc: 'Temporarily sever a user from the node' },
-        { name: 'warn', desc: 'Issue a formal protocol strike to an entity' },
-        { name: 'purge', desc: 'Initiate a mass data deletion in the current channel' },
-        { name: 'lock', desc: 'Engage firewall on the current channel' },
-        { name: 'unlock', desc: 'Disengage firewall on the current channel' },
-        { name: 'slowmode', desc: 'Throttle output bandwidth in the current channel' },
-        { name: 'say', desc: 'Transmit a cleartext message through the Nexus' },
-        { name: 'verify-setup', desc: 'Drop a secure verification portal (Admin Only)' },
-        { name: 'ticket-setup', desc: 'Deploy a support ticket interface' },
-        { name: 'automod-setup', desc: 'Configure automatic network filters for spam and unauthorized uplinks' },
-        { name: 'log-setup', desc: 'Establish an audit logging channel for purged and modified transmissions' },
-        { name: 'starboard-setup', desc: 'Initialize a starboard node to archive highlighted transmissions' }
+        { name: 'warn', desc: 'Issue a formal protocol strike to an entity.' },
+        { name: 'ban', desc: 'Permanently sever an entity from the node.' },
+        { name: 'kick', desc: 'Temporarily sever an entity from the node.' },
+        { name: 'purge', desc: 'Initiate a mass data deletion in the current channel.' },
+        { name: 'timeout', desc: 'Temporarily restrict an entity\'s transmit permissions.' },
+        { name: 'lock', desc: 'Engage firewall on the current channel.' },
+        { name: 'unlock', desc: 'Disengage firewall on the current channel.' },
+        { name: 'blacklist', desc: 'Global protocol exclusion.', ownerOnly: true }
+    ],
+    economy: [
+        { name: 'work', desc: 'Execute a gig to earn Nexus Credits.' },
+        { name: 'crime', desc: 'Initiate a high-risk security breach for credits.' },
+        { name: 'balance', desc: 'Scan current credit reserves and net worth.' },
+        { name: 'shop', desc: 'Access the decentralized asset market.' },
+        { name: 'daily', desc: 'Receive your daily Nexus Credit allocation.' },
+        { name: 'set-credits', desc: 'Modify user credit allocation.', ownerOnly: true }
     ],
     fun: [
-        { name: '8ball', desc: 'Query the Oracle array for a yes/no outcome' },
-        { name: 'joke', desc: 'Process a humorous data packet' },
-        { name: 'fact', desc: 'Extract an interesting file from the database' },
-        { name: 'quote', desc: 'Extract an inspirational transmission' },
-        { name: 'roll', desc: 'Execute a randomized integer sequence' },
-        { name: 'rps', desc: 'Simulate Rock, Paper, Scissors against the CPU' },
-        { name: 'trivia', desc: 'Process a trivia data packet' },
-        { name: 'hack', desc: 'Initiate a harmless penetration test on a target' },
-        { name: 'emojify', desc: 'Convert text data into an encrypted emoji string' }
+        { name: 'meme', desc: 'Intercept humor data from the network.' },
+        { name: 'hack', desc: 'Simulate a high-level breach on a target.' },
+        { name: '8ball', desc: 'Query the Oracle array for a yes/no outcome.' },
+        { name: 'coinflip', desc: 'Execute a boolean 50/50 algorithm.' }
     ],
-    advanced: [
-        { name: 'cyber-heist', desc: 'Execute a high-stakes multi-phase heist operation' },
-        { name: 'giveaway', desc: 'Airdrop resources to the community' },
-        { name: 'network-stats', desc: 'Display real-time shard and gateway diagnostics' },
-        { name: 'shards', desc: 'View active shard processes and their health' }
-    ],
-    media: [
-        { name: 'cat', desc: 'Fetches biological data on Felines' },
-        { name: 'dog', desc: 'Fetches biological data on Canines' },
-        { name: 'meme', desc: 'Intercepts top-tier humorous media' },
-        { name: 'urban', desc: 'Query the Urban data archives for slang definitions' }
+    owner: [
+        { name: 'eval', desc: 'Execute raw terminal logic.', ownerOnly: true },
+        { name: 'shutdown', desc: 'Terminate all protocol shards.', ownerOnly: true },
+        { name: 'reload', desc: 'Hot-reload protocol modules.', ownerOnly: true }
     ]
 };
 
@@ -123,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Pointer position (particles + parallax + custom cursor)
+    // Pointer position
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
@@ -139,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Navbar scroll effect ---
+    // Navbar scroll effect
     window.addEventListener('scroll', () => {
         if (nav && window.scrollY > 50) {
             nav.classList.add('scrolled');
@@ -148,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Smooth scroll for anchor links ---
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -161,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Command Rendering (let allows safe wrapping for hover re-attach) ---
+    // --- Command Rendering ---
     let renderCommands = function renderCommands(filter = '') {
         if (!commandList) return;
         
@@ -171,19 +133,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filter.trim()) {
             Object.values(CATEGORIES).forEach(list => {
                 const matches = list.filter(cmd => 
-                    cmd.name.toLowerCase().includes(filter.toLowerCase()) || 
-                    cmd.desc.toLowerCase().includes(filter.toLowerCase())
+                    !cmd.ownerOnly && (
+                        cmd.name.toLowerCase().includes(filter.toLowerCase()) || 
+                        cmd.desc.toLowerCase().includes(filter.toLowerCase())
+                    )
                 );
                 commandsToDisplay.push(...matches);
             });
             if (tabContainer) tabContainer.style.display = 'none';
         } else {
-            commandsToDisplay = CATEGORIES[activeCategory] || [];
+            // Filter out ownerOnly commands for the public view
+            commandsToDisplay = (CATEGORIES[activeCategory] || []).filter(cmd => !cmd.ownerOnly);
             if (tabContainer) tabContainer.style.display = 'flex';
         }
 
         if (commandsToDisplay.length === 0) {
-            commandList.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-dim);">No command signals found.</div>';
+            commandList.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-dim);">No public command signals found.</div>';
             return;
         }
 
@@ -210,11 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             copySpan.style.color = 'inherit';
                         }, 2000);
                     }
-                }).catch(() => {
-                    const copySpan = div.querySelector('.cmd-copy');
-                    if (copySpan) {
-                        copySpan.innerText = 'COPY';
-                    }
                 });
             };
 
@@ -227,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tabContainer.addEventListener('click', (e) => {
             const btn = e.target.closest?.('.tab-btn');
             if (btn && tabContainer.contains(btn)) {
+                // If it's the owner tab, we could hide the tab itself in CSS or here
                 activeCategory = btn.dataset.category;
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -265,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // Start animation when in viewport
             const observer = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting && !counter.dataset.done) {
                     updateCounter();
@@ -279,59 +239,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animateCounters();
 
-    // --- Operations Feed Typing Effect ---
+    // --- Operations Feed ---
     const opsFeed = document.getElementById('ops-feed');
     if (opsFeed) {
         const opsMessages = [
             { time: '21:52:10', module: 'SHARD_0', msg: 'Initializing neural level sync for guild_8829...', status: 'SUCCESS', statusClass: 'ops-success' },
-            { time: '21:52:12', module: 'FIREWALL', msg: 'Unauthorized breach attempt detected in sector_G4. Blocking vector...', status: 'BLOCKED', statusClass: 'ops-error' },
-            { time: '21:52:15', module: 'CORE', msg: 'Global heartbeat pulse emitted. Latency: 18ms.', status: '', statusClass: '' },
-            { time: '21:52:20', module: 'UPLINK', msg: 'Gateway handshake confirmed with Discord API nodes.', status: '', statusClass: '' },
-            { time: '21:52:25', module: 'ECONOMY', msg: 'Batching 4,821 credit transactions to global ledger...', status: '', statusClass: '' },
-            { time: '21:52:28', module: 'XP_SYS', msg: 'Distributed 27 XP to operative_0092. Level check: PASS.', status: '', statusClass: '' },
-            { time: '21:52:30', module: 'CASINO', msg: 'Slot terminal spin registered. Result: 💎💎🍋 — MINOR GAIN.', status: '', statusClass: '' },
-            { time: '21:52:33', module: 'SECURITY', msg: 'Anti-spam module throttled entity_4412 in sector_B2.', status: 'THROTTLED', statusClass: 'ops-error' },
-            { time: '21:52:35', module: 'SHARD_0', msg: 'Processing /PROFILE request from entity_0055...', status: 'OK', statusClass: 'ops-success' },
+            { time: '21:52:12', module: 'FIREWALL', msg: 'Unauthorized breach attempt blocked. Identity sequestered.', status: 'BLOCKED', statusClass: 'ops-error' },
+            { time: '21:52:15', module: 'CORE', msg: 'Global heartbeat pulse emitted. Latency: 12ms.', status: '', statusClass: '' },
+            { time: '21:52:20', module: 'UPLINK', msg: 'Gateway bridge established with Discord mainframes.', status: '', statusClass: '' },
+            { time: '21:52:25', module: 'ECONOMY', msg: 'Ledger sync complete. 12.4k credits distributed.', status: '', statusClass: '' },
+            { time: '21:52:30', module: 'SECURITY', msg: 'Active scan: No anomalies detected in Sector 7.', status: 'PASS', statusClass: 'ops-success' },
         ];
 
         let lineIndex = 0;
-
         function addOpsLine() {
             if (lineIndex >= opsMessages.length) {
-                // Loop back
                 lineIndex = 0;
                 opsFeed.innerHTML = '';
             }
-
             const entry = opsMessages[lineIndex];
             const line = document.createElement('div');
             line.className = 'ops-line';
             line.innerHTML = `<span class="ops-timestamp">[${entry.time}]</span> <span class="ops-module">${entry.module}</span>: ${entry.msg}${entry.status ? ` <span class="${entry.statusClass}">${entry.status}</span>` : ''}`;
-            
-            // Remove cursor if exists
             const cursor = opsFeed.querySelector('.ops-cursor');
             if (cursor) cursor.remove();
-
             opsFeed.appendChild(line);
-
-            // Re-add cursor
             const cursorEl = document.createElement('div');
             cursorEl.className = 'ops-cursor';
-            cursorEl.textContent = '_ LISTENING_FOR_TRAFFIC...';
+            cursorEl.textContent = '_ WAITING_FOR_INPUT...';
             opsFeed.appendChild(cursorEl);
-
-            // Auto-scroll
             opsFeed.scrollTop = opsFeed.scrollHeight;
-
             lineIndex++;
         }
-
-        // Start the feed
         addOpsLine();
-        setInterval(addOpsLine, 3000);
+        setInterval(addOpsLine, 4000);
     }
 
-    // --- Reveal on Scroll ---
+    // Reveal on Scroll
     const reveal = () => {
         document.querySelectorAll('.reveal').forEach(el => {
             const windowHeight = window.innerHeight;
@@ -341,221 +285,79 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-
     window.addEventListener('scroll', reveal);
     reveal();
 
-    // Initial render
-    if (commandList) {
-        renderCommands();
-    }
+    if (commandList) renderCommands();
 
+    // Background Canvas
     function initNetworkCanvas(canvas) {
         if (!canvas || canvas.dataset.nexusInit === '1') return;
         canvas.dataset.nexusInit = '1';
         const ctx = canvas.getContext('2d');
-        let width;
-        let height;
+        let width, height;
         const particles = [];
-
-        const resizeCanvas = () => {
+        const resize = () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         };
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', resize);
+        resize();
 
         class Particle {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 1.5 + 0.5;
-                this.accent = Math.random() > 0.52 ? 'primary' : 'secondary';
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.2 + 0.5;
             }
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
+                this.x += this.vx; this.y += this.vy;
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
             }
             draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.accent === 'primary'
-                    ? 'rgba(0, 255, 234, 0.48)'
-                    : 'rgba(188, 130, 255, 0.42)';
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 255, 234, 0.3)'; ctx.fill();
             }
         }
-
-        for (let i = 0; i < 60; i++) particles.push(new Particle());
-
-        const animateParticles = () => {
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
+        const animate = () => {
             ctx.clearRect(0, 0, width, height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        const alpha = Math.max(0, 0.2 - dist / 600);
-                        const useViolet = (i + j) % 3 === 0;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = useViolet
-                            ? `rgba(157, 0, 255, ${alpha * 0.95})`
-                            : `rgba(0, 255, 234, ${alpha})`;
-                        ctx.stroke();
-                    }
-                }
-                const mdx = particles[i].x - mouseX;
-                const mdy = particles[i].y - mouseY;
-                const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-                if (mDist < 150) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(mouseX, mouseY);
-                    ctx.strokeStyle = `rgba(157, 0, 255, ${0.4 - mDist / 375})`;
-                    ctx.stroke();
-                }
-            }
-            requestAnimationFrame(animateParticles);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
         };
-        animateParticles();
+        animate();
     }
-
     initNetworkCanvas(document.getElementById('network-canvas'));
 
-    if (!document.getElementById('network-canvas')) {
-        const bgContainer = document.createElement('div');
-        bgContainer.className = 'nexus-bg';
-        bgContainer.innerHTML = `
-            <canvas id="network-canvas"></canvas>
-            <div class="grid-overlay"></div>
-            <div class="scanline"></div>
-            <div class="orb orb-1"></div>
-            <div class="orb orb-2"></div>
-        `;
-        document.body.prepend(bgContainer);
-        initNetworkCanvas(document.getElementById('network-canvas'));
-    }
-
+    // Custom Cursor
     const useFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (useFinePointer) {
         document.body.classList.add('custom-cursor-enabled');
-        const cursorDot = document.createElement('div');
-        cursorDot.className = 'cursor-dot';
-        const cursorTrail = document.createElement('div');
-        cursorTrail.className = 'cursor-trail';
-        document.body.appendChild(cursorDot);
-        document.body.appendChild(cursorTrail);
-
-        let dotX = mouseX;
-        let dotY = mouseY;
-        let trailX = mouseX;
-        let trailY = mouseY;
-
-        const updateCursor = () => {
-            dotX += (mouseX - dotX) * 0.2;
-            dotY += (mouseY - dotY) * 0.2;
-            trailX += (mouseX - trailX) * 0.1;
-            trailY += (mouseY - trailY) * 0.1;
-            cursorDot.style.left = `${dotX}px`;
-            cursorDot.style.top = `${dotY}px`;
-            cursorTrail.style.left = `${trailX}px`;
-            cursorTrail.style.top = `${trailY}px`;
-            requestAnimationFrame(updateCursor);
+        const dot = document.createElement('div'); dot.className = 'cursor-dot';
+        const trail = document.createElement('div'); trail.className = 'cursor-trail';
+        document.body.appendChild(dot); document.body.appendChild(trail);
+        let dx=mouseX, dy=mouseY, tx=mouseX, ty=mouseY;
+        const update = () => {
+            dx += (mouseX - dx) * 0.2; dy += (mouseY - dy) * 0.2;
+            tx += (mouseX - tx) * 0.1; ty += (mouseY - ty) * 0.1;
+            dot.style.transform = `translate(${dx}px, ${dy}px)`;
+            trail.style.transform = `translate(${tx}px, ${ty}px)`;
+            requestAnimationFrame(update);
         };
-        updateCursor();
+        update();
     }
 
-    document.addEventListener('mouseover', (e) => {
-        const el = e.target.closest?.('a, button:not(.tab-btn), .cmd-item, .card, .explore-card, .nav-item, .scroll-to-top, .toggle-switch');
-        if (el) document.body.classList.add('clickable-hover');
-    });
-    document.addEventListener('mouseout', (e) => {
-        const el = e.target.closest?.('a, button:not(.tab-btn), .cmd-item, .card, .explore-card, .nav-item, .scroll-to-top, .toggle-switch');
-        const rel = e.relatedTarget;
-        if (el && (!rel || !el.contains(rel))) {
-            document.body.classList.remove('clickable-hover');
-        }
-    });
-
-    // --- Dynamic Scroll-to-Top Button ---
-    const scrollTopBtn = document.createElement('button');
-    scrollTopBtn.className = 'scroll-to-top';
-    scrollTopBtn.innerHTML = '↑';
-    scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
-    document.body.appendChild(scrollTopBtn);
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollTopBtn.classList.add('visible');
-        } else {
-            scrollTopBtn.classList.remove('visible');
-        }
-    });
-
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // --- FAQ Accordions ---
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(q => {
-        q.addEventListener('click', () => {
-            const item = q.closest('.faq-item');
-            const isActive = item.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        });
-    });
-
-    // --- Live Bot Stats Integration (same origin when site is served by the bot's Express static host) ---
-    fetch('/api/stats', { credentials: 'same-origin' })
-        .then(res => {
-            if (!res.ok) throw new Error('API offline');
-            return res.json();
-        })
+    // API Stats
+    fetch('/api/stats')
+        .then(res => res.json())
         .then(data => {
-            const guilds = typeof data.guilds === 'number' ? data.guilds : 0;
-            const ping = typeof data.ping === 'number' ? data.ping : 0;
-            const shards = Math.max(1, data.shards || 1);
-
-            const counters = document.querySelectorAll('.stat-number');
-            if (counters.length >= 1) {
-                const c0 = counters[0];
-                if (c0.dataset.done) {
-                    c0.textContent = `${guilds.toLocaleString()}+`;
-                } else {
-                    c0.dataset.target = String(guilds);
-                }
-            }
-
-            document.querySelectorAll('[data-stat="latency"]').forEach(el => {
-                el.textContent = `${ping}ms`;
+            document.querySelectorAll('[data-target]').forEach(el => {
+                const target = data[el.id] || el.dataset.target;
+                el.dataset.target = target;
             });
-            document.querySelectorAll('[data-stat="shards"]').forEach(el => {
-                const s = String(shards).padStart(3, '0');
-                el.textContent = `${s} / ${s}`;
-            });
-
-            const shardHealth = document.querySelector('.shard-item');
-            if (shardHealth) {
-                shardHealth.innerHTML = `
-                    <span style="color: var(--primary); font-family: 'JetBrains Mono'; font-size: 0.8rem;">SHARD_ACTIVE (${shards})</span>
-                    <div style="font-size: 0.6rem; color: var(--text-dim);">UPLINK: ACTIVE | LATENCY: ${ping}ms</div>
-                `;
-            }
-        })
-        .catch(() => {
-            /* Static preview or API down — placeholder values remain */
-        });
+            animateCounters();
+        }).catch(() => {});
 });

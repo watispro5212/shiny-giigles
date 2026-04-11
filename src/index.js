@@ -4,11 +4,13 @@ const logger = require('./utils/logger');
 require('dotenv').config();
 
 // ═══════════════════════════════════════════════
-//   NEXUS PROTOCOL v7.0.0 — SHARDING MANAGER
+//   NEXUS PROTOCOL v7.1.0 — SHARDING MANAGER
+
 // ═══════════════════════════════════════════════
 
 logger.info('═══════════════════════════════════════════════');
-logger.info('  NEXUS PROTOCOL v7.0.0 — INITIALIZING...');
+logger.info('  NEXUS PROTOCOL v7.1.0 — INITIALIZING...');
+
 logger.info('═══════════════════════════════════════════════');
 
 const manager = new ShardingManager(path.join(__dirname, 'bot.js'), {

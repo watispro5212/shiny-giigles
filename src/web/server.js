@@ -5,7 +5,8 @@ const logger = require('../utils/logger');
 require('dotenv').config();
 
 /**
- * NEXUS PROTOCOL v7.0.0 — COMPANION WEB SERVER
+ * NEXUS PROTOCOL v7.1.0 — COMPANION WEB SERVER
+
  * Provides static hosting for dashboard and API endpoints for metadata/stats.
  */
 module.exports = (manager) => {
@@ -39,14 +40,16 @@ module.exports = (manager) => {
 
     // API: Health Check
     app.get('/api/health', (req, res) => {
-        res.json({ status: 'online', version: '7.0.0', uptime: process.uptime() });
+        res.json({ status: 'online', version: '7.1.0', uptime: process.uptime() });
+
     });
 
     // API: Version
     app.get('/api/version', (req, res) => {
         res.json({
             name: 'Nexus Protocol',
-            version: '7.0.0',
+            version: '7.1.0',
+
             author: 'watispro5212, watispro1',
             build: 'stable'
         });

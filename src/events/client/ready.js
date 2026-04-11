@@ -5,7 +5,7 @@ const statuses = [
     { name: 'Nexus Protocol | /help', type: ActivityType.Watching },
     { name: 'over {guilds} nodes', type: ActivityType.Watching },
     { name: 'with {members} operatives', type: ActivityType.Playing },
-    { name: '/help | v7.0.0', type: ActivityType.Listening },
+    { name: '/help | v7.1.0', type: ActivityType.Listening },
     { name: 'Shard {shard} | {ping}ms', type: ActivityType.Competing },
 ];
 

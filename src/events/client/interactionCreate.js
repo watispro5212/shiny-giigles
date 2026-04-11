@@ -27,22 +27,35 @@ module.exports = {
                 });
             }
         } catch (err) {
-            // If MongoDB is down, allow commands to continue
             logger.error('Blacklist check failed (allowing command):', err);
         }
 
-        // ── Cooldown System ──
-        if (!client.cooldowns) client.cooldowns = new Collection();
+        // ── Owner Only Check ──
+        if (command.ownerOnly && !client.owners.includes(interaction.user.id)) {
+            logger.warn(`Unauthorized execution attempt of /${command.data.name} by ${interaction.user.tag}`);
+            return interaction.reply({
+                embeds: [embedBuilder({
+                    title: '🔐 Clearance Required',
+                    description: 'This command is restricted to **Nexus Protocol Architects** only.',
+                    color: '#ED4245'
+                })],
+                ephemeral: true
+            });
+        }
 
+        // ── Cooldown System ──
         if (!client.cooldowns.has(command.data.name)) {
             client.cooldowns.set(command.data.name, new Collection());
         }
 
         const now = Date.now();
         const timestamps = client.cooldowns.get(command.data.name);
-        const cooldownAmount = (command.cooldown || 3) * 1000; // default 3s
+        const cooldownAmount = (command.cooldown || 3) * 1000;
 
-        if (timestamps.has(interaction.user.id)) {
+        // Skip cooldown for owners
+        const isOwner = client.owners.includes(interaction.user.id);
+
+        if (!isOwner && timestamps.has(interaction.user.id)) {
             const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 
             if (now < expirationTime) {
@@ -58,19 +71,21 @@ module.exports = {
             }
         }
 
-        timestamps.set(interaction.user.id, now);
-        setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+        if (!isOwner) {
+            timestamps.set(interaction.user.id, now);
+            setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+        }
 
         // ── Execute Command ──
         try {
             await command.execute(interaction, client);
         } catch (error) {
             const errorId = Date.now().toString(36).toUpperCase();
-            logger.error(`[${errorId}] Error executing /${interaction.commandName}:`, error);
+            logger.error(`[EXEC_ERR] [ID:${errorId}] /${interaction.commandName}:`, error);
 
             const errEmbed = embedBuilder({
                 title: '⚠️ Execution Error',
-                description: `An internal error occurred.\n**Error ID:** \`${errorId}\`\nThis has been logged for the developers.`,
+                description: `An internal error occurred during protocol execution.\n**Error ID:** \`${errorId}\`\nThis incident has been logged.`,
                 color: '#ED4245'
             });
 
@@ -86,3 +101,4 @@ module.exports = {
         }
     },
 };
+

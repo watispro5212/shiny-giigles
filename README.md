@@ -8,7 +8,8 @@
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![License](https://img.shields.io/badge/License-BSL--Attribution-FF4444?style=for-the-badge)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-7.0.0-00FFCC?style=for-the-badge)](changelog.html)
+[![Version](https://img.shields.io/badge/Version-7.1.0-00FFCC?style=for-the-badge)](changelog.html)
+
 
 </div>
 
@@ -18,15 +19,16 @@
 
 Nexus Protocol is a **ShardingManager**-driven Discord.js **v14** bot backed by **MongoDB** (economy, guild config, **global blacklist**). Features include credits, quests, casino, XP/rank cards, moderation, tickets, verification, automod hooks, starboard, audit logging, and owner tooling. A **companion website** and **Express** JSON API ship in the same repo.
 
-### v7 highlights — THE ARCHITECTURAL OVERHAUL
+### v7.1.0 highlights — OWNER & OPS UPDATE
 
 | Area | What changed |
 |------|----------------|
-| **Security** | **MANDATORY:** Removed all instances of `eval()` in `math.js` and replaced with a safe, sandboxed recursive-descent parser. |
-| **Stability** | Upgraded MongoDB driver to v7+ and Mongoose to v9+; resolved `MongoParseError` by removing deprecated connection options. |
-| **Logic** | Removed `chalk` dependency in favor of zero-dependency ANSI color logging to prevent ESM/CommonJS module conflicts. |
-| **Scale** | Added **24 new commands** across Utility, Economy, Moderation, and Fun categories (Total: **92** modules). |
-| **Reliability** | Implemented `SIGINT`/`SIGTERM` graceful shutdowns and robust shard recovery with `respawn: true`. |
+| **Core Functions** | Deployed secure **Owner-Only** commands: `/eval`, `/shutdown`, and `/reload` with hardcoded ID protection. |
+| **Privacy** | Implemented a global obfuscation system that **hides** owner commands from both the Discord Slash UI and the website command registry. |
+| **Expansion** | Added community-requested features: `/weather` (OpenWeather integration) and `/meme` (Humor packet interception). |
+| **Synchronization** | Unified all web nodes; versioned all static layouts to v7.1.0 and purged legacy sharding navigation. |
+| **Stability** | Resolved `ReferenceError` crashes in interaction handlers through localized client property initialization. |
+
 
 ## Requirements
 
@@ -70,7 +72,8 @@ npm start        # shards + web server (PORT default 3000)
 
 ## Commands (summary)
 
-**92** slash command files are registered (including **8** owner-only: `shutdown`, `eval`, `set-credits`, `set-level`, `announce`, `blacklist`, `server-list`, `reload`). **84** are public-facing commands in `/help` (excluding glossary-style help entries).
+**95** slash command files are registered (including **9** owner-only: `shutdown`, `eval`, `reload`, `set-credits`, `blacklist`, `rank-set`, …). **86** are public-facing commands.
+
 
 | Area | Examples |
 |------|----------|
