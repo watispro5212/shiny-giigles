@@ -4,7 +4,7 @@
 ## 🛡️ Vulnerability Disclosure
 Founders prioritize the security of the Nexus Protocol. If you identify a logic failure or a potential breach in the "Singularity" core, please notify us immediately through the following channels:
 
-1. **Direct Support Sector**: Open a priority ticket in the [Support Hub](https://discord.gg/nexus).
+1. **Direct Support Sector**: Open a priority ticket in the [Support Hub](https://discord.com/invite/DYXBEd2G8M).
 2. **Founder Link**: Use the "Connect with Founder" gateway in the [Staff Sector](staff.html).
 
 Do NOT disclose vulnerabilities in public sectors (e.g., `#⚡-general-chat`).

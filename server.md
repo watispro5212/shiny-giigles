@@ -1,5 +1,5 @@
 # NEXUS PROTOCOL // THE COMMUNITY BLUEPRINT
-> Tier-1 Orchestration Directive — v10.0.0 "Omega"
+> Tier-1 Orchestration Directive — v11.0.0 "Apex"
 
 This directive is the definitive architecture specification for the official Nexus Support Hub. It outlines a complete, enterprise-grade Discord server structure utilizing a "Prestige Nomenclature" system for maximum identity clarity, operational precision, and artisanal community aesthetics. Every sector, role, agent, and permission is documented to production quality.
 
@@ -892,10 +892,10 @@ These are the core directives to be pasted into the `#📜-rules` channel:
 | **Web Portal** | [shiny-giigles.pages.dev](https://shiny-giigles.pages.dev/) |
 | **Commands** | [shiny-giigles.pages.dev/commands.html](https://shiny-giigles.pages.dev/commands.html) |
 | **GitHub** | [github.com/watispro5212/shiny-giigles](https://github.com/watispro5212/shiny-giigles) |
-| **Support Server** | [discord.gg/nexus](https://discord.gg/nexus) |
+| **Support Server** | [discord.com/invite/DYXBEd2G8M](https://discord.com/invite/DYXBEd2G8M) |
 | **Changelog** | [shiny-giigles.pages.dev/changelog.html](https://shiny-giigles.pages.dev/changelog.html) |
 | **Wiki** | [shiny-giigles.pages.dev/wiki.html](https://shiny-giigles.pages.dev/wiki.html) |
 
 ---
 
-*NEXUS PROTOCOL © 2026 // ALL SYSTEMS OMEGA — v10.0.0*
+*NEXUS PROTOCOL © 2026 // ALL SYSTEMS APEX — v11.0.0*

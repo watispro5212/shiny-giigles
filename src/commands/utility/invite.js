@@ -25,7 +25,7 @@ module.exports = {
             new ButtonBuilder()
                 .setLabel('Support Server')
                 .setStyle(ButtonStyle.Link)
-                .setURL('https://discord.gg/waf2NMNECA')
+                .setURL('https://discord.com/invite/DYXBEd2G8M')
                 .setEmoji('💬')
         );
 

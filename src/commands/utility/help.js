@@ -39,7 +39,7 @@ module.exports = {
                     description: 'Explore the available command protocols using the menu below.\n\n' +
                                  '**Active Systems:** ' + categories.map(c => `\`${c.toUpperCase()}\``).join(', '),
                     fields: [
-                        { name: 'Support', value: '[Portal](https://discord.gg/nexus)', inline: true }
+                        { name: 'Support', value: '[Portal](https://discord.com/invite/DYXBEd2G8M)', inline: true }
                     ],
                     footer: `Nexus v11.0.0 • Status: Omega`
                 });
