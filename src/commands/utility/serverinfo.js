@@ -28,7 +28,7 @@ module.exports = {
         const stages = guild.channels.cache.filter(c => c.type === ChannelType.GuildStageVoice).size;
 
         const serverEmbed = embedBuilder({
-            title: `🖥️ Node Identity // ${guild.name}`,
+            title: `🖥️ Node Identity 
             description: `**ID:** \`${guild.id}\`\n**Owner:** <@${guild.ownerId}>\n**Created:** <t:${Math.floor(guild.createdTimestamp / 1000)}:R>`,
             fields: [
                 { name: '👥 Entity Density', value: `Total: \`${totalMembers}\`\nHumans: \`${humanCount}\`\nBots: \`${botCount}\``, inline: true },

@@ -18,15 +18,15 @@ module.exports = {
         const commandName = interaction.options.getString('command').toLowerCase();
         
         if (commandName === 'all') {
-            // Re-run the command handler logic
+            
             const handler = require('../../handlers/commandHandler');
-            // This is tricky because the handler is a function(client)
-            // We need to clear cache for every command
+            
+            
             client.commands.forEach(cmd => {
                 const category = cmd.category;
                 const name = cmd.data.name;
-                // find the file... this is hard without paths stored.
-                // For simplicity, let's just reload individual ones or tell user it's individual only for now.
+                
+                
             });
             
             return interaction.reply({ content: 'Reloading "all" is currently being optimized. Please reload specific commands for now.', ephemeral: true });

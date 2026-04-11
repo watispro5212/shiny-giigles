@@ -13,7 +13,7 @@ module.exports = {
 
         logger.command(interaction.commandName, interaction.user.tag);
 
-        // ── Blacklist Check ──
+        
         try {
             const isBlacklisted = await BlacklistEntry.findOne({ targetId: interaction.user.id });
             if (isBlacklisted) {
@@ -30,7 +30,7 @@ module.exports = {
             logger.error('Blacklist check failed (allowing command):', err);
         }
 
-        // ── Owner Only Check ──
+        
         if (command.ownerOnly && !client.owners.includes(interaction.user.id)) {
             logger.warn(`Unauthorized execution attempt of /${command.data.name} by ${interaction.user.tag}`);
             return interaction.reply({
@@ -43,7 +43,7 @@ module.exports = {
             });
         }
 
-        // ── Cooldown System ──
+        
         if (!client.cooldowns.has(command.data.name)) {
             client.cooldowns.set(command.data.name, new Collection());
         }
@@ -52,7 +52,7 @@ module.exports = {
         const timestamps = client.cooldowns.get(command.data.name);
         const cooldownAmount = (command.cooldown || 3) * 1000;
 
-        // Skip cooldown for owners
+        
         const isOwner = client.owners.includes(interaction.user.id);
 
         if (!isOwner && timestamps.has(interaction.user.id)) {
@@ -76,7 +76,7 @@ module.exports = {
             setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
         }
 
-        // ── Execute Command ──
+        
         try {
             await command.execute(interaction, client);
         } catch (error) {

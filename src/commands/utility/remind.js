@@ -43,7 +43,7 @@ module.exports = {
                     })]
                 });
             } catch (err) {
-                // DMs closed — nothing we can do
+                
             }
         }, minutes * 60 * 1000);
     },

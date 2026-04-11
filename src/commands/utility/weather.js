@@ -32,7 +32,7 @@ module.exports = {
             const data = await response.json();
 
             const weatherEmbed = embedBuilder({
-                title: `🌍 Atmospheric Scan // ${data.name}, ${data.sys.country}`,
+                title: `🌍 Atmospheric Scan 
                 description: `**Coordinates:** \`${data.coord.lat}, ${data.coord.lon}\``,
                 fields: [
                     { name: '🌡️ Temperature', value: `\`${data.main.temp}°C\` (Feels: \`${data.main.feels_like}°C\`)`, inline: true },

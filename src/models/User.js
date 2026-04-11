@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// Compound index — one document per user per guild
+
 userSchema.index({ userId: 1, guildId: 1 }, { unique: true });
 
 module.exports = mongoose.model('User', userSchema);

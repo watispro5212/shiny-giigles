@@ -21,7 +21,7 @@ client.cooldowns = new Collection();
 client.events = new Collection();
 client.owners = process.env.OWNER_IDS ? process.env.OWNER_IDS.split(',').map(id => id.trim()) : [];
 
-// Connect to the database
+
 if (process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI, {
         serverSelectionTimeoutMS: 12000,
@@ -35,7 +35,7 @@ if (process.env.MONGODB_URI) {
     logger.warn('Missing MONGODB_URI in config — persistence disabled');
 }
 
-// Load Handlers
+
 const handlersPath = path.join(__dirname, 'handlers');
 fs.readdirSync(handlersPath).forEach(file => {
     if (file.endsWith('.js')) {
@@ -47,7 +47,7 @@ client.login(process.env.TOKEN).catch(err => {
     logger.error('Failed to login to Discord:', err);
 });
 
-// Graceful shutdown
+
 const shutdown = (signal) => {
     logger.warn(`${signal} received — shutting down gracefully...`);
     client.destroy();
@@ -60,7 +60,7 @@ const shutdown = (signal) => {
 process.on('SIGINT', () => shutdown('SIGINT'));
 process.on('SIGTERM', () => shutdown('SIGTERM'));
 
-// Error handling
+
 process.on('unhandledRejection', error => {
     logger.error('Unhandled promise rejection:', error);
 });

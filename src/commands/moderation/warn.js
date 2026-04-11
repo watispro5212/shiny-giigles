@@ -32,7 +32,7 @@ module.exports = {
 
         await warning.save();
 
-        // Get total warning count
+        
         const totalWarnings = await Warning.countDocuments({ userId: target.id, guildId: interaction.guild.id, active: true });
 
         await interaction.reply({
@@ -44,7 +44,7 @@ module.exports = {
             })]
         });
 
-        // DM the user
+        
         try {
             await target.send({
                 embeds: [embedBuilder({

@@ -30,7 +30,7 @@ module.exports = {
             return interaction.reply({ content: '❌ User not found.', ephemeral: true });
         }
 
-        // Check role hierarchy
+        
         if (role.position >= interaction.guild.members.me.roles.highest.position) {
             return interaction.reply({ content: '❌ That role is higher than my highest role.', ephemeral: true });
         }

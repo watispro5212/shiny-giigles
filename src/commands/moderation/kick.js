@@ -29,7 +29,7 @@ module.exports = {
             return interaction.reply({ content: '❌ You cannot kick yourself.', ephemeral: true });
         }
 
-        // DM before kicking
+        
         try {
             await target.send({
                 embeds: [embedBuilder({

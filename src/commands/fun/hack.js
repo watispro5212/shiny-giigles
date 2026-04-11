@@ -48,7 +48,7 @@ module.exports = {
             });
         }
 
-        // Generate fake "stolen" data
+        
         const fakeData = [
             `📧 Email: \`${target.username.toLowerCase()}@nexus-protocol.net\``,
             `🔑 Password: \`${'*'.repeat(Math.floor(Math.random() * 8) + 6)}\``,

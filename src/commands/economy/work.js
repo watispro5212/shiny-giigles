@@ -32,7 +32,7 @@ module.exports = {
         }
 
         const now = new Date();
-        const cooldown = 60 * 60 * 1000; // 1 hour
+        const cooldown = 60 * 60 * 1000; 
 
         if (userData.lastWork && (now - userData.lastWork < cooldown)) {
             const timeLeft = cooldown - (now - userData.lastWork);

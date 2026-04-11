@@ -19,9 +19,9 @@ module.exports = {
         
         logger.warn(`Shutdown command executed by ${interaction.user.tag}. Shutting down...`);
         
-        // Wait a small bit so the reply goes through
+        
         setTimeout(() => {
-            process.exit(0); // ShardingManager will handle shard shutdown or process will die
+            process.exit(0); 
         }, 1000);
     },
 };

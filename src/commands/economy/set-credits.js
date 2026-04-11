@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
-const User = require('../../models/User'); // Assuming this is the model name for economy
+const User = require('../../models/User'); 
 
 module.exports = {
     ownerOnly: true,
@@ -28,7 +28,7 @@ module.exports = {
             );
 
             const economyEmbed = embedBuilder({
-                title: '💳 Registry Mod // Success',
+                title: '💳 Registry Mod 
                 description: `**Target:** ${target.tag}\n**New Balance:** \`${amount.toLocaleString()}\` credits`,
                 color: '#2ECC71'
             });

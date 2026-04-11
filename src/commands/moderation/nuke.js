@@ -32,7 +32,7 @@ module.exports = {
                     })]
                 });
             } catch (err) {
-                // Channel may already be deleted
+                
             }
         }, 5000);
     },

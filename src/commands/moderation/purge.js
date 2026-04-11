@@ -25,7 +25,7 @@ module.exports = {
             let deleted;
 
             if (targetUser) {
-                // Fetch messages and filter by user
+                
                 const messages = await interaction.channel.messages.fetch({ limit: 100 });
                 const userMessages = messages
                     .filter(m => m.author.id === targetUser.id)

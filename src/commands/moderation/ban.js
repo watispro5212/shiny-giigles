@@ -38,7 +38,7 @@ module.exports = {
             return interaction.reply({ content: '❌ You cannot ban yourself.', ephemeral: true });
         }
 
-        // DM the user before banning
+        
         try {
             await target.send({
                 embeds: [embedBuilder({

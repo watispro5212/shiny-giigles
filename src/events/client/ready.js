@@ -16,7 +16,7 @@ module.exports = {
         logger.success(`Ready! Logged in as ${client.user.tag}`);
         logger.info(`Serving ${client.guilds.cache.size} guilds on shard ${client.shard?.ids[0] ?? 0}`);
 
-        // Set initial presence
+        
         const updatePresence = () => {
             const status = statuses[Math.floor(Math.random() * statuses.length)];
             const name = status.name
@@ -32,6 +32,6 @@ module.exports = {
         };
 
         updatePresence();
-        setInterval(updatePresence, 30000); // Rotate every 30 seconds
+        setInterval(updatePresence, 30000); 
     },
 };

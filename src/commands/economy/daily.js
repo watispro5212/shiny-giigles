@@ -34,7 +34,7 @@ module.exports = {
             });
         }
 
-        // Check streak (within 48h of last daily = streak continues)
+        
         const streakWindow = 48 * 60 * 60 * 1000;
         if (userData.lastDaily && (now - userData.lastDaily < streakWindow)) {
             userData.streak = (userData.streak || 0) + 1;
@@ -42,7 +42,7 @@ module.exports = {
             userData.streak = 1;
         }
 
-        // Calculate amount with streak bonus (base 1000 + streak * 100, cap 5000)
+        
         const baseAmount = 1000;
         const streakBonus = Math.min(userData.streak * 100, 4000);
         const totalAmount = baseAmount + streakBonus;

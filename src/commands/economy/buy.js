@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const embedBuilder = require('../../utils/embedBuilder');
 const User = require('../../models/User');
 
-// Import shop items
+
 const shopItems = [
     { id: 'cyberlink', name: '🔗 Cyber-Link', price: 5000 },
     { id: 'neuralshunt', name: '🧠 Neural-Shunt', price: 12000 },

@@ -12,7 +12,7 @@ const shopItems = [
     { id: 'shield', name: '🛡️ Shield Module', price: 15000, description: 'Protection against /rob attempts' },
 ];
 
-// Export for use in buy command
+
 module.exports = {
     shopItems,
     data: new SlashCommandBuilder()

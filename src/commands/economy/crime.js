@@ -22,7 +22,7 @@ module.exports = {
             userData = new User({ userId: interaction.user.id, guildId: interaction.guild.id });
         }
 
-        // 2-hour cooldown
+        
         const cooldown = 2 * 60 * 60 * 1000;
         if (userData.lastCrime && (Date.now() - userData.lastCrime < cooldown)) {
             const timeLeft = cooldown - (Date.now() - userData.lastCrime);
@@ -38,7 +38,7 @@ module.exports = {
         }
 
         const crime = crimes[Math.floor(Math.random() * crimes.length)];
-        const success = Math.random() < 0.4; // 40% success rate
+        const success = Math.random() < 0.4; 
 
         userData.lastCrime = new Date();
 

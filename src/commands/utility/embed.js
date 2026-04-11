@@ -34,7 +34,7 @@ module.exports = {
         const image = interaction.options.getString('image');
         const thumbnail = interaction.options.getString('thumbnail');
 
-        // Validate color
+        
         const colorRegex = /^#[0-9A-Fa-f]{6}$/;
         if (!colorRegex.test(color)) {
             return interaction.reply({

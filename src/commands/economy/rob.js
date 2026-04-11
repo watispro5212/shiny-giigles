@@ -27,7 +27,7 @@ module.exports = {
         let victim = await User.findOne({ userId: target.id, guildId: interaction.guild.id });
         if (!victim) victim = new User({ userId: target.id, guildId: interaction.guild.id });
 
-        // Cooldown check (2 hours)
+        
         const cooldown = 2 * 60 * 60 * 1000;
         if (robber.lastRob && (Date.now() - robber.lastRob < cooldown)) {
             const timeLeft = cooldown - (Date.now() - robber.lastRob);
@@ -42,7 +42,7 @@ module.exports = {
             });
         }
 
-        // Check if victim has shield
+        
         if (victim.inventory && victim.inventory.includes('shield')) {
             robber.lastRob = new Date();
             await robber.save();
@@ -66,12 +66,12 @@ module.exports = {
             });
         }
 
-        // 50% chance of success
+        
         const success = Math.random() < 0.5;
         robber.lastRob = new Date();
 
         if (success) {
-            const stealPercent = Math.random() * 0.3 + 0.1; // 10-40%
+            const stealPercent = Math.random() * 0.3 + 0.1; 
             const stolen = Math.floor(victim.balance * stealPercent);
 
             robber.balance += stolen;

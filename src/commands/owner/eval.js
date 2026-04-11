@@ -11,7 +11,7 @@ module.exports = {
             option.setName('code')
                 .setDescription('The snippet to execute.')
                 .setRequired(true))
-        .setDefaultMemberPermissions(0), // Restricted to Admins in Slash UI
+        .setDefaultMemberPermissions(0), 
     async execute(interaction, client) {
         const code = interaction.options.getString('code');
         
@@ -22,7 +22,7 @@ module.exports = {
                 evaled = util.inspect(evaled, { depth: 1 });
             }
 
-            // Clean output for privacy (tokens, etc)
+            
             const cleaned = evaled.replace(client.token, '[REDACTED TOKEN]');
 
             const resultEmbed = embedBuilder({

@@ -38,7 +38,7 @@ module.exports = {
 
         await interaction.reply({
             embeds: [embedBuilder({
-                title: `🔍 Breach Audit // ${target.username}`,
+                title: `🔍 Breach Audit 
                 description: `**Total Infractions:** \`${totalCount}\`\nShowing the latest \`${warnings.length}\`.`,
                 fields,
                 color: '#F1C40F',

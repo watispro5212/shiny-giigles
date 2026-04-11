@@ -27,7 +27,7 @@ module.exports = {
 
         await interaction.deferReply({ ephemeral: true });
 
-        // Simulate processing delay
+        
         await new Promise(resolve => setTimeout(resolve, 2000));
 
         let result = '';

@@ -26,7 +26,7 @@ module.exports = {
             });
         }
 
-        // Group items by count
+        
         const itemCounts = {};
         for (const item of userData.inventory) {
             itemCounts[item] = (itemCounts[item] || 0) + 1;

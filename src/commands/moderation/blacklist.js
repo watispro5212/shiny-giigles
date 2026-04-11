@@ -33,7 +33,7 @@ module.exports = {
             );
 
             const blacklistEmbed = embedBuilder({
-                title: '🚫 Protocol Exclusion // Success',
+                title: '🚫 Protocol Exclusion 
                 description: `**Target:** ${target.tag} (\`${target.id}\`)\n**Status:** DE-AUTHORIZED\n**Reason:** ${reason}`,
                 color: '#ED4245'
             });

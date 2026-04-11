@@ -16,7 +16,7 @@ module.exports = {
         const latency = sent.createdTimestamp - interaction.createdTimestamp;
         const apiLatency = Math.round(client.ws.ping);
 
-        // Quality rating based on latency
+        
         const getQuality = (ms) => {
             if (ms < 50) return { label: 'Excellent', color: '#2ECC71', bar: '█████' };
             if (ms < 100) return { label: 'Good', color: '#3498DB', bar: '████░' };

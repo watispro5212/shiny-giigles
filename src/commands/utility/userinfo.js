@@ -14,15 +14,15 @@ module.exports = {
         const target = interaction.options.getMember('target') || interaction.member;
         const user = target.user;
 
-        // Calculate account age
+        
         const accountAge = Math.floor((Date.now() - user.createdTimestamp) / 86400000);
 
-        // Get top role (highest non-@everyone)
+        
         const topRole = target.roles.highest.id !== interaction.guild.id
             ? target.roles.highest
             : null;
 
-        // Get all roles (excluding @everyone)
+        
         const roles = target.roles.cache
             .filter(r => r.name !== '@everyone')
             .sort((a, b) => b.position - a.position)
@@ -37,7 +37,7 @@ module.exports = {
         };
 
         const infoEmbed = embedBuilder({
-            title: `👤 Entity Dossier // ${user.displayName}`,
+            title: `👤 Entity Dossier 
             description: [
                 `**ID:** \`${user.id}\``,
                 `**Tag:** \`${user.tag}\``,

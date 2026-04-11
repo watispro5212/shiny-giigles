@@ -22,7 +22,7 @@ module.exports = {
 
         const netWorth = userData.balance + userData.bank;
 
-        // Get rank in this guild
+        
         const richerCount = await User.countDocuments({
             guildId: interaction.guild.id,
             $expr: { $gt: [{ $add: ['$balance', '$bank'] }, netWorth] }
