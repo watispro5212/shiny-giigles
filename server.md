@@ -12,7 +12,12 @@ This directive outlines the definitive architecture for the official Nexus Suppo
 | :--- | :--- | :--- |
 | **Founder** | `👑` | Total dominion over the framework. |
 | **Admin** | `🛡️` | Executive management and logistical oversight. |
+| **Developer** | `💻` | Technical architects behind the core subsystems. |
 | **Moderator** | `⚔️` | Security monitoring and directive enforcement. |
+| **Support** | `🔧` | Primary operatives for directive resolution. |
+| **Partner** | `🌐` | Strategic allies and verified collaborators. |
+| **Booster** | `💎` | Elite entities providing node enhancements via boosts. |
+| **Early Operative** | `🥇` | Founding members of the initial Singularity. |
 | **Operative** | `🧬` | Standard verified entities with full hub access. |
 | **Entity** | `🌑` | Unverified newcomers awaiting initialization. |
 | **Neural Engine** | `🤖` | Integration role for all external intelligence agents (Bots). |
