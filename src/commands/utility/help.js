@@ -9,6 +9,7 @@ const categoryEmojis = {
     moderation: '🛡️',
     advanced: '⚡',
     fun: '🎮',
+    owner: '👑',
 };
 
 const categoryDescriptions = {
@@ -16,7 +17,8 @@ const categoryDescriptions = {
     economy: 'Manage your credit reserves and participate in the global market.',
     moderation: 'Enforce node security and manage community entities.',
     advanced: 'High-level infrastructure and network diagnostic protocols.',
-    fun: 'Engage with random data packets and entertainment sub-routines.'
+    fun: 'Engage with random data packets and entertainment sub-routines.',
+    owner: 'Restricted protocols for Nexus Protocol Architects only.'
 };
 
 module.exports = {
@@ -39,7 +41,7 @@ module.exports = {
                     fields: [
                         { name: 'Support', value: '[Portal](https://discord.gg/nexus)', inline: true }
                     ],
-                    footer: `Nexus v10.0.0 • Status: Omega`
+                    footer: `Nexus v11.0.0 • Status: Omega`
                 });
             }
 
@@ -53,7 +55,7 @@ module.exports = {
             return embedBuilder({
                 title: `${category.toUpperCase()} Module`,
                 description: `${categoryDescriptions[category] || 'Commands for this system.'}\n\n${commands}`,
-                footer: `Nexus v10.0.0 • Total: ${cmdFiles.length}`
+                footer: `Nexus v11.0.0 • Total: ${cmdFiles.length}`
             });
         };
 

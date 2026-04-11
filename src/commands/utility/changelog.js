@@ -9,31 +9,35 @@ module.exports = {
     async execute(interaction, client) {
         await interaction.reply({
             embeds: [embedBuilder({
-                title: 'Nexus v9.1.0 // Infinitum Patch',
-                description: 'A stability-critical update resolving portal inconsistencies and expanding the command registry.',
+                title: 'Nexus v11.0.0 // Apex Overhaul',
+                description: 'The most advanced update yet — 8 new commands, infrastructure upgrades, and a complete visual redesign.',
                 fields: [
                     { 
-                        name: '🐛 Portal Stabilization', 
-                        value: 'Resolved duplicated nav entries and broken HTML structure across the Wiki and Changelog sectors.' 
+                        name: '🎮 New Game Commands', 
+                        value: '`/wordle` `/connect4` — Full interactive games with emoji displays and button controls.' 
                     },
                     { 
-                        name: '⚡ New Protocols', 
-                        value: '`/snipe` `/afk` `/banner` `/announce` — 4 new commands added to the registry.' 
+                        name: '💰 Economy Expansion', 
+                        value: '`/gamble` `/slots` — New gambling commands with visual dice rolls and slot machine reels.' 
                     },
                     { 
-                        name: '🔐 Permission Engine', 
-                        value: 'Expanded server blueprint with granular permissions for all 11 operational roles.' 
+                        name: '🛡️ Moderation Arsenal', 
+                        value: '`/lockdown` `/slowall` — Server-wide emergency controls for rapid response.' 
                     },
                     { 
-                        name: '🌌 Visual Overhaul', 
-                        value: 'Animated starfield, glowing dividers, tech stack showcase, and expanded content across all 9 portal sectors.' 
+                        name: '⭐ Community Systems', 
+                        value: '`/suggest` `/starboard` — Suggestion voting and auto-highlight popular messages.' 
+                    },
+                    {
+                        name: '⚡ Infrastructure',
+                        value: 'In-memory TTL cache layer for GuildConfig, reducing MongoDB queries by ~80% on active servers.'
                     },
                     {
                         name: '📜 Full Archive',
                         value: '[View the complete changelog →](https://shiny-giigles.pages.dev/changelog.html)'
                     }
                 ],
-                footer: 'Nexus Protocol • Infinitum Archive'
+                footer: 'Nexus Protocol v11.0.0 • Apex Archive'
             })]
         });
     },

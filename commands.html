@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS // Protocol Index v10</title>
-    <meta name="description" content="Complete command directory for the Nexus Protocol v10 Discord bot — 65+ slash commands across moderation, economy, utility, fun, advanced, and founder categories.">
+    <title>NEXUS // Protocol Index v11</title>
+    <meta name="description" content="Complete command directory for the Nexus Protocol v11 Discord bot — 73+ slash commands across moderation, economy, utility, fun, advanced, and founder categories.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <a href="wiki.html">Wiki</a>
             <a href="staff.html">Staff</a>
             <a href="changelog.html">Log</a>
-            <span class="nav-version">v10.0</span>
+            <span class="nav-version">v11.0</span>
         </div>
         <div class="hamburger" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('open');"><span></span><span></span><span></span></div>
     </nav>
@@ -27,7 +27,7 @@
         <section class="section-header">
             <span class="section-label">PROTOCOL REGISTRY</span>
             <h1>Protocol Index.</h1>
-            <p>A comprehensive directory of <span class="cmd-count-badge">65+</span> Nexus operational directives.</p>
+            <p>A comprehensive directory of <span class="cmd-count-badge">73+</span> Nexus operational directives.</p>
         </section>
 
         <!-- Search -->
@@ -646,19 +646,98 @@
                 <p>Gracefully terminate all shard processes and close database connections.</p>
                 <div class="cmd-syntax">/shutdown</div>
             </div>
-        </div>
+
+            <!-- ═══ NEW IN V11: MODERATION ═══ -->
+            <div class="artisanal-card protocol-node" data-category="security" data-name="lockdown">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-security">SECURITY</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 30s</span>
+                </div>
+                <h3>/lockdown</h3>
+                <p>Emergency server-wide lockdown — revoke messaging in all text channels instantly.</p>
+                <div class="cmd-syntax">/lockdown &lt;lock|lift&gt; [reason]</div>
+            </div>
+            <div class="artisanal-card protocol-node" data-category="security" data-name="slowall">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-security">SECURITY</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 30s</span>
+                </div>
+                <h3>/slowall</h3>
+                <p>Set slowmode on all text channels simultaneously.</p>
+                <div class="cmd-syntax">/slowall &lt;seconds&gt;</div>
+            </div>
+
+            <!-- ═══ NEW IN V11: UTILITY ═══ -->
+            <div class="artisanal-card protocol-node" data-category="utility" data-name="suggest">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-utility">UTILITY</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 30s</span>
+                </div>
+                <h3>/suggest</h3>
+                <p>Submit a suggestion for the server with community voting (👍/👎).</p>
+                <div class="cmd-syntax">/suggest &lt;idea&gt;</div>
+            </div>
+            <div class="artisanal-card protocol-node" data-category="utility" data-name="starboard">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-utility">UTILITY</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 10s</span>
+                </div>
+                <h3>/starboard</h3>
+                <p>Configure the starboard system to auto-highlight popular messages.</p>
+                <div class="cmd-syntax">/starboard &lt;setup|disable|status&gt;</div>
+            </div>
+
+            <!-- ═══ NEW IN V11: FUN ═══ -->
+            <div class="artisanal-card protocol-node" data-category="fun" data-name="wordle">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-fun">FUN</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 10s</span>
+                </div>
+                <h3>/wordle</h3>
+                <p>Play a Wordle-style word guessing game with emoji grid (🟩🟨⬛).</p>
+                <div class="cmd-syntax">/wordle</div>
+            </div>
+            <div class="artisanal-card protocol-node" data-category="fun" data-name="connect4">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-fun">FUN</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 15s</span>
+                </div>
+                <h3>/connect4</h3>
+                <p>Challenge another user to Connect 4 with button-based column selection.</p>
+                <div class="cmd-syntax">/connect4 &lt;opponent&gt;</div>
+            </div>
+
+            <!-- ═══ NEW IN V11: ECONOMY ═══ -->
+            <div class="artisanal-card protocol-node" data-category="economy" data-name="gamble">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-economy">ECONOMY</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 10s</span>
+                </div>
+                <h3>/gamble</h3>
+                <p>Gamble your credits on a dice roll — double or nothing!</p>
+                <div class="cmd-syntax">/gamble &lt;amount&gt;</div>
+            </div>
+            <div class="artisanal-card protocol-node" data-category="economy" data-name="slots">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
+                    <span class="protocol-tag tag-economy">ECONOMY</span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted);">CD: 8s</span>
+                </div>
+                <h3>/slots</h3>
+                <p>Spin the slot machine with emoji reels and multiple payout tiers.</p>
+                <div class="cmd-syntax">/slots &lt;bet&gt;</div>
+            </div>
     </main>
 
     <footer>
         <div class="footer-brand">
             <span style="font-weight: 700; letter-spacing: 2px; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NEXUS</span>
-            <span class="footer-version">v10.0.0</span>
+            <span class="footer-version">v11.0.0</span>
         </div>
         <div class="footer-links">
             <a href="terms.html">Terms</a>
             <a href="privacy.html">Privacy</a>
         </div>
-        <p>NEXUS PROTOCOL © 2026 // ALL SYSTEMS OMEGA</p>
+        <p>NEXUS PROTOCOL © 2026 // ALL SYSTEMS APEX</p>
     </footer>
 
     <script>

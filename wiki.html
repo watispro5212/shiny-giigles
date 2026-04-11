@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS // Neural Database v10</title>
-    <meta name="description" content="Technical wiki and documentation for the Nexus Protocol v10 — architecture, hosting, economy, leveling, auto-moderation, and ticket systems.">
+    <title>NEXUS // Neural Database v11</title>
+    <meta name="description" content="Technical wiki and documentation for the Nexus Protocol v11 — architecture, hosting, economy, leveling, auto-moderation, and ticket systems.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <a href="wiki.html" class="active">Wiki</a>
             <a href="staff.html">Staff</a>
             <a href="changelog.html">Log</a>
-            <span class="nav-version">v10.0</span>
+            <span class="nav-version">v11.0</span>
         </div>
         <div class="hamburger" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('open');"><span></span><span></span><span></span></div>
     </nav>
@@ -27,7 +27,7 @@
         <section class="section-header">
             <span class="section-label">TECHNICAL DOCUMENTATION</span>
             <h1>Neural Database.</h1>
-            <p>A comprehensive glossary of the Omega engine and its operational subsystems.</p>
+            <p>A comprehensive glossary of the Apex engine and its operational subsystems.</p>
         </section>
 
         <!-- TABLE OF CONTENTS -->
@@ -49,7 +49,7 @@
             <div id="architecture" class="artisanal-card reveal">
                 <span class="protocol-tag tag-utility" style="margin-bottom: 1rem; display: inline-block;">SYSTEMS</span>
                 <h3>01 // Core Architecture</h3>
-                <p>The Nexus Protocol v10 is built on a distributed MERN-adjacent stack optimized for high-frequency Discord interactions. The Omega Core utilizes Node.js worker threads to isolate shard processes, preventing a failure in one sector from cascading across the entire neural matrix.</p>
+                <p>The Nexus Protocol v11 is built on a distributed MERN-adjacent stack optimized for high-frequency Discord interactions. The Omega Core utilizes Node.js worker threads to isolate shard processes, preventing a failure in one sector from cascading across the entire neural matrix.</p>
                 <div class="code-block" style="margin-top: 1.5rem;">
                     <p><span class="keyword">➔</span> Load Balancer: Internal Shard Manager (Worker Threads)</p>
                     <p><span class="keyword">➔</span> Persistence: MongoDB Atlas cluster with global write concerns.</p>
@@ -105,7 +105,7 @@
             <div id="leveling" class="artisanal-card reveal">
                 <span class="protocol-tag tag-economy" style="margin-bottom: 1rem; display: inline-block;">LEVELING</span>
                 <h3>05 // Leveling & XP System</h3>
-                <p>The v10 Omega Core introduces a comprehensive XP and leveling system. Members earn XP for each message sent (with cooldown-based rate limiting), and level up as XP accumulates. The leveling formula follows an exponential curve.</p>
+                <p>The v11 Apex Core features a comprehensive XP and leveling system. Members earn XP for each message sent (with cooldown-based rate limiting), and level up as XP accumulates. The leveling formula follows an exponential curve.</p>
                 <div class="code-block" style="margin-top: 1.5rem;">
                     <p><span class="comment">// Level-up threshold calculation</span></p>
                     <p><span class="keyword">const</span> xpNeeded = 5 * (level ** 2) + 50 * level + 100;</p>
@@ -154,10 +154,10 @@
     <footer>
         <div class="footer-brand">
             <span style="font-weight: 700; letter-spacing: 2px; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NEXUS</span>
-            <span class="footer-version">v10.0.0</span>
+            <span class="footer-version">v11.0.0</span>
         </div>
         <div class="footer-links"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div>
-        <p>NEXUS PROTOCOL © 2026 // ALL SYSTEMS OMEGA</p>
+        <p>NEXUS PROTOCOL © 2026 // ALL SYSTEMS APEX</p>
     </footer>
 
     <script>

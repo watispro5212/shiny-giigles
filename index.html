@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS // Deep Space Protocol v10</title>
-    <meta name="description" content="Nexus Protocol v10 — A high-performance neural framework for elite Discord communities. 65+ commands, economy, moderation, leveling, and more.">
+    <title>NEXUS // Apex Protocol v11</title>
+    <meta name="description" content="Nexus Protocol v11 — The Apex Core. A high-performance neural framework for elite Discord communities. 73+ commands, economy, moderation, starboard, and more.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="space-bg">
         <div class="stars"></div>
     </div>
+    <div class="noise-overlay"></div>
     <canvas id="particle-canvas"></canvas>
 
     <nav>
@@ -23,7 +24,7 @@
             <a href="wiki.html">Wiki</a>
             <a href="staff.html">Staff</a>
             <a href="changelog.html">Log</a>
-            <span class="nav-version">v10.0</span>
+            <span class="nav-version">v11.0</span>
         </div>
         <div class="hamburger" onclick="this.classList.toggle('active'); document.querySelector('.nav-links').classList.toggle('open');">
             <span></span><span></span><span></span>
@@ -33,10 +34,11 @@
     <main class="container">
         <!-- HERO -->
         <section class="hero">
+            <div class="hero-orb"></div>
             <div class="section-header">
-                <span class="section-label">NEXUS PROTOCOL v10.0.0 — OMEGA</span>
-                <h1>The Omega Core.</h1>
-                <p>A next-generation neural framework engineered for elite Discord communities. Secure. Scalable. Unstoppable.</p>
+                <span class="section-label">NEXUS PROTOCOL v11.0.0 — APEX</span>
+                <h1>The Apex Core.</h1>
+                <p>Next-generation neural framework engineered for elite Discord communities. 73 commands. Zero compromises. Infinite power.</p>
             </div>
 
             <div class="terminal-container reveal">
@@ -44,7 +46,7 @@
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <span class="terminal-title">nexus-core@10.0.0</span>
+                    <span class="terminal-title">nexus-core@11.0.0</span>
                 </div>
                 <div class="terminal-body" id="terminal"></div>
             </div>
@@ -62,7 +64,7 @@
                 <span class="metric-label">% SLA Uptime</span>
             </div>
             <div class="metric-card">
-                <span class="metric-value" data-count="65">0</span>
+                <span class="metric-value" data-count="73">0</span>
                 <span class="metric-label">+ Protocols</span>
             </div>
             <div class="metric-card">
@@ -70,7 +72,7 @@
                 <span class="metric-label">ms Latency</span>
             </div>
             <div class="metric-card">
-                <span class="metric-value" data-count="10">0</span>
+                <span class="metric-value" data-count="11">0</span>
                 <span class="metric-label">.0 Engine</span>
             </div>
         </section>
@@ -82,42 +84,76 @@
             <div class="section-header" style="margin-bottom: 3rem;">
                 <span class="section-label">CORE SYSTEMS</span>
                 <h2>Architectural Excellence.</h2>
-                <p>Engineered for scalability, the Nexus framework operates on a distributed neural matrix designed for zero-latency execution.</p>
+                <p>Engineered for scalability. The Nexus framework operates on a distributed neural matrix designed for zero-latency execution.</p>
             </div>
 
             <div class="content-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
                 <div class="artisanal-card reveal reveal-delay-1">
                     <div class="feature-icon">🛡️</div>
                     <h3>Sovereign Security</h3>
-                    <p>Full-spectrum moderation with real-time infraction auditing, automated raid prevention, and auto-mod pipeline.</p>
+                    <p>Full-spectrum moderation with real-time infraction auditing, emergency lockdown, and auto-mod pipeline.</p>
                     <ul class="feature-list">
                         <li>Auto-Moderation Pipeline (anti-spam, anti-link)</li>
+                        <li>Server-wide Lockdown & Slowall</li>
                         <li>Mass-ban & Nuke Protocols</li>
-                        <li>Immutable Audit Archives</li>
                         <li>Global Blacklist Registry</li>
                     </ul>
                 </div>
                 <div class="artisanal-card reveal reveal-delay-2">
                     <div class="feature-icon">📈</div>
                     <h3>Neural Economy</h3>
-                    <p>A persistent financial system backed by MongoDB with atomic transaction safety and progression mechanics.</p>
+                    <p>A persistent financial system backed by MongoDB with gambling, slots, and progression mechanics.</p>
                     <ul class="feature-list">
-                        <li>13+ Economy Commands</li>
-                        <li>Cross-Shard Sync</li>
+                        <li>15 Economy Commands</li>
+                        <li>Slots & Dice Gambling</li>
                         <li>Leveling & XP System</li>
                         <li>Reputation & Profiles</li>
                     </ul>
                 </div>
                 <div class="artisanal-card reveal reveal-delay-3">
                     <div class="feature-icon">⚡</div>
-                    <h3>Worker Sharding</h3>
-                    <p>Distributed across isolated worker threads with spawn throttling, auto-reconnection, and lifecycle telemetry.</p>
+                    <h3>Apex Infrastructure</h3>
+                    <p>Distributed across isolated worker threads with in-memory caching, auto-reconnection, and lifecycle telemetry.</p>
                     <ul class="feature-list">
+                        <li>In-Memory TTL Cache Layer</li>
                         <li>Auto-Scaling Shard Manager</li>
-                        <li>60s Spawn Timeout</li>
-                        <li>Lifecycle Telemetry</li>
+                        <li>Starboard & Suggestions System</li>
                         <li>Graceful Shutdown Protocol</li>
                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-glow"></div>
+
+        <!-- NEW IN V11 -->
+        <section class="reveal">
+            <div class="section-header" style="margin-bottom: 3rem;">
+                <span class="section-label">WHAT'S NEW</span>
+                <h2>v11 Apex Highlights.</h2>
+                <p>8 new commands, infrastructure upgrades, and a complete visual redesign.</p>
+            </div>
+
+            <div class="content-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="artisanal-card reveal reveal-delay-1" style="text-align: center;">
+                    <p style="font-size: 1.8rem; margin-bottom: 0.8rem;">🎰</p>
+                    <h4>Slots & Gamble</h4>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Full slot machine with emoji reels and dice gambling with visual rolls.</p>
+                </div>
+                <div class="artisanal-card reveal reveal-delay-2" style="text-align: center;">
+                    <p style="font-size: 1.8rem; margin-bottom: 0.8rem;">🟩</p>
+                    <h4>Wordle & Connect 4</h4>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Interactive games with emoji boards and button-based controls.</p>
+                </div>
+                <div class="artisanal-card reveal reveal-delay-3" style="text-align: center;">
+                    <p style="font-size: 1.8rem; margin-bottom: 0.8rem;">⭐</p>
+                    <h4>Starboard System</h4>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Auto-highlight popular messages when they hit the reaction threshold.</p>
+                </div>
+                <div class="artisanal-card reveal reveal-delay-4" style="text-align: center;">
+                    <p style="font-size: 1.8rem; margin-bottom: 0.8rem;">🔒</p>
+                    <h4>Emergency Lockdown</h4>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">One command to lock every channel. One command to unlock them all.</p>
                 </div>
             </div>
         </section>
@@ -129,14 +165,14 @@
             <div class="section-header" style="margin-bottom: 3rem;">
                 <span class="section-label">SUPERIORITY MATRIX</span>
                 <h2>Why Nexus?</h2>
-                <p>See how the Omega Core stacks up against competitors.</p>
+                <p>See how the Apex Core stacks up against competitors.</p>
             </div>
             <div class="artisanal-card" style="overflow-x: auto;">
                 <table class="comparison-table">
                     <thead>
                         <tr>
                             <th>Feature</th>
-                            <th style="color: var(--accent)">Nexus v10</th>
+                            <th style="color: var(--accent)">Nexus v11</th>
                             <th>Bot A</th>
                             <th>Bot B</th>
                         </tr>
@@ -149,31 +185,31 @@
                             <td class="check-no">✗</td>
                         </tr>
                         <tr>
-                            <td>Full Economy System</td>
+                            <td>Full Economy + Gambling</td>
                             <td class="check-yes">✓</td>
                             <td class="check-yes">✓</td>
                             <td class="check-no">✗</td>
                         </tr>
                         <tr>
-                            <td>XP & Leveling</td>
+                            <td>Interactive Games</td>
+                            <td class="check-yes">✓</td>
+                            <td class="check-no">✗</td>
+                            <td class="check-no">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Starboard System</td>
                             <td class="check-yes">✓</td>
                             <td class="check-no">✗</td>
                             <td class="check-yes">✓</td>
                         </tr>
                         <tr>
-                            <td>Auto-Moderation</td>
+                            <td>Emergency Lockdown</td>
                             <td class="check-yes">✓</td>
-                            <td class="check-yes">✓</td>
+                            <td class="check-no">✗</td>
                             <td class="check-no">✗</td>
                         </tr>
                         <tr>
-                            <td>Ticket System</td>
-                            <td class="check-yes">✓</td>
-                            <td class="check-no">✗</td>
-                            <td class="check-yes">✓</td>
-                        </tr>
-                        <tr>
-                            <td>Giveaway Engine</td>
+                            <td>In-Memory Cache Layer</td>
                             <td class="check-yes">✓</td>
                             <td class="check-no">✗</td>
                             <td class="check-no">✗</td>
@@ -235,7 +271,7 @@
             <div class="section-header" style="margin-bottom: 3rem;">
                 <span class="section-label">DEVELOPMENT TIMELINE</span>
                 <h2>Project Roadmap.</h2>
-                <p>The developmental timeline for the Omega Core framework.</p>
+                <p>The developmental timeline for the Apex Core framework.</p>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
                 <div class="artisanal-card reveal reveal-delay-1" style="border-left: 3px solid var(--accent);">
@@ -256,14 +292,20 @@
                     <p style="font-size: 0.85rem;">Advanced auto-moderation pipeline, XP/leveling system, ticket engine.</p>
                     <span class="status-dot status-online"></span><span style="color: #50fa7b; font-size: 0.8rem;">COMPLETED</span>
                 </div>
-                <div class="artisanal-card reveal reveal-delay-4" style="border-left: 3px solid #ffbd2e;">
-                    <span style="color: #ffbd2e; font-weight: bold; font-family: 'JetBrains Mono'; font-size: 0.75rem;">PHASE 04</span>
+                <div class="artisanal-card reveal reveal-delay-4" style="border-left: 3px solid var(--accent);">
+                    <span style="color: var(--accent); font-weight: bold; font-family: 'JetBrains Mono'; font-size: 0.75rem;">PHASE 04</span>
                     <h4 style="margin: 0.5rem 0;">OMEGA CONVERGENCE</h4>
-                    <p style="font-size: 0.85rem;">v10 — full ecosystem overhaul, profile cards, giveaway engine, reputation system.</p>
+                    <p style="font-size: 0.85rem;">v10 — Full ecosystem overhaul, profile cards, giveaway engine, reputation system.</p>
+                    <span class="status-dot status-online"></span><span style="color: #50fa7b; font-size: 0.8rem;">COMPLETED</span>
+                </div>
+                <div class="artisanal-card reveal reveal-delay-5" style="border-left: 3px solid #ffbd2e;">
+                    <span style="color: #ffbd2e; font-weight: bold; font-family: 'JetBrains Mono'; font-size: 0.75rem;">PHASE 05</span>
+                    <h4 style="margin: 0.5rem 0;">APEX ASCENT</h4>
+                    <p style="font-size: 0.85rem;">v11 — 8 new commands, cache layer, starboard, gambling, interactive games, visual redesign.</p>
                     <span class="status-dot status-progress"></span><span style="color: #ffbd2e; font-size: 0.8rem;">IN PROGRESS</span>
                 </div>
                 <div class="artisanal-card" style="border-left: 3px solid var(--text-muted); opacity: 0.6;">
-                    <span style="color: var(--text-muted); font-weight: bold; font-family: 'JetBrains Mono'; font-size: 0.75rem;">PHASE 05</span>
+                    <span style="color: var(--text-muted); font-weight: bold; font-family: 'JetBrains Mono'; font-size: 0.75rem;">PHASE 06</span>
                     <h4 style="margin: 0.5rem 0;">GLOBAL SINGULARITY</h4>
                     <p style="font-size: 0.85rem;">Open-source deployment, REST API, dashboard portal, and enterprise scaling.</p>
                     <span class="status-dot status-planned"></span><span style="color: var(--text-muted); font-size: 0.8rem;">PLANNED</span>
@@ -276,8 +318,8 @@
         <!-- CTA -->
         <section class="reveal" style="text-align: center; padding: 5rem 0;">
             <span class="section-label">READY TO INITIALIZE?</span>
-            <h2 style="font-size: 2.5rem; margin: 1rem 0; background: linear-gradient(180deg, #fff 0%, #a0a0c0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Deploy the Omega Core.</h2>
-            <p style="color: var(--text-dim); max-width: 500px; margin: 0 auto 2.5rem;">Experience the full power of the Nexus v10 framework.</p>
+            <h2 style="font-size: 2.5rem; margin: 1rem 0; background: linear-gradient(180deg, #fff 0%, #d4a040 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Deploy the Apex Core.</h2>
+            <p style="color: var(--text-dim); max-width: 500px; margin: 0 auto 2.5rem;">Experience the full power of the Nexus v11 framework. 73 commands. Free forever.</p>
             <div class="hero-actions" style="justify-content: center;">
                 <a href="invite.html" class="btn btn-primary" style="padding: 1rem 3rem;">⚡ Establish Uplink</a>
                 <a href="https://discord.gg/nexus" class="btn btn-outline">Join Support Hub</a>
@@ -288,7 +330,7 @@
     <footer>
         <div class="footer-brand">
             <span style="font-weight: 700; letter-spacing: 2px; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NEXUS</span>
-            <span class="footer-version">v10.0.0</span>
+            <span class="footer-version">v11.0.0</span>
         </div>
         <div class="footer-links">
             <a href="terms.html">Terms</a>
@@ -296,7 +338,7 @@
             <a href="changelog.html">Changelog</a>
             <a href="https://github.com/watispro5212/shiny-giigles">GitHub</a>
         </div>
-        <p>NEXUS PROTOCOL © 2026 // ALL SYSTEMS OMEGA</p>
+        <p>NEXUS PROTOCOL © 2026 // ALL SYSTEMS APEX</p>
     </footer>
 
     <script>
@@ -323,7 +365,7 @@
                 this.speedY = -(Math.random() * 0.5 + 0.1);
                 this.speedX = (Math.random() - 0.5) * 0.3;
                 this.opacity = Math.random() * 0.4 + 0.1;
-                this.hue = Math.random() > 0.5 ? 185 : 270;
+                this.hue = Math.random() > 0.5 ? 40 : 270;
             }
             update() {
                 this.y += this.speedY;
@@ -333,7 +375,7 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `hsla(${this.hue}, 100%, 70%, ${this.opacity})`;
+                ctx.fillStyle = `hsla(${this.hue}, 100%, 65%, ${this.opacity})`;
                 ctx.fill();
             }
         }
@@ -354,14 +396,15 @@
         /* === Terminal Typewriter === */
         const terminal = document.getElementById('terminal');
         const lines = [
-            'nexus init --version 10.0.0 --codename omega',
+            'nexus init --version 11.0.0 --codename apex',
             'Connecting to global shard matrix...',
             'Shard #0: Neural Uplink Established.',
+            'Cache Layer: PRIMED (TTL: 5m)',
             'Economy Module: SYNCHRONIZED',
-            'Leveling Engine: ONLINE',
+            'Starboard Engine: ARMED',
             'Auto-Moderation: ARMED',
-            'Security Layer: ARMED',
-            'Portal Status: [ALL SECTORS OMEGA]',
+            'Lockdown Protocol: STANDBY',
+            'Portal Status: [ALL SECTORS APEX]',
             'Awaiting directives. Type /help to begin.'
         ];
 
@@ -375,7 +418,7 @@
                 p.innerHTML = `<span style="color: ${color}">${prefix}</span> ${lines[lineIndex]}`;
                 terminal.appendChild(p);
                 lineIndex++;
-                setTimeout(typeLine, 500);
+                setTimeout(typeLine, 400);
             } else {
                 const cursor = document.createElement('span');
                 cursor.className = 'cursor';
@@ -425,6 +468,16 @@
         window.addEventListener('scroll', () => {
             document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
         });
+
+        /* === Mouse parallax on hero orb === */
+        const orb = document.querySelector('.hero-orb');
+        if (orb) {
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                orb.style.transform = `translate(${x}px, ${y}px) rotateZ(${x * 2}deg) rotateX(15deg)`;
+            });
+        }
     </script>
 </body>
 </html>
